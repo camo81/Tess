@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Tess.View.SettingsPage">
+
+  <ContentPage.ToolbarItems>
+    <ToolbarItem Icon="ic_check_white_36dp.png" Command="{Binding SaveLanguage}"></ToolbarItem>
+    <ToolbarItem Name="About" Order="Secondary" Priority="0" Command="{Binding gotoPage}" />
+  </ContentPage.ToolbarItems>
+
+  <ScrollView Style="{StaticResource MasterDetailSVMain}">
+    <StackLayout>
+      <StackLayout Style="{StaticResource MasterDetailSLMain}">
+        <Picker x:Name="Dayselection" HorizontalOptions="FillAndExpand" Title="{Binding pickerWdTitle}" ItemsSource="{Binding Giorni}"
+                ItemDisplayBinding="{Binding number}" SelectedItem="{Binding WdSelected}" Style="{StaticResource LanguagePicker}">
+                
+        </Picker>
+        <Picker x:Name="Hourselection" HorizontalOptions="FillAndExpand" Title="{Binding pickerHdTitle}" ItemsSource="{Binding oreSettimana}"
+                ItemDisplayBinding="{Binding number}" SelectedItem="{Binding osSelected}" Style="{StaticResource LanguagePicker}">
+
+        </Picker>             
+      </StackLayout>
+
+      
+      <StackLayout Style="{StaticResource MasterDetailSLMain}">
+        <Label Text="{Binding pickerDescription}"/>
+        <StackLayout Orientation="Horizontal">
+          <Picker x:Name="Breakselection1" HorizontalOptions="FillAndExpand" Title="{Binding breakHour}" ItemsSource="{Binding Giorni}"
+                ItemDisplayBinding="{Binding number}" SelectedItem="{Binding WdSelected}" Style="{StaticResource LanguagePicker}">
+
+          </Picker>
+          <Picker x:Name="Breakselection2" HorizontalOptions="FillAndExpand" Title="{Binding breakMinute}" ItemsSource="{Binding Giorni}"
+                  ItemDisplayBinding="{Binding number}" SelectedItem="{Binding WdSelected}" Style="{StaticResource LanguagePicker}">
+
+          </Picker>
+        </StackLayout>        
+      </StackLayout>
+    </StackLayout>
+  </ScrollView>
+</ContentPage>

@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Tess.App">
+  <Application.Resources>
+    <!-- Application resource dictionary -->
+    <ResourceDictionary>
+      
+      <Style x:Key="MasterDetailSL1" TargetType="StackLayout">
+      </Style>
+
+      <Style x:Key="MasterDetailLb2" TargetType="Label">
+        <Setter Property="FontSize" Value="17" />
+        <Setter Property="Margin" Value="10,5,5,5" />
+        <Setter Property="FontFamily" Value="Roboto-Regular.ttf#Roboto-Regular" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+      </Style>
+
+      <Style x:Key="MasterDetailLb1" TargetType="Label">
+        <Setter Property="FontSize" Value="110" />
+        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="FontFamily" Value="IMissYourKiss.ttf#IMissYourKiss" />
+        <Setter Property="Margin" Value="40,10,40,40" />
+      </Style>      
+      
+      <Style x:Key="MasterDetailSLMain" TargetType="StackLayout">
+        <Setter Property="Padding" Value="40,40,40,20" />
+        <Setter Property="BackgroundColor" Value="#fff" />
+      </Style>
+
+      <Style x:Key="MasterDetailSL3" TargetType="StackLayout">
+        <Setter Property="Padding" Value="40,40,40,20" />
+      </Style>
+
+      <Style x:Key="MasterDetailSVMain" TargetType="ScrollView">
+        <Setter Property="Padding" Value="15,15,15,15" />
+        <Setter Property="BackgroundColor" Value="#f2f2f5" />
+      </Style>
+
+      <Style x:Key="LanguagePicker" TargetType="Picker">
+        <Setter Property="Margin" Value="0,0,0,10" />
+      </Style>
+      
+      <!-- Application resource dictionary -->
+    </ResourceDictionary>
+  </Application.Resources>
+</Application>
