@@ -91,7 +91,30 @@ namespace Tess.Model
         }
 
         #endregion
+
+        #region settings functions
+
+        public static int InsertSettings(Settings dati)
+        {
+            return database.Insert(dati);
+        }
+
+        public static Settings getValue(string SettingName)
+        {
+
+            string query = $"SELECT * FROM [{TabellaSettings}] WHERE [SettingName] = \"{SettingName}\"";
+            var lista = database.Query<Settings>(query);
+            return lista.FirstOrDefault();
+        }
+
+        public static int UpdateSettings(Settings dati)
+        {
+            int i = database.Update(dati);
+            return i;
+        }
+        #endregion
     }
+
 
 
 

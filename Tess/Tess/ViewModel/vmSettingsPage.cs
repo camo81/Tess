@@ -14,7 +14,18 @@ namespace Tess.ViewModel
     public class vmSettingsPage : ViewModelBase
     {
         #region binding
-        
+        private String opstatus;
+        public String opStatus
+        {
+            get { return opstatus; }
+            set
+            {
+                opstatus = value;
+                Set(nameof(opStatus), ref value);
+
+            }
+        }
+
         private String pickerdescription = Traduzioni.Settings_pickerDesc;
         public String pickerDescription
         {
@@ -75,7 +86,6 @@ namespace Tess.ViewModel
             }
         }
 
-
         private String wdset = "";
         public String WdSet
         {
@@ -99,6 +109,18 @@ namespace Tess.ViewModel
             }
         }
 
+        private HoursWeek osselected;
+        public HoursWeek osSelected
+
+        {
+            get { return osselected; }
+            set
+            {
+                osselected = value;
+                Set(nameof(osSelected), ref value);
+            }
+
+        }
 
         private WorkingDays wdselected;
         public WorkingDays WdSelected
@@ -112,6 +134,29 @@ namespace Tess.ViewModel
 
         }
 
+        private MinBreakHour bhselected;
+        public MinBreakHour BHSelected
+        {
+            get { return bhselected; }
+            set
+            {
+                bhselected = value;
+                Set(nameof(BHSelected), ref value);
+            }
+
+        }
+
+        private MinBreakMinute bmselected;
+        public MinBreakMinute BMSelected
+        {
+            get { return bmselected; }
+            set
+            {
+                bmselected = value;
+                Set(nameof(BMSelected), ref value);
+            }
+
+        }
 
         private List<HoursWeek> oresettimana;
         public List<HoursWeek> oreSettimana
@@ -124,20 +169,82 @@ namespace Tess.ViewModel
             }
         }
 
-
-        private HoursWeek osselected;
-        public HoursWeek osSelected
+        private List<MinBreakHour> minhbreak;
+        public List<MinBreakHour> minHBreak
         {
-            get { return osselected; }
+            get { return minhbreak; }
             set
             {
-                osselected = value;
-                Set(nameof(osSelected), ref value);
+                minhbreak = value;
+                Set(nameof(minHBreak), ref value);
+            }
+        }
+
+        private List<MinBreakMinute> minmbreak;
+        public List<MinBreakMinute> minMBreak
+        {
+            get { return minmbreak; }
+            set
+            {
+                minmbreak = value;
+                Set(nameof(minMBreak), ref value);
+            }
+        }
+
+        public ICommand SaveSettings
+        {
+            get
+            {
+                return new RelayCommand(() => { SaveSet(); });
             }
 
         }
-
         #endregion
+
+        public void SaveSet()
+        {
+            var dati = new Settings();
+
+            //set della variabile WdSelected
+            dati.SettingName = "WdSelected";
+            dati.SettingValue = WdSelected.number;
+            int u = 0;
+
+            //verifico se esiste già un setting per WdSelected
+            var tmp = ManageData.getValue("WdSelected");
+
+            if ((tmp == null) )
+            {
+                // se non esiste faccio l'insert
+                try
+                {
+                    u = ManageData.InsertSettings(dati);
+                }
+                catch (Exception e)
+                {
+                    opStatus = "" + e;
+                }
+            }
+            //altrimenti l'update
+            else 
+            {
+                dati.IdSetting = tmp.IdSetting;
+                u = ManageData.UpdateSettings(dati);
+            }
+
+
+/*
+
+            if ((u != 0) && (p != 0) && (MultiSave.Count > 0))
+            {
+                UserDialogs.Instance.ShowSuccess(Traduzioni.Settings_SaveSetOk);
+            }
+            else
+            {
+                UserDialogs.Instance.ShowError(Traduzioni.Settings_SaveSetKo);
+            }*/
+
+        }
 
         public vmSettingsPage()
         {
@@ -155,6 +262,36 @@ namespace Tess.ViewModel
             {
                 oreSettimana.Add(new HoursWeek { number = ""+i });
             }
+
+            this.minHBreak = new List<MinBreakHour>();
+            for (int i = 0; i < 5; i++)
+            {
+                minHBreak.Add(new MinBreakHour { number = "" + i });
+            }
+
+            this.minMBreak = new List<MinBreakMinute>();
+            for (int i = 0; i <61 ; i++)
+            {
+                minMBreak.Add(new MinBreakMinute { number = "" + i });
+            }
+
+
+            #region GetValue
+            try
+            {
+                /*Breve spiegazione triste: i raccatta la mia impostazione corrente. con linq faccio una query sulla lista giorni dicendogli che 
+                 l'attributo number dell'oggetto deve essere uguale al valore raccattato con getvalue*/
+
+                var i = ManageData.getValue("WdSelected");
+                WdSelected = Giorni.Where(x => x.number == i.SettingValue).FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                opStatus = "Not set" + e;
+
+            }
+
+            #endregion
 
         }
 

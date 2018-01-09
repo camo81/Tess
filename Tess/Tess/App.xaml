@@ -16,6 +16,10 @@
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
       </Style>
 
+      <Style x:Key="DefLabelRoboto" TargetType="Label">
+        <Setter Property="FontFamily" Value="Roboto-Regular.ttf#Roboto-Regular" />
+      </Style>
+      
       <Style x:Key="MasterDetailLb1" TargetType="Label">
         <Setter Property="FontSize" Value="110" />
         <Setter Property="VerticalOptions" Value="CenterAndExpand" />

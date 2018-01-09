@@ -4,7 +4,7 @@
              x:Class="Tess.View.SettingsPage">
 
   <ContentPage.ToolbarItems>
-    <ToolbarItem Icon="ic_check_white_36dp.png" Command="{Binding SaveLanguage}"></ToolbarItem>
+    <ToolbarItem Icon="ic_check_white_36dp.png" Command="{Binding SaveSettings}"></ToolbarItem>
     <ToolbarItem Name="About" Order="Secondary" Priority="0" Command="{Binding gotoPage}" />
   </ContentPage.ToolbarItems>
 
@@ -23,18 +23,20 @@
 
       
       <StackLayout Style="{StaticResource MasterDetailSLMain}">
-        <Label Text="{Binding pickerDescription}"/>
+        <Label Text="{Binding pickerDescription}" Style="{StaticResource DefLabelRoboto}"/>
         <StackLayout Orientation="Horizontal">
-          <Picker x:Name="Breakselection1" HorizontalOptions="FillAndExpand" Title="{Binding breakHour}" ItemsSource="{Binding Giorni}"
-                ItemDisplayBinding="{Binding number}" SelectedItem="{Binding WdSelected}" Style="{StaticResource LanguagePicker}">
+          <Picker x:Name="Breakselection1" HorizontalOptions="FillAndExpand" Title="{Binding breakHour}" ItemsSource="{Binding minHBreak}"
+                ItemDisplayBinding="{Binding number}" SelectedItem="{Binding BHSelected}" Style="{StaticResource LanguagePicker}">
 
           </Picker>
-          <Picker x:Name="Breakselection2" HorizontalOptions="FillAndExpand" Title="{Binding breakMinute}" ItemsSource="{Binding Giorni}"
-                  ItemDisplayBinding="{Binding number}" SelectedItem="{Binding WdSelected}" Style="{StaticResource LanguagePicker}">
+          <Picker x:Name="Breakselection2" HorizontalOptions="FillAndExpand" Title="{Binding breakMinute}" ItemsSource="{Binding minMBreak}"
+                  ItemDisplayBinding="{Binding number}" SelectedItem="{Binding BMSelected}" Style="{StaticResource LanguagePicker}">
 
           </Picker>
+                    
         </StackLayout>        
       </StackLayout>
+      <Label Text="{Binding opStatus}" Style="{StaticResource DefLabelRoboto}"/>
     </StackLayout>
   </ScrollView>
 </ContentPage>
