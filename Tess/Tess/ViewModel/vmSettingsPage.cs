@@ -8,6 +8,7 @@ using Tess.Model;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using Tess.Common;
+using Acr.UserDialogs;
 
 namespace Tess.ViewModel
 {
@@ -110,14 +111,14 @@ namespace Tess.ViewModel
         }
 
         private HoursWeek osselected;
-        public HoursWeek osSelected
+        public HoursWeek OsSelected
 
         {
             get { return osselected; }
             set
             {
                 osselected = value;
-                Set(nameof(osSelected), ref value);
+                Set(nameof(OsSelected), ref value);
             }
 
         }
@@ -130,6 +131,54 @@ namespace Tess.ViewModel
             {
                 wdselected = value;
                 Set(nameof(WdSelected), ref value);
+            }
+
+        }
+
+        private int osindex;
+        public int OsIndex
+        {
+            get { return osindex; }
+            set
+            {
+                osindex = value;
+                Set(nameof(OsIndex), ref value);
+            }
+
+        }
+
+        private int wdindex;
+        public int WdIndex
+        {
+            get { return wdindex; }
+            set
+            {
+                wdindex = value;
+                Set(nameof(WdIndex), ref value);
+            }
+
+        }
+
+        private int bhindex;
+        public int BHIndex
+        {
+            get { return bhindex; }
+            set
+            {
+                bhindex = value;
+                Set(nameof(BHIndex), ref value);
+            }
+
+        }
+
+        private int bmindex;
+        public int BMIndex
+        {
+            get { return bmindex; }
+            set
+            {
+                bmindex = value;
+                Set(nameof(BMIndex), ref value);
             }
 
         }
@@ -199,52 +248,215 @@ namespace Tess.ViewModel
             }
 
         }
+
+        public ICommand DelSettings
+        {
+            get
+            {
+                return new RelayCommand(() => { DelSet(); });
+            }
+
+        }
+
+
+        public ICommand gotoPage
+        {
+            get
+            {
+                return new RelayCommand(() => { vmMenuPage.changePage("About"); });
+
+            }
+
+
+        }
         #endregion
 
+        #region functions
         public void SaveSet()
         {
             var dati = new Settings();
 
             //set della variabile WdSelected
             dati.SettingName = "WdSelected";
-            dati.SettingValue = WdSelected.number;
-            int u = 0;
-
-            //verifico se esiste già un setting per WdSelected
-            var tmp = ManageData.getValue("WdSelected");
-
-            if ((tmp == null) )
+            int Wd = 0;
+            if (WdSelected != null)
             {
-                // se non esiste faccio l'insert
-                try
+                dati.SettingValue = WdSelected.number;
+                
+                //verifico se esiste già un setting per WdSelected
+                var tmp = ManageData.getValue("WdSelected");
+
+                if ((tmp == null))
                 {
-                    u = ManageData.InsertSettings(dati);
+                    // se non esiste faccio l'insert
+                    try
+                    {
+                        Wd = ManageData.InsertSettings(dati);
+                    }
+                    catch (Exception e)
+                    {
+                        opStatus = "" + e;
+                    }
                 }
-                catch (Exception e)
+                //altrimenti l'update
+                else
                 {
-                    opStatus = "" + e;
+                    dati.IdSetting = tmp.IdSetting;
+                    Wd = ManageData.UpdateSettings(dati);
                 }
+
+                   
+
+
+
+                /*
+                if (Wd != 0)
+                {
+                    UserDialogs.Instance.ShowSuccess(Traduzioni.Settings_SaveSetOk);
+                }
+                else
+                {
+                    UserDialogs.Instance.ShowError(Traduzioni.Settings_SaveSetKo);
+                }*/
+
             }
-            //altrimenti l'update
-            else 
+            else {
+
+                //UserDialogs.Instance.ShowError(Traduzioni.Settings_Nothing);
+            }
+
+            //set della variabile OsSelected
+            dati.SettingName = "OsSelected";
+            int Os = 0;
+            if (OsSelected != null)
             {
-                dati.IdSetting = tmp.IdSetting;
-                u = ManageData.UpdateSettings(dati);
+                dati.SettingValue = OsSelected.number;
+
+                //verifico se esiste già un setting per OsSelected
+                var tmp = ManageData.getValue("OsSelected");
+
+                if ((tmp == null))
+                {
+                    // se non esiste faccio l'insert
+                    try
+                    {
+                        Os = ManageData.InsertSettings(dati);
+                    }
+                    catch (Exception e)
+                    {
+                        opStatus = "" + e;
+                    }
+                }
+                //altrimenti l'update
+                else
+                {
+                    dati.IdSetting = tmp.IdSetting;
+                    Os = ManageData.UpdateSettings(dati);
+                }
+
             }
 
 
-/*
+            //set della variabile BHSelected
+            dati.SettingName = "BHSelected";
+            int Bh = 0;
+            if (BHSelected != null)
+            {
+                dati.SettingValue = BHSelected.number;
 
-            if ((u != 0) && (p != 0) && (MultiSave.Count > 0))
+
+                //verifico se esiste già un setting per BHSelected
+                var tmp = ManageData.getValue("BHSelected");
+
+                if ((tmp == null))
+                {
+                    // se non esiste faccio l'insert
+                    try
+                    {
+                        Bh = ManageData.InsertSettings(dati);
+                    }
+                    catch (Exception e)
+                    {
+                        opStatus = "" + e;
+                    }
+                }
+                //altrimenti l'update
+                else
+                {
+                    dati.IdSetting = tmp.IdSetting;
+                    Bh = ManageData.UpdateSettings(dati);
+                }
+
+            }
+
+
+
+            //set della variabile BMSelected
+            dati.SettingName = "BMSelected";
+            int Bm = 0;
+            if (BMSelected != null)
+            {
+                dati.SettingValue = BMSelected.number;
+
+
+                //verifico se esiste già un setting per BMSelected
+                var tmp = ManageData.getValue("BMSelected");
+
+                if ((tmp == null))
+                {
+                    // se non esiste faccio l'insert
+                    try
+                    {
+                        Bm = ManageData.InsertSettings(dati);
+                    }
+                    catch (Exception e)
+                    {
+                        opStatus = "" + e;
+                    }
+                }
+                //altrimenti l'update
+                else
+                {
+                    dati.IdSetting = tmp.IdSetting;
+                    Bm = ManageData.UpdateSettings(dati);
+                }
+
+
+            }
+
+            
+            if ((Wd != 0) && (Os != 0))
             {
                 UserDialogs.Instance.ShowSuccess(Traduzioni.Settings_SaveSetOk);
             }
             else
             {
                 UserDialogs.Instance.ShowError(Traduzioni.Settings_SaveSetKo);
-            }*/
+            }
+
+            //opStatus = Wd + " / " + Os + " / " + Bh + " / " + Bm;
 
         }
+
+        public async void DelSet()
+        {
+            var result = await UserDialogs.Instance.ConfirmAsync(new ConfirmConfig
+            {
+                Message = Traduzioni.Setting_confirmMessage,
+                OkText = Traduzioni.Setting_confirm_yes,
+                CancelText = Traduzioni.Setting_confirm_no
+            });
+            if (result)
+            {
+                ManageData.delSettings();
+                BHIndex = -1;
+                WdIndex = -1;
+                OsIndex = -1;
+                BMIndex = -1; 
+            }
+
+        }
+        #endregion
 
         public vmSettingsPage()
         {
@@ -284,6 +496,40 @@ namespace Tess.ViewModel
 
                 var i = ManageData.getValue("WdSelected");
                 WdSelected = Giorni.Where(x => x.number == i.SettingValue).FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                opStatus = "Not set" + e;
+
+            }
+
+            try
+            {
+                var i = ManageData.getValue("OsSelected");
+                OsSelected = oreSettimana.Where(x => x.number == i.SettingValue).FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                opStatus = "Not set" + e;
+
+            }
+
+            try
+            {
+                var i = ManageData.getValue("BHSelected");
+                BHSelected = minHBreak.Where(x => x.number == i.SettingValue).FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                opStatus = "Not set" + e;
+
+            }
+
+            try
+            {
+
+                var i = ManageData.getValue("BMSelected");
+                BMSelected = minMBreak.Where(x => x.number == i.SettingValue).FirstOrDefault();
             }
             catch (Exception e)
             {

@@ -71,7 +71,43 @@ namespace Tess.Common {
         }
         
         /// <summary>
-        ///   Cerca una stringa localizzata simile a Working days in week.
+        ///   Cerca una stringa localizzata simile a No.
+        /// </summary>
+        internal static string Setting_confirm_no {
+            get {
+                return ResourceManager.GetString("Setting_confirm_no", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Yes.
+        /// </summary>
+        internal static string Setting_confirm_yes {
+            get {
+                return ResourceManager.GetString("Setting_confirm_yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Are you sure to proceed?.
+        /// </summary>
+        internal static string Setting_confirmMessage {
+            get {
+                return ResourceManager.GetString("Setting_confirmMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Nothing to do..
+        /// </summary>
+        internal static string Settings_Nothing {
+            get {
+                return ResourceManager.GetString("Settings_Nothing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Working days in week *.
         /// </summary>
         internal static string Settings_picker1 {
             get {
@@ -80,7 +116,7 @@ namespace Tess.Common {
         }
         
         /// <summary>
-        ///   Cerca una stringa localizzata simile a Working hours in week.
+        ///   Cerca una stringa localizzata simile a Working hours in week *.
         /// </summary>
         internal static string Settings_picker2 {
             get {
@@ -112,6 +148,24 @@ namespace Tess.Common {
         internal static string Settings_pickerDesc {
             get {
                 return ResourceManager.GetString("Settings_pickerDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Working days in week and Working hours in week required!.
+        /// </summary>
+        internal static string Settings_SaveSetKo {
+            get {
+                return ResourceManager.GetString("Settings_SaveSetKo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Done.
+        /// </summary>
+        internal static string Settings_SaveSetOk {
+            get {
+                return ResourceManager.GetString("Settings_SaveSetOk", resourceCulture);
             }
         }
     }

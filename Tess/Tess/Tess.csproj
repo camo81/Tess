@@ -48,6 +48,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Traduzioni.it-IT.resx</DependentUpon>
     </Compile>
+    <Compile Include="Model\ButtonWithoutShadow.cs" />
     <Compile Include="Model\Lingua.cs" />
     <Compile Include="Model\WorkingDays.cs" />
     <Compile Include="Model\database.cs" />

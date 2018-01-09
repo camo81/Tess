@@ -120,11 +120,14 @@
   <data name="Language_pickerTitle" xml:space="preserve">
     <value>Choose language</value>
   </data>
+  <data name="Settings_Nothing" xml:space="preserve">
+    <value>Nothing to do.</value>
+  </data>
   <data name="Settings_picker1" xml:space="preserve">
-    <value>Working days in week</value>
+    <value>Working days in week *</value>
   </data>
   <data name="Settings_picker2" xml:space="preserve">
-    <value>Working hours in week</value>
+    <value>Working hours in week *</value>
   </data>
   <data name="Settings_picker3" xml:space="preserve">
     <value>Hour</value>
@@ -134,5 +137,20 @@
   </data>
   <data name="Settings_pickerDesc" xml:space="preserve">
     <value>If required, the minimun lenght of the break</value>
+  </data>
+  <data name="Settings_SaveSetKo" xml:space="preserve">
+    <value>Working days in week and Working hours in week required!</value>
+  </data>
+  <data name="Settings_SaveSetOk" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="Setting_confirmMessage" xml:space="preserve">
+    <value>Are you sure to proceed?</value>
+  </data>
+  <data name="Setting_confirm_no" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Setting_confirm_yes" xml:space="preserve">
+    <value>Yes</value>
   </data>
 </root>
