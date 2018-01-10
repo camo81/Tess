@@ -258,7 +258,6 @@ namespace Tess.ViewModel
 
         }
 
-
         public ICommand gotoPage
         {
             get
@@ -304,25 +303,7 @@ namespace Tess.ViewModel
                     dati.IdSetting = tmp.IdSetting;
                     Wd = ManageData.UpdateSettings(dati);
                 }
-
-                   
-
-
-
-                /*
-                if (Wd != 0)
-                {
-                    UserDialogs.Instance.ShowSuccess(Traduzioni.Settings_SaveSetOk);
-                }
-                else
-                {
-                    UserDialogs.Instance.ShowError(Traduzioni.Settings_SaveSetKo);
-                }*/
-
-            }
-            else {
-
-                //UserDialogs.Instance.ShowError(Traduzioni.Settings_Nothing);
+                  
             }
 
             //set della variabile OsSelected

@@ -48,10 +48,50 @@ namespace Tess.Model
         }
     }
 
+    public class DaysWorked
+    {
+        [PrimaryKey, AutoIncrement]
+        public int IdDaysWorked { get; set; }
+
+        public string Timestamp { get; set; }
+
+        public string WeekDay { get; set; }
+
+        public string YearDay { get; set; }
+
+        public string Year { get; set; }
+
+        public string DayName { get; set;}
+
+        public override string ToString()
+        {
+            return string.Format("[Language: IdDaysWorked={0}, Timestamp={1}, WeekDay{2} ,YearDay{3}, Year{4}", IdDaysWorked, Timestamp, WeekDay, YearDay, Year);
+        }
+    }
+
+    public class DaysWorkedHours
+    {
+        [PrimaryKey, AutoIncrement]
+        public int IdDaysWorkedHours { get; set; }
+
+        public int IdDaysWorked { get; set; }
+
+        public string CheckIn { get; set; }
+
+        public string CheckOut { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("[Language: IdDaysWorkedHours={0}, IdDaysWorked={1}, CheckIn={2}, CheckOut{3}", IdDaysWorkedHours, IdDaysWorked, CheckIn, CheckOut);
+        }
+    }
+
     public static class ManageData
     {
         public const string TabellaSettings = "Settings";
         public const string TabellaLanguage = "Language";
+        public const string TabellaDays = "DaysWorked";
+        public const string TabellaDaysHours = "DaysWorkedHours";
         static SQLiteConnection database = DependencyService.Get<ISqlLite>().getConnection();
 
 
@@ -59,6 +99,8 @@ namespace Tess.Model
         {
             database.CreateTable<Settings>();
             database.CreateTable<Language>();
+            database.CreateTable<DaysWorked>();
+            database.CreateTable<DaysWorkedHours>();
         }
 
         #region language functions

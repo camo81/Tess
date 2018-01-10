@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Tess.View.MainPage">
+             x:Class="Tess.View.MainPage"
+             xmlns:customs="clr-namespace:Tess.Model;assembly=Tess">
   <ContentPage.ToolbarItems>
-    <ToolbarItem Icon="ic_check_white_36dp.png" Command="{Binding SaveLanguage}"></ToolbarItem>
     <ToolbarItem Name="About" Order="Secondary" Priority="0" Command="{Binding gotoPage}" />
   </ContentPage.ToolbarItems>
 
@@ -11,6 +11,59 @@
     <StackLayout>
       <StackLayout Style="{StaticResource MasterDetailSLMain}">
         <Label Text="{Binding MainLabel}" VerticalOptions="Center" HorizontalOptions="Center" />
+
+        <StackLayout>
+          <StackLayout >
+            <Image Source="ic_trophy_outline_grey600_36dp.png"/>
+          </StackLayout>
+          <ProgressBar x:Name="progress" Progress="0.5" Scale="1"  />
+          <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+            <customs:ButtonWithoutShadow x:Name = "buttonStopIn" Image="ic_login_variant_white_24dp.png" Command="{Binding CommandStopWatchIn}" Style="{StaticResource buttonOnlyIcon}" />
+            <customs:ButtonWithoutShadow x:Name = "buttonStopOut" Image="ic_logout_variant_white_24dp.png" Command="{Binding CommandStopWatchOut}" Style="{StaticResource buttonOnlyIcon}" />
+          </StackLayout>
+        </StackLayout>
+
+
+        <ListView ItemsSource="{Binding Worked}"
+                  CachingStrategy="RecycleElement"
+                  SelectedItem="Sabato">
+
+          <ListView.ItemTemplate>
+            <DataTemplate>
+              <ViewCell>
+                <StackLayout Orientation="Horizontal" >                
+                  <Label Text="{Binding WeekDay}" VerticalTextAlignment="Center"/>
+                  <Label Text="{Binding DayName}" VerticalTextAlignment="Center"/>
+                  <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" >
+                    <Image Source="ic_clock_grey600_18dp.png" />
+                    <Label Text="8:04" VerticalTextAlignment="Center"/>
+                    <Image Source="ic_check_grey600_18dp.png" />
+                  </StackLayout>
+                </StackLayout>
+              </ViewCell>
+            </DataTemplate>
+          </ListView.ItemTemplate>
+
+        </ListView>        
+        
+      <!--
+        <ListView x:Name="EmployeeView" ItemsSource="{Binding Giorni}">
+          
+         <ListView.ItemTemplate>
+            <DataTemplate>
+              
+              <ImageCell
+                 ImageSource="ic_clock_grey600_36dp.png"
+                 Text="{Binding number}"
+                 Detail="opopop">
+              </ImageCell>
+              
+            </DataTemplate>
+          </ListView.ItemTemplate>
+        </ListView>
+        
+       -->
+
       </StackLayout>
     </StackLayout>
 </ScrollView>
