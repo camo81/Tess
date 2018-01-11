@@ -76,9 +76,9 @@ namespace Tess.Model
 
         public int IdDaysWorked { get; set; }
 
-        public string CheckIn { get; set; }
+        public string CheckIn { get; set; } = "";
 
-        public string CheckOut { get; set; }
+        public string CheckOut { get; set; } = "";
 
         public override string ToString()
         {
@@ -143,7 +143,6 @@ namespace Tess.Model
 
         public static Settings getValue(string SettingName)
         {
-
             string query = $"SELECT * FROM [{TabellaSettings}] WHERE [SettingName] = \"{SettingName}\"";
             var lista = database.Query<Settings>(query);
             return lista.FirstOrDefault();
@@ -164,13 +163,12 @@ namespace Tess.Model
         #region DayWorked functions
         public static DaysWorked getDay(string YearDay, string Year)
         {
-
             string query = $"SELECT * FROM [{TabellaDays}] WHERE [Year] = \"{Year}\" AND [YearDay] = \"{YearDay}\"";
             var lista = database.Query<DaysWorked>(query);
             return lista.FirstOrDefault();
         }
 
-        public static List<DaysWorked> getAll()
+        public static List<DaysWorked> getAllDays()
         {
 
             string query = $"SELECT * FROM [{TabellaDays}]";
@@ -186,6 +184,41 @@ namespace Tess.Model
         public static int delDays()
         {
             return database.DeleteAll<DaysWorked>();
+        }
+        #endregion
+
+
+        #region  DaysWorkedHours
+
+        public static int delDaysHours()
+        {
+            return database.DeleteAll<DaysWorkedHours>();
+        }
+
+        public static List<DaysWorkedHours> getAllHours()
+        {
+            string query = $"SELECT * FROM [{TabellaDaysHours}]";
+            var lista = database.Query<DaysWorkedHours>(query);
+            return lista;
+        }
+
+        public static List<DaysWorkedHours> getDayHours(string IdDaysWorked)
+        {
+            string query = $"SELECT * FROM [{TabellaDaysHours}] WHERE [IdDaysWorked] = \"{IdDaysWorked}\" ";
+            var lista = database.Query<DaysWorkedHours>(query);
+            return lista;
+        }
+
+        public static List<DaysWorkedHours> getOpenedDayHours(string IdDaysWorked)
+        {
+            string query = $"SELECT * FROM [{TabellaDaysHours}] WHERE [IdDaysWorked] = \"{IdDaysWorked}\" AND [CheckOut] = \"\" ";
+            var lista = database.Query<DaysWorkedHours>(query);
+            return lista;
+        }
+
+        public static int InsertDayHours(DaysWorkedHours dati)
+        {
+            return database.Insert(dati);
         }
         #endregion
     }
