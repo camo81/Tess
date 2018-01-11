@@ -16,6 +16,7 @@ namespace Tess.Droid
     {
         protected override void OnCreate(Bundle bundle)
         {
+            UserDialogs.Init(() => this);
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
@@ -23,7 +24,7 @@ namespace Tess.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
-            UserDialogs.Init(this);
+            
         }
     }
 }

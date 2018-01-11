@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using Acr.UserDialogs;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
@@ -79,15 +80,10 @@ namespace Tess.ViewModel
 
             // get impostazioni
             var DaysNumber = ManageData.getValue("WdSelected");
-            int DaysNum = 5;
             int x = 0;
             if (Int32.TryParse(DaysNumber.SettingValue, out x))
             {
-                int DaysNumSettings = Int32.Parse(DaysNumber.SettingValue);
-                if (DaysNumSettings > 5)
-                {
-                    DaysNum = DaysNumSettings;
-                } 
+                int DaysNum = Int32.Parse(DaysNumber.SettingValue);
             }
 
             var HoursNumber = ManageData.getValue("OsSelected");
@@ -101,16 +97,16 @@ namespace Tess.ViewModel
 
             // Creazione della listview
             this.Worked = new List<DaysWorked>();
-            for (int i = 1; i <= DaysNum; i++)
+            for (int i = 1; i <= 7; i++)
             {
             Worked.Add(new DaysWorked { WeekDay = i.ToString(), DayName=DaysName[(i -1)] });
             }
 
+            //inserisco i workedDays se non esistono ancora
+            insertWorkedDay();
 
-            var pluto = DateTime.Now;
-            var pippo = pluto.DayOfYear;
-            var paperino = (int)pluto.DayOfWeek;
-                MainLabel = pluto + "---"+ pippo + "---" + paperino;
+
+
 
 
         }
@@ -124,6 +120,42 @@ namespace Tess.ViewModel
         {
 
 
+        }
+
+        public async void insertWorkedDay() {
+            await Task.Delay(1000);
+            UserDialogs.Instance.ShowLoading("wait", MaskType.Black);
+            var now = DateTime.Now;
+            int DayOfYear = now.DayOfYear;
+            int DayOfWeek = (int)now.DayOfWeek;
+            int Year = now.Year;
+            string Date = now.ToString();
+
+            int weekStart = DayOfYear - (DayOfWeek -1);
+            int weekEnd = DayOfYear + (7 - DayOfWeek);
+
+            //var t = ManageData.getAll();
+            //ManageData.delDays();
+
+            for (int i = weekStart; i <= weekEnd; i++)
+            {
+                int wstart = i;
+                string ws = wstart.ToString();
+                string y = Year.ToString(); 
+                var d = ManageData.getDay(ws,y);
+                if (d == null)
+                {
+                    DaysWorked dati = new DaysWorked();
+                    dati.Datetime = Date;
+                    dati.WeekDay = DayOfWeek.ToString();
+                    dati.YearDay = ws;
+                    dati.Year = Year.ToString();
+
+                    var ins = ManageData.InsertDay(dati);
+                }
+
+            }
+            UserDialogs.Instance.HideLoading();
         }
         #endregion
     }

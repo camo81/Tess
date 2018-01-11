@@ -53,7 +53,7 @@ namespace Tess.Model
         [PrimaryKey, AutoIncrement]
         public int IdDaysWorked { get; set; }
 
-        public string Timestamp { get; set; }
+        public string Datetime { get; set; }
 
         public string WeekDay { get; set; }
 
@@ -65,7 +65,7 @@ namespace Tess.Model
 
         public override string ToString()
         {
-            return string.Format("[Language: IdDaysWorked={0}, Timestamp={1}, WeekDay{2} ,YearDay{3}, Year{4}", IdDaysWorked, Timestamp, WeekDay, YearDay, Year);
+            return string.Format("[Language: IdDaysWorked={0}, Datetime={1}, WeekDay{2} ,YearDay{3}, Year{4}", IdDaysWorked, Datetime, WeekDay, YearDay, Year);
         }
     }
 
@@ -158,6 +158,34 @@ namespace Tess.Model
         public static int delSettings()
         {
             return database.DeleteAll<Settings>();
+        }
+        #endregion
+
+        #region DayWorked functions
+        public static DaysWorked getDay(string YearDay, string Year)
+        {
+
+            string query = $"SELECT * FROM [{TabellaDays}] WHERE [Year] = \"{Year}\" AND [YearDay] = \"{YearDay}\"";
+            var lista = database.Query<DaysWorked>(query);
+            return lista.FirstOrDefault();
+        }
+
+        public static List<DaysWorked> getAll()
+        {
+
+            string query = $"SELECT * FROM [{TabellaDays}]";
+            var lista = database.Query<DaysWorked>(query);
+            return lista;
+        }
+
+        public static int InsertDay(DaysWorked dati)
+        {
+            return database.Insert(dati);
+        }
+
+        public static int delDays()
+        {
+            return database.DeleteAll<DaysWorked>();
         }
         #endregion
     }
