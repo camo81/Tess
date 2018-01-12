@@ -13,6 +13,7 @@ using Xamarin.Forms;
 using Tess.Common;
 using Tess.Droid.DS;
 using Android.Media;
+using Tess.Model;
 
 [assembly: Dependency(typeof(IAudio_android))]
 namespace Tess.Droid.DS
@@ -28,6 +29,7 @@ namespace Tess.Droid.DS
         public void PlayAudioFile(string fileName)
         {
 
+            //inserisci qui il check per l'impostazione di abilitare i suoni
             var player = new MediaPlayer();
             var fd = global::Android.App.Application.Context.Assets.OpenFd(fileName);
             
