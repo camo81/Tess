@@ -16,7 +16,7 @@
           <StackLayout >
             <Image Source="ic_trophy_outline_grey600_36dp.png"/>
           </StackLayout>
-          <ProgressBar x:Name="progress" Progress="0.5" Scale="1"  />
+          <ProgressBar x:Name="progress" Progress="{Binding Percentage}" Scale="1"  />
           <StackLayout Orientation="Horizontal" HorizontalOptions="End">
             <customs:ButtonWithoutShadow x:Name = "buttonStopIn" Image="ic_login_variant_white_24dp.png" Command="{Binding CommandStopWatchIn}" Style="{StaticResource buttonOnlyIcon}" />
             <customs:ButtonWithoutShadow x:Name = "buttonStopOut" Image="ic_logout_variant_white_24dp.png" Command="{Binding CommandStopWatchOut}" Style="{StaticResource buttonOnlyIcon}" />

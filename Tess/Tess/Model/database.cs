@@ -187,8 +187,7 @@ namespace Tess.Model
         }
         #endregion
 
-
-        #region  DaysWorkedHours
+        #region  DaysWorkedHours functions
 
         public static int delDaysHours()
         {
@@ -209,6 +208,13 @@ namespace Tess.Model
             return lista;
         }
 
+        public static List<DaysWorkedHours> getClosedDayHours(string IdDaysWorked)
+        {
+            string query = $"SELECT * FROM [{TabellaDaysHours}] WHERE [IdDaysWorked] = \"{IdDaysWorked}\" AND [CheckIn] <> \"\" AND  [CheckOut] <> \"\"";
+            var lista = database.Query<DaysWorkedHours>(query);
+            return lista;
+        }
+
         public static List<DaysWorkedHours> getOpenedDayHours(string IdDaysWorked)
         {
             string query = $"SELECT * FROM [{TabellaDaysHours}] WHERE [IdDaysWorked] = \"{IdDaysWorked}\" AND [CheckOut] = \"\" ";
@@ -220,6 +226,13 @@ namespace Tess.Model
         {
             return database.Insert(dati);
         }
+
+        public static int UpdateDayHours(DaysWorkedHours dati)
+        {
+            int i = database.Update(dati);
+            return i;
+        }
+
         #endregion
     }
 

@@ -27,6 +27,18 @@ namespace Tess.ViewModel
             }
         }
 
+        private String percentage; 
+        public String Percentage
+        {
+            get { return percentage; }
+            set
+            {
+                percentage = value;
+                Set(nameof(Percentage), ref value);
+            }
+        }
+        
+
         private List<DaysWorked> worked;
         public List<DaysWorked> Worked
         {
@@ -96,11 +108,11 @@ namespace Tess.ViewModel
             }
 
             var HoursNumber = ManageData.getValue("OsSelected");
-            int HoursNum = 0;
-            x = 0;
-            if (Int32.TryParse(HoursNumber.SettingValue, out x))
+            double HoursNum = 0;
+            double y = 0;
+            if (Double.TryParse(HoursNumber.SettingValue, out y))
             {
-                HoursNum = Int32.Parse(HoursNumber.SettingValue);
+                HoursNum = Double.Parse(HoursNumber.SettingValue);                
             }
 
 
@@ -112,9 +124,21 @@ namespace Tess.ViewModel
             }
 
             //inserisco i workedDays se non esistono ancora
-            var t = ManageData.getAllDays();
-
             insertWorkedDay();
+
+            //var t = ManageData.getAllDays();
+
+            //Calcolo la somma settimanale di ore e inizializzo la progress bar
+
+            double WeekTot = HoursSum();
+
+            if (HoursNum < WeekTot) {
+                WeekTot = HoursNum;
+            }
+
+            var perc = Math.Round(WeekTot / HoursNum, 2);
+            Percentage = perc.ToString();
+
 
 
 
@@ -124,7 +148,7 @@ namespace Tess.ViewModel
 
 
         public async void insertWorkedDay() {
-            await Task.Delay(1000);
+            await Task.Delay(2000);
             UserDialogs.Instance.ShowLoading("wait", MaskType.Black);
 
             int weekStart = DayOfYear - (DayOfWeek -1);
@@ -154,7 +178,6 @@ namespace Tess.ViewModel
             UserDialogs.Instance.HideLoading();
         }
 
-
         public void StopWatchIn()
         {
             var idDW = ManageData.getDay(DayOfYear.ToString(), Year.ToString());
@@ -172,40 +195,29 @@ namespace Tess.ViewModel
                     DaysWorkedHours dati = new DaysWorkedHours();
                     var now = DateTime.Now;
                     dati.IdDaysWorked = IdDayWorkedInt;
-                    dati.CheckIn = Date = now.ToString();
+                    dati.CheckIn = now.ToString();
                     if (ManageData.InsertDayHours(dati) == 1)
                     {
                         UserDialogs.Instance.ShowSuccess("Bella!");
                     }
                     else
                     {
-                        UserDialogs.Instance.ShowError("1");
+                        UserDialogs.Instance.ShowError("Errore nell'inserimento");
                     }
 
                 }
                 else {
-                    UserDialogs.Instance.ShowError("2");
+                    UserDialogs.Instance.ShowError("Errore nel casting a int");
                 }
 
-
             }
-            else {
-                //ManageData.delDaysHours();
 
-                var d =ManageData.getAllHours();
-                UserDialogs.Instance.ShowError("3");
-
-            }
         }
-
-
 
         public void StopWatchOut()
         {
-
+            bool i = setCheckout();
         }
-
-
 
         public bool checkDayEntry(string IdDayWorked)
         {
@@ -213,7 +225,7 @@ namespace Tess.ViewModel
             var list = ManageData.getDayHours(IdDayWorked);
             if (list.Count() > 1)
             {
-                UserDialogs.Instance.ShowError("4");
+                UserDialogs.Instance.ShowError("Hai già inserito due entrate per la giornata odierna");
                 return false;
             }
 
@@ -226,10 +238,102 @@ namespace Tess.ViewModel
             var list = ManageData.getOpenedDayHours(IdDayWorked);
             if (list.Count > 0)
             {
-                UserDialogs.Instance.ShowError("5");
+                UserDialogs.Instance.ShowError("Hai già un'entrata aperta");
                 return false;
             }
             return true;
+        }
+
+        public bool setCheckout()    
+        {
+            var idDW = ManageData.getDay(DayOfYear.ToString(), Year.ToString());
+            string IdDayWorked = idDW.IdDaysWorked.ToString();
+
+            var list = ManageData.getOpenedDayHours(IdDayWorked);
+
+            switch (list.Count)
+            {
+                case 0:
+                    UserDialogs.Instance.ShowError("Non ci sono Check-in da chiudere");
+                    return false;
+
+                case 1:
+                    
+                    DaysWorkedHours dati = new DaysWorkedHours();
+                    var now = DateTime.Now;
+                    var current = list.FirstOrDefault();
+
+                    dati.CheckIn = current.CheckIn;
+                    dati.IdDaysWorked = current.IdDaysWorked;
+                    dati.IdDaysWorkedHours = current.IdDaysWorkedHours;
+                    dati.CheckOut = now.ToString();
+                    if (ManageData.UpdateDayHours(dati) == 1)
+                    {
+                        UserDialogs.Instance.ShowSuccess("Check-in chiuso");
+                        return true;
+                    }
+                    else {
+                        UserDialogs.Instance.ShowError("C'è statao un errore nell'inserimento");
+                        return false;
+                    }                 
+                    
+                case 2:
+                    UserDialogs.Instance.ShowError("C'è statao un errore (2 checkin attivi)");
+                    return false;
+                    
+                default:
+                    UserDialogs.Instance.ShowError("il count della lista openeHours è null o maggiore di 2");
+                    return false; 
+            }
+        }
+
+        public double HoursSum() {
+            int weekStart = DayOfYear - (DayOfWeek - 1);
+            int weekEnd = DayOfYear + (7 - DayOfWeek);
+
+            double WeekTot = 0;
+
+            for (int i = weekStart; i <= weekEnd; i++)
+            {
+                int wstart = i;
+                string ws = wstart.ToString();
+                string y = Year.ToString();
+                var d = ManageData.getDay(ws, y);
+                if (d != null)
+                {
+                          
+                    string idDay = d.IdDaysWorked.ToString();
+                    var f = ManageData.getClosedDayHours(idDay);
+                    if (f != null)
+                    {
+                        //fetch della lista
+                        foreach (var interval in f)
+                        {
+                            var start = interval.CheckIn;
+                            var end = interval.CheckOut;
+
+                            DateTime startDT = Convert.ToDateTime(start);
+                            DateTime endDT = Convert.ToDateTime(end);
+
+
+                            var hours = (endDT - startDT).TotalHours;
+                            WeekTot = WeekTot + hours;
+
+                        }
+
+                            //per ogni riga calcolare la differenza tra check in e out
+
+                        }
+
+
+
+                }
+
+            }
+
+            return WeekTot;
+
+
         }
         #endregion
     }
