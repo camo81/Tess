@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Tess.Common;
 using Tess.Model;
+using Xamarin.Forms;
 
 namespace Tess.ViewModel
 {
@@ -38,7 +39,6 @@ namespace Tess.ViewModel
             }
         }
         
-
         private List<DaysWorked> worked;
         public List<DaysWorked> Worked
         {
@@ -88,6 +88,8 @@ namespace Tess.ViewModel
         public int DayOfWeek;
         public int Year;
         public string Date;
+        public double HoursNum = 0;
+        public int DaysNum = 0;
 
         #endregion
 
@@ -104,48 +106,58 @@ namespace Tess.ViewModel
             int x = 0;
             if (Int32.TryParse(DaysNumber.SettingValue, out x))
             {
-                int DaysNum = Int32.Parse(DaysNumber.SettingValue);
+                DaysNum = Int32.Parse(DaysNumber.SettingValue);
             }
 
-            var HoursNumber = ManageData.getValue("OsSelected");
-            double HoursNum = 0;
+            var HoursNumber = ManageData.getValue("OsSelected");            
             double y = 0;
             if (Double.TryParse(HoursNumber.SettingValue, out y))
             {
                 HoursNum = Double.Parse(HoursNumber.SettingValue);                
             }
 
-
             // Creazione della listview
-            this.Worked = new List<DaysWorked>();
-            for (int i = 1; i <= 7; i++)
-            {
-            Worked.Add(new DaysWorked { WeekDay = i.ToString(), DayName=DaysName[(i -1)] });
-            }
+            createListView();
 
             //inserisco i workedDays se non esistono ancora
             insertWorkedDay();
 
-            //var t = ManageData.getAllDays();
-
             //Calcolo la somma settimanale di ore e inizializzo la progress bar
-
             double WeekTot = HoursSum();
+            setProgressBar(HoursNum, WeekTot);
 
-            if (HoursNum < WeekTot) {
-                WeekTot = HoursNum;
-            }
-
-            var perc = Math.Round(WeekTot / HoursNum, 2);
-            Percentage = perc.ToString();
 
 
 
 
         }
 
+
+
         #region functions
 
+        public void createListView()
+        {
+            int weekStart = DayOfYear - (DayOfWeek - 1);
+            int weekEnd = DayOfYear + (7 - DayOfWeek);
+
+            this.Worked = new List<DaysWorked>();
+            for (int i = 1; i <= 7; i++)
+            {
+                double worked = HoursPerDay(weekStart.ToString(), Year.ToString());
+                var timeSpan = TimeSpan.FromHours(worked);
+
+
+                Worked.Add(new DaysWorked
+                {
+                    WeekDay = i.ToString(),
+                    DayName = DaysName[(i - 1)],
+                    WorkedHours = timeSpan.ToString()
+                });
+
+                weekStart += 1;
+            }
+        }
 
         public async void insertWorkedDay() {
             await Task.Delay(2000);
@@ -198,25 +210,30 @@ namespace Tess.ViewModel
                     dati.CheckIn = now.ToString();
                     if (ManageData.InsertDayHours(dati) == 1)
                     {
+                        DependencyService.Get<IAudio>().PlayAudioFile("pop.mp3");
                         UserDialogs.Instance.ShowSuccess("Bella!");
                     }
                     else
                     {
+                        DependencyService.Get<IAudio>().PlayAudioFile("error.mp3");
                         UserDialogs.Instance.ShowError("Errore nell'inserimento");
                     }
 
                 }
                 else {
+                    DependencyService.Get<IAudio>().PlayAudioFile("error.mp3");
                     UserDialogs.Instance.ShowError("Errore nel casting a int");
                 }
 
             }
-
+           
         }
 
         public void StopWatchOut()
         {
             bool i = setCheckout();
+            double WeekTot = HoursSum();
+            setProgressBar(HoursNum,WeekTot);        
         }
 
         public bool checkDayEntry(string IdDayWorked)
@@ -225,6 +242,7 @@ namespace Tess.ViewModel
             var list = ManageData.getDayHours(IdDayWorked);
             if (list.Count() > 1)
             {
+                DependencyService.Get<IAudio>().PlayAudioFile("error.mp3");
                 UserDialogs.Instance.ShowError("Hai già inserito due entrate per la giornata odierna");
                 return false;
             }
@@ -238,6 +256,7 @@ namespace Tess.ViewModel
             var list = ManageData.getOpenedDayHours(IdDayWorked);
             if (list.Count > 0)
             {
+                DependencyService.Get<IAudio>().PlayAudioFile("error.mp3");
                 UserDialogs.Instance.ShowError("Hai già un'entrata aperta");
                 return false;
             }
@@ -254,6 +273,7 @@ namespace Tess.ViewModel
             switch (list.Count)
             {
                 case 0:
+                    DependencyService.Get<IAudio>().PlayAudioFile("error.mp3");
                     UserDialogs.Instance.ShowError("Non ci sono Check-in da chiudere");
                     return false;
 
@@ -269,19 +289,23 @@ namespace Tess.ViewModel
                     dati.CheckOut = now.ToString();
                     if (ManageData.UpdateDayHours(dati) == 1)
                     {
+                        DependencyService.Get<IAudio>().PlayAudioFile("woosh.mp3");
                         UserDialogs.Instance.ShowSuccess("Check-in chiuso");
                         return true;
                     }
                     else {
+                        DependencyService.Get<IAudio>().PlayAudioFile("error.mp3");
                         UserDialogs.Instance.ShowError("C'è statao un errore nell'inserimento");
                         return false;
                     }                 
                     
                 case 2:
+                    DependencyService.Get<IAudio>().PlayAudioFile("error.mp3");
                     UserDialogs.Instance.ShowError("C'è statao un errore (2 checkin attivi)");
                     return false;
                     
                 default:
+                    DependencyService.Get<IAudio>().PlayAudioFile("error.mp3");
                     UserDialogs.Instance.ShowError("il count della lista openeHours è null o maggiore di 2");
                     return false; 
             }
@@ -335,6 +359,54 @@ namespace Tess.ViewModel
 
 
         }
+
+        public double HoursPerDay(string DayYear, string Year)
+        {
+
+            double DayTot = 0;
+
+            DaysWorked day = ManageData.getDay(DayYear, Year);
+
+            if (day != null) {
+                var idDay = day.IdDaysWorked;
+                var f = ManageData.getClosedDayHours(idDay.ToString());
+
+                if (f != null)
+                {
+                    //fetch della lista
+                    foreach (var interval in f)
+                    {
+                        var start = interval.CheckIn;
+                        var end = interval.CheckOut;
+
+                        DateTime startDT = Convert.ToDateTime(start);
+                        DateTime endDT = Convert.ToDateTime(end);
+
+
+                        var hours = (endDT - startDT).TotalHours;
+                        DayTot = DayTot + hours;
+                    }
+
+                }
+            }
+
+            return DayTot;
+
+
+        }
+
+        public void setProgressBar(double HoursNum, double WeekTot)
+        {
+
+            if (HoursNum < WeekTot)
+            {
+                WeekTot = HoursNum;
+            }
+
+            var perc = Math.Round(WeekTot / HoursNum, 2);
+            Percentage = perc.ToString();
+        }
+
         #endregion
     }
 }

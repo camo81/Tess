@@ -63,6 +63,8 @@ namespace Tess.Model
 
         public string DayName { get; set;}
 
+        public string WorkedHours { get; set; } = "-";
+
         public override string ToString()
         {
             return string.Format("[Language: IdDaysWorked={0}, Datetime={1}, WeekDay{2} ,YearDay{3}, Year{4}", IdDaysWorked, Datetime, WeekDay, YearDay, Year);

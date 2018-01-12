@@ -10,8 +10,6 @@
   <ScrollView Style="{StaticResource MasterDetailSVMain}">
     <StackLayout>
       <StackLayout Style="{StaticResource MasterDetailSLMain}">
-        <Label Text="{Binding MainLabel}" VerticalOptions="Center" HorizontalOptions="Center" />
-
         <StackLayout>
           <StackLayout >
             <Image Source="ic_trophy_outline_grey600_36dp.png"/>
@@ -34,9 +32,11 @@
                 <StackLayout Orientation="Horizontal" >                
                   <Label Text="{Binding WeekDay}" VerticalTextAlignment="Center"/>
                   <Label Text="{Binding DayName}" VerticalTextAlignment="Center"/>
+                  <Label Text=" {Binding YearDay}" VerticalTextAlignment="Center"/>
+                 
                   <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" >
                     <Image Source="ic_clock_grey600_18dp.png" />
-                    <Label Text="8:04" VerticalTextAlignment="Center"/>
+                    <Label Text="{Binding WorkedHours}" VerticalTextAlignment="Center"/>
                     <Image Source="ic_check_grey600_18dp.png" />
                   </StackLayout>
                 </StackLayout>
