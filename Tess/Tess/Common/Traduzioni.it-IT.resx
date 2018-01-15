@@ -153,4 +153,58 @@
   <data name="Setting_confirm_yes" xml:space="preserve">
     <value>Ho le spalle larghe</value>
   </data>
+  <data name="Friday" xml:space="preserve">
+    <value>Venerdì</value>
+  </data>
+  <data name="Loading_message" xml:space="preserve">
+    <value>blablabla | opopopop</value>
+  </data>
+  <data name="Main_1opened" xml:space="preserve">
+    <value>Prima chiudi il Check-in aperto</value>
+  </data>
+  <data name="Main_castError" xml:space="preserve">
+    <value>Error casting to int</value>
+  </data>
+  <data name="Main_Closed" xml:space="preserve">
+    <value>Check-in chiuso</value>
+  </data>
+  <data name="Main_countError" xml:space="preserve">
+    <value>Il count della lista openedHours è null o maggiore di 2</value>
+  </data>
+  <data name="Main_insert" xml:space="preserve">
+    <value>Check-in inserito</value>
+  </data>
+  <data name="Main_insertError" xml:space="preserve">
+    <value>C'è statao un errore nell'inserimento del ckeckout</value>
+  </data>
+  <data name="Main_insertError2" xml:space="preserve">
+    <value>C'è statao un errore nell'inserimento del ckeckin</value>
+  </data>
+  <data name="Main_moreThan1" xml:space="preserve">
+    <value>Errore: c'è più di un check-in attivo</value>
+  </data>
+  <data name="Main_moreThan2" xml:space="preserve">
+    <value>Hai già inserito due entrate per la giornata odierna</value>
+  </data>
+  <data name="Main_noToClose" xml:space="preserve">
+    <value>Non ci sono Check-in da chiudere</value>
+  </data>
+  <data name="Monday" xml:space="preserve">
+    <value>Lunedì</value>
+  </data>
+  <data name="Saturday" xml:space="preserve">
+    <value>Sabato</value>
+  </data>
+  <data name="Sunday" xml:space="preserve">
+    <value>Domenica</value>
+  </data>
+  <data name="Thursday" xml:space="preserve">
+    <value>Giovedì</value>
+  </data>
+  <data name="Tuesday" xml:space="preserve">
+    <value>Martedì</value>
+  </data>
+  <data name="Wednesday" xml:space="preserve">
+    <value>Mercoledì</value>
+  </data>
 </root>

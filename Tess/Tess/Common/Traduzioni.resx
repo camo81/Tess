@@ -153,4 +153,58 @@
   <data name="Setting_confirm_yes" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="Friday" xml:space="preserve">
+    <value>Friday</value>
+  </data>
+  <data name="Loading_message" xml:space="preserve">
+    <value>blablabla | opopopop</value>
+  </data>
+  <data name="Main_1opened" xml:space="preserve">
+    <value>First close the opened Check-in</value>
+  </data>
+  <data name="Main_castError" xml:space="preserve">
+    <value>Error casting to int</value>
+  </data>
+  <data name="Main_Closed" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="Main_countError" xml:space="preserve">
+    <value>openedHours is null or &gt;2</value>
+  </data>
+  <data name="Main_insert" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="Main_insertError" xml:space="preserve">
+    <value>Error on insert checkout</value>
+  </data>
+  <data name="Main_insertError2" xml:space="preserve">
+    <value>Error on insert checkin</value>
+  </data>
+  <data name="Main_moreThan1" xml:space="preserve">
+    <value>Error: More than 1 check-in active</value>
+  </data>
+  <data name="Main_moreThan2" xml:space="preserve">
+    <value>Max Check-in / day is 2</value>
+  </data>
+  <data name="Main_noToClose" xml:space="preserve">
+    <value>Nothing to close.</value>
+  </data>
+  <data name="Monday" xml:space="preserve">
+    <value>Monday</value>
+  </data>
+  <data name="Saturday" xml:space="preserve">
+    <value>Saturday</value>
+  </data>
+  <data name="Sunday" xml:space="preserve">
+    <value>Sunday</value>
+  </data>
+  <data name="Thursday" xml:space="preserve">
+    <value>Thursday</value>
+  </data>
+  <data name="Tuesday" xml:space="preserve">
+    <value>Tuesday</value>
+  </data>
+  <data name="Wednesday" xml:space="preserve">
+    <value>Wednesday</value>
+  </data>
 </root>

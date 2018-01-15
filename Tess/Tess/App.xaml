@@ -18,6 +18,7 @@
       </Style>
       
       <Style x:Key="MasterDetailSL1" TargetType="StackLayout">
+        <Setter Property="Padding" Value="20,5,20,5" />
       </Style>
 
       <Style x:Key="MasterDetailLb2" TargetType="Label">

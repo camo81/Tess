@@ -62,11 +62,137 @@ namespace Tess.Common {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a Friday.
+        /// </summary>
+        internal static string Friday {
+            get {
+                return ResourceManager.GetString("Friday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a Choose language.
         /// </summary>
         internal static string Language_pickerTitle {
             get {
                 return ResourceManager.GetString("Language_pickerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a blablabla | opopopop.
+        /// </summary>
+        internal static string Loading_message {
+            get {
+                return ResourceManager.GetString("Loading_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a First close the opened Check-in.
+        /// </summary>
+        internal static string Main_1opened {
+            get {
+                return ResourceManager.GetString("Main_1opened", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Error casting to int.
+        /// </summary>
+        internal static string Main_castError {
+            get {
+                return ResourceManager.GetString("Main_castError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Done.
+        /// </summary>
+        internal static string Main_Closed {
+            get {
+                return ResourceManager.GetString("Main_Closed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a openedHours is null or &gt;2.
+        /// </summary>
+        internal static string Main_countError {
+            get {
+                return ResourceManager.GetString("Main_countError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Done.
+        /// </summary>
+        internal static string Main_insert {
+            get {
+                return ResourceManager.GetString("Main_insert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Error on insert checkout.
+        /// </summary>
+        internal static string Main_insertError {
+            get {
+                return ResourceManager.GetString("Main_insertError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Error on insert checkin.
+        /// </summary>
+        internal static string Main_insertError2 {
+            get {
+                return ResourceManager.GetString("Main_insertError2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Error: More than 1 check-in active.
+        /// </summary>
+        internal static string Main_moreThan1 {
+            get {
+                return ResourceManager.GetString("Main_moreThan1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Max Check-in / day is 2.
+        /// </summary>
+        internal static string Main_moreThan2 {
+            get {
+                return ResourceManager.GetString("Main_moreThan2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Nothing to close..
+        /// </summary>
+        internal static string Main_noToClose {
+            get {
+                return ResourceManager.GetString("Main_noToClose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Monday.
+        /// </summary>
+        internal static string Monday {
+            get {
+                return ResourceManager.GetString("Monday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Saturday.
+        /// </summary>
+        internal static string Saturday {
+            get {
+                return ResourceManager.GetString("Saturday", resourceCulture);
             }
         }
         
@@ -166,6 +292,42 @@ namespace Tess.Common {
         internal static string Settings_SaveSetOk {
             get {
                 return ResourceManager.GetString("Settings_SaveSetOk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Sunday.
+        /// </summary>
+        internal static string Sunday {
+            get {
+                return ResourceManager.GetString("Sunday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Thursday.
+        /// </summary>
+        internal static string Thursday {
+            get {
+                return ResourceManager.GetString("Thursday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Tuesday.
+        /// </summary>
+        internal static string Tuesday {
+            get {
+                return ResourceManager.GetString("Tuesday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Wednesday.
+        /// </summary>
+        internal static string Wednesday {
+            get {
+                return ResourceManager.GetString("Wednesday", resourceCulture);
             }
         }
     }

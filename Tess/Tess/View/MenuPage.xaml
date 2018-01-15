@@ -9,21 +9,25 @@
       <ContentPage.Content>
 
         <StackLayout HorizontalOptions="FillAndExpand">
-          <StackLayout Style ="{StaticResource MasterDetailSL1}">
+          
+          
+          <StackLayout>
             <RelativeLayout>
               <Image Source="background.png" Aspect="Fill" />
               <Label Text="Tess" Style ="{StaticResource MasterDetailLb1}"/>
             </RelativeLayout>
           </StackLayout>
 
-          <StackLayout HorizontalOptions="FillAndExpand">
+                    
+          <StackLayout HorizontalOptions="FillAndExpand" Style ="{StaticResource MasterDetailSL1}">
+            
             <StackLayout Orientation="Horizontal">
               <Image Source="ic_home_grey600_24dp.png"></Image>
               <Label Text="Main" Style ="{StaticResource MasterDetailLb2}">
               <Label.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding gotoPage}" NumberOfTapsRequired="1" CommandParameter="MainPage" />
               </Label.GestureRecognizers>
-            </Label>                        
+              </Label>                        
             </StackLayout>
 
             <StackLayout Orientation="Horizontal">
@@ -34,6 +38,7 @@
                 </Label.GestureRecognizers>
               </Label>
             </StackLayout>
+            
             <StackLayout Orientation="Horizontal">
               <Image Source="ic_web_grey600_24dp.png"></Image>
               <Label Text="Language" Style ="{StaticResource MasterDetailLb2}">
@@ -42,8 +47,11 @@
                 </Label.GestureRecognizers>
               </Label>
             </StackLayout>
+                        
           </StackLayout>
+        
         </StackLayout>
+        
       </ContentPage.Content>
     </ContentPage>
   </MasterDetailPage.Master>

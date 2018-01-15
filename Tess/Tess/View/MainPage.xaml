@@ -45,25 +45,7 @@
           </ListView.ItemTemplate>
 
         </ListView>        
-        
-      <!--
-        <ListView x:Name="EmployeeView" ItemsSource="{Binding Giorni}">
-          
-         <ListView.ItemTemplate>
-            <DataTemplate>
-              
-              <ImageCell
-                 ImageSource="ic_clock_grey600_36dp.png"
-                 Text="{Binding number}"
-                 Detail="opopop">
-              </ImageCell>
-              
-            </DataTemplate>
-          </ListView.ItemTemplate>
-        </ListView>
-        
-       -->
-
+       
       </StackLayout>
     </StackLayout>
 </ScrollView>

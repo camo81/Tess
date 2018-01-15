@@ -83,13 +83,14 @@ namespace Tess.ViewModel
 
         }
 
-        public string[] DaysName = new string[] { "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica" };
+        public string[] DaysName = new string[] { Traduzioni.Monday, Traduzioni.Tuesday, Traduzioni.Wednesday, Traduzioni.Thursday, Traduzioni.Friday, Traduzioni.Saturday, Traduzioni.Sunday };
         public int DayOfYear;
         public int DayOfWeek;
         public int Year;
         public string Date;
         public double HoursNum = 0;
         public int DaysNum = 0;
+        bool leap;
 
         #endregion
 
@@ -99,6 +100,7 @@ namespace Tess.ViewModel
             DayOfYear = now.DayOfYear;
             DayOfWeek = (int)now.DayOfWeek;
             Year = now.Year;
+            leap = DateTime.IsLeapYear(Year);
             Date = now.ToString();
             
             // get impostazioni
@@ -138,53 +140,72 @@ namespace Tess.ViewModel
 
         public void createListView()
         {
-            int weekStart = DayOfYear - (DayOfWeek - 1);
-            int weekEnd = DayOfYear + (7 - DayOfWeek);
+            //int weekStart = DayOfYear - (DayOfWeek - 1);
+            //int weekEnd = DayOfYear + (7 - DayOfWeek);
+
+            DateTime weekStartDT = DateTime.Now.AddDays(-(DayOfWeek - 1));
+            DateTime weekEndDT = DateTime.Now.AddDays((7 - DayOfWeek));
+
 
             this.Worked = new List<DaysWorked>();
-            for (int i = 1; i <= 7; i++)
+            int cont = 0;
+            for (DateTime i = weekStartDT; i <= weekEndDT; i = i.AddDays(1))
             {
-                double worked = HoursPerDay(weekStart.ToString(), Year.ToString());
-                var timeSpan = TimeSpan.FromHours(worked);
-
+                TimeSpan timeSpan;
+                cont +=1;
+                double worked = HoursPerDay(i.DayOfYear.ToString() , i.Year.ToString());
+                timeSpan = TimeSpan.FromHours(worked);
+                int p = (int)i.DayOfWeek;
 
                 Worked.Add(new DaysWorked
                 {
-                    WeekDay = i.ToString(),
-                    DayName = DaysName[(i - 1)],
+                    WeekDay = p.ToString(),
+                    DayName = DaysName[(cont - 1)],
                     WorkedHours = timeSpan.ToString()
                 });
 
-                weekStart += 1;
             }
         }
 
         public async void insertWorkedDay() {
             await Task.Delay(2000);
-            UserDialogs.Instance.ShowLoading("wait", MaskType.Black);
+            var message = Common.functions.idiotMessage();
+            UserDialogs.Instance.ShowLoading(message, MaskType.Black);
 
-            int weekStart = DayOfYear - (DayOfWeek -1);
-            int weekEnd = DayOfYear + (7 - DayOfWeek);
+            DateTime weekStartDT = DateTime.Now.AddDays( -(DayOfWeek - 1) );
+            DateTime weekEndDT = DateTime.Now.AddDays((7 - DayOfWeek));
 
-            //var t = ManageData.getAll();
+
+            //var t = ManageData.getAllDays();
             //ManageData.delDays();
 
-            for (int i = weekStart; i <= weekEnd; i++)
-            {
-                int wstart = i;
+            //TODO: vedere come gestire gli anni bisestili. O con il bool leap o meglio facendo il ciclo su un elemento datetime invece che int!
+
+            for (DateTime i = weekStartDT; i <= weekEndDT; i=i.AddDays(1) )
+            {                
+                string h = i.ToString();
+                int wstart = i.DayOfYear;
                 string ws = wstart.ToString();
-                string y = Year.ToString(); 
+                string y = i.Year.ToString();
                 var d = ManageData.getDay(ws,y);
                 if (d == null)
                 {
                     DaysWorked dati = new DaysWorked();
-                    dati.Datetime = Date;
-                    dati.WeekDay = DayOfWeek.ToString();
-                    dati.YearDay = ws;
-                    dati.Year = Year.ToString();
-
+                    int wdint = (int)i.DayOfWeek;
+                    dati.Datetime = i.ToString();
+                    dati.WeekDay = wdint.ToString();
+                    dati.YearDay = i.DayOfYear.ToString();
+                    dati.Year = i.Year.ToString();
+                     
                     var ins = ManageData.InsertDay(dati);
                 }
+
+                DaysWorked dati2 = new DaysWorked();
+                int p = (int)i.DayOfWeek;
+                dati2.Datetime = i.ToString();
+                dati2.WeekDay = p.ToString();
+                dati2.YearDay = i.DayOfYear.ToString();
+                dati2.Year = i.Year.ToString();
 
             }
             UserDialogs.Instance.HideLoading();
@@ -211,18 +232,18 @@ namespace Tess.ViewModel
                     if (ManageData.InsertDayHours(dati) == 1)
                     {
                         DependencyService.Get<IAudio>().PlayAudioFile("pop.mp3");
-                        UserDialogs.Instance.ShowSuccess("Bella!");
+                        UserDialogs.Instance.ShowSuccess(Traduzioni.Main_insert);
                     }
                     else
                     {
                         DependencyService.Get<IAudio>().PlayAudioFile("error.mp3");
-                        UserDialogs.Instance.ShowError("Errore nell'inserimento");
+                        UserDialogs.Instance.ShowError(Traduzioni.Main_insertError2);
                     }
 
                 }
                 else {
                     DependencyService.Get<IAudio>().PlayAudioFile("error.mp3");
-                    UserDialogs.Instance.ShowError("Errore nel casting a int");
+                    UserDialogs.Instance.ShowError(Traduzioni.Main_castError);
                 }
 
             }
@@ -243,7 +264,7 @@ namespace Tess.ViewModel
             if (list.Count() > 1)
             {
                 DependencyService.Get<IAudio>().PlayAudioFile("error.mp3");
-                UserDialogs.Instance.ShowError("Hai già inserito due entrate per la giornata odierna");
+                UserDialogs.Instance.ShowError(Traduzioni.Main_moreThan2);
                 return false;
             }
 
@@ -257,7 +278,7 @@ namespace Tess.ViewModel
             if (list.Count > 0)
             {
                 DependencyService.Get<IAudio>().PlayAudioFile("error.mp3");
-                UserDialogs.Instance.ShowError("Hai già un'entrata aperta");
+                UserDialogs.Instance.ShowError(Traduzioni.Main_1opened);
                 return false;
             }
             return true;
@@ -274,7 +295,7 @@ namespace Tess.ViewModel
             {
                 case 0:
                     DependencyService.Get<IAudio>().PlayAudioFile("error.mp3");
-                    UserDialogs.Instance.ShowError("Non ci sono Check-in da chiudere");
+                    UserDialogs.Instance.ShowError(Traduzioni.Main_noToClose);
                     return false;
 
                 case 1:
@@ -290,23 +311,23 @@ namespace Tess.ViewModel
                     if (ManageData.UpdateDayHours(dati) == 1)
                     {
                         DependencyService.Get<IAudio>().PlayAudioFile("woosh.mp3");
-                        UserDialogs.Instance.ShowSuccess("Check-in chiuso");
+                        UserDialogs.Instance.ShowSuccess(Traduzioni.Main_Closed);
                         return true;
                     }
                     else {
                         DependencyService.Get<IAudio>().PlayAudioFile("error.mp3");
-                        UserDialogs.Instance.ShowError("C'è statao un errore nell'inserimento");
+                        UserDialogs.Instance.ShowError(Traduzioni.Main_insertError);
                         return false;
                     }                 
                     
                 case 2:
                     DependencyService.Get<IAudio>().PlayAudioFile("error.mp3");
-                    UserDialogs.Instance.ShowError("C'è statao un errore (2 checkin attivi)");
+                    UserDialogs.Instance.ShowError(Traduzioni.Main_moreThan1);
                     return false;
                     
                 default:
                     DependencyService.Get<IAudio>().PlayAudioFile("error.mp3");
-                    UserDialogs.Instance.ShowError("il count della lista openeHours è null o maggiore di 2");
+                    UserDialogs.Instance.ShowError(Traduzioni.Main_countError);
                     return false; 
             }
         }
