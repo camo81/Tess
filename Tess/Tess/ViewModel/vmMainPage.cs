@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Tess.Common;
 using Tess.Model;
+using Tess.View;
 using Xamarin.Forms;
 
 namespace Tess.ViewModel
@@ -61,6 +62,17 @@ namespace Tess.ViewModel
 
         }
 
+        public ICommand gotoSettings
+        {
+            get
+            {
+                return new RelayCommand(() => { vmMenuPage.changePage("SettingsPage"); });
+
+            }
+
+
+        }
+
         public ICommand CommandStopWatchIn
         {
             get
@@ -83,6 +95,24 @@ namespace Tess.ViewModel
 
         }
 
+        public ICommand CommandEditRow
+        {
+            get
+            {
+                return new RelayCommand<DaysWorked>((idR) => { EditRow(idR); });
+            }
+
+        }
+
+        public ICommand CommandDelRow
+        {
+            get
+            {
+                return new RelayCommand<DaysWorked>((idR) => { DelRow(idR); });
+            }
+
+        }
+
         public string[] DaysName = new string[] { Traduzioni.Monday, Traduzioni.Tuesday, Traduzioni.Wednesday, Traduzioni.Thursday, Traduzioni.Friday, Traduzioni.Saturday, Traduzioni.Sunday };
         public int DayOfYear;
         public int DayOfWeek;
@@ -102,7 +132,8 @@ namespace Tess.ViewModel
             Year = now.Year;
             leap = DateTime.IsLeapYear(Year);
             Date = now.ToString();
-            
+
+
             // get impostazioni
             var DaysNumber = ManageData.getValue("WdSelected");
             int x = 0;
@@ -127,10 +158,6 @@ namespace Tess.ViewModel
             //Calcolo la somma settimanale di ore e inizializzo la progress bar
             double WeekTot = HoursSum();
             setProgressBar(HoursNum, WeekTot);
-
-
-
-
 
         }
 
@@ -161,10 +188,13 @@ namespace Tess.ViewModel
                 {
                     WeekDay = p.ToString(),
                     DayName = DaysName[(cont - 1)],
-                    WorkedHours = timeSpan.ToString()
+                    WorkedHours = timeSpan.ToString(),
+                    Year = i.Year.ToString(),
+                    YearDay = i.DayOfYear.ToString()
                 });
 
             }
+
         }
 
         public async void insertWorkedDay() {
@@ -199,13 +229,6 @@ namespace Tess.ViewModel
                      
                     var ins = ManageData.InsertDay(dati);
                 }
-
-                DaysWorked dati2 = new DaysWorked();
-                int p = (int)i.DayOfWeek;
-                dati2.Datetime = i.ToString();
-                dati2.WeekDay = p.ToString();
-                dati2.YearDay = i.DayOfYear.ToString();
-                dati2.Year = i.Year.ToString();
 
             }
             UserDialogs.Instance.HideLoading();
@@ -254,7 +277,8 @@ namespace Tess.ViewModel
         {
             bool i = setCheckout();
             double WeekTot = HoursSum();
-            setProgressBar(HoursNum,WeekTot);        
+            setProgressBar(HoursNum,WeekTot);
+            vmMenuPage.changePage("MainPage");     
         }
 
         public bool checkDayEntry(string IdDayWorked)
@@ -428,6 +452,36 @@ namespace Tess.ViewModel
             Percentage = perc.ToString();
         }
 
+        public async void EditRow(DaysWorked p1) {
+
+            DaysWorked day = ManageData.getDay(p1.YearDay, p1.Year);
+            await App.Current.MainPage.Navigation.PushAsync(new EntryPage());
+
+        }
+
+        public async void DelRow(DaysWorked p1)
+        {
+            var result = await UserDialogs.Instance.ConfirmAsync(new ConfirmConfig
+            {
+                Message = Traduzioni.Setting_confirmMessage,
+                OkText = Traduzioni.Setting_confirm_yes,
+                CancelText = Traduzioni.Setting_confirm_no
+            });
+            if (result)
+            {
+                DaysWorked day = ManageData.getDay(p1.YearDay, p1.Year);
+                ManageData.delDayHours(day.IdDaysWorked);
+                UserDialogs.Instance.ShowSuccess(Traduzioni.Settings_SaveSetOk);
+                vmMenuPage.changePage("MainPage");
+            }
+
+            
+        }
+
+
+
+
         #endregion
     }
 }
+

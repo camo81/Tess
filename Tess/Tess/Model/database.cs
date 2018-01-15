@@ -196,6 +196,12 @@ namespace Tess.Model
             return database.DeleteAll<DaysWorkedHours>();
         }
 
+        public static void delDayHours(int IdDaysWorked)
+        {
+            string query = $"DELETE FROM [{TabellaDaysHours}] WHERE [IdDaysWorked] = \"{IdDaysWorked}\" ";
+            var lista = database.Query<DaysWorkedHours>(query);
+        }
+
         public static List<DaysWorkedHours> getAllHours()
         {
             string query = $"SELECT * FROM [{TabellaDaysHours}]";

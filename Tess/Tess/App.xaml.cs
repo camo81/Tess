@@ -28,6 +28,7 @@ namespace Tess
 
             Traduzioni.Culture = lingua;
             MainPage = new View.MenuPage();
+            //MainPage = new NavigationPage(new View.MenuPage());
         }
 
         protected override void OnStart()
