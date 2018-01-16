@@ -17,15 +17,15 @@ namespace Tess.ViewModel
     public class vmMainPage : ViewModelBase
     {
         #region binding
-        public String mainlabel = "Wellcome to Tess";
+        private String updown = "ic_thumb_down_outline_grey600_48dp.png";
 
-        public String MainLabel
+        public String upDown
         {
-            get { return mainlabel; }
+            get { return updown; }
             set
             {
-                mainlabel = value;
-                Set(nameof(MainLabel), ref value);
+                updown = value;
+                Set(nameof(upDown), ref value);
             }
         }
 
@@ -136,18 +136,29 @@ namespace Tess.ViewModel
 
             // get impostazioni
             var DaysNumber = ManageData.getValue("WdSelected");
-            int x = 0;
-            if (Int32.TryParse(DaysNumber.SettingValue, out x))
+            if (DaysNumber != null)
             {
-                DaysNum = Int32.Parse(DaysNumber.SettingValue);
+                int x = 0;
+                if (Int32.TryParse(DaysNumber.SettingValue, out x))
+                {
+                    DaysNum = Int32.Parse(DaysNumber.SettingValue);
+                }
+            } 
+
+
+            var HoursNumber = ManageData.getValue("OsSelected");
+            if (HoursNumber != null)
+            {
+                double y = 0;
+                if (Double.TryParse(HoursNumber.SettingValue, out y))
+                {
+                    HoursNum = Double.Parse(HoursNumber.SettingValue);
+                }
             }
 
-            var HoursNumber = ManageData.getValue("OsSelected");            
-            double y = 0;
-            if (Double.TryParse(HoursNumber.SettingValue, out y))
-            {
-                HoursNum = Double.Parse(HoursNumber.SettingValue);                
-            }
+
+            //Set di updown
+            setUpDown();
 
             // Creazione della listview
             createListView();
@@ -165,24 +176,47 @@ namespace Tess.ViewModel
 
         #region functions
 
+        public void setUpDown() {
+            //ore/giorno attuali 
+            double HAvg = HoursAvg();
+
+            // ore/giorno richieste
+            double HperDayReq = HoursNum / DaysNum;
+
+            if (HAvg > HperDayReq)
+            {
+                upDown = "ic_thumb_up_outline_grey600_18dp.png";
+            }
+
+
+        }
+
         public void createListView()
         {
             //int weekStart = DayOfYear - (DayOfWeek - 1);
             //int weekEnd = DayOfYear + (7 - DayOfWeek);
+            
 
             DateTime weekStartDT = DateTime.Now.AddDays(-(DayOfWeek - 1));
             DateTime weekEndDT = DateTime.Now.AddDays((7 - DayOfWeek));
-
+            
 
             this.Worked = new List<DaysWorked>();
             int cont = 0;
             for (DateTime i = weekStartDT; i <= weekEndDT; i = i.AddDays(1))
             {
+                string upDownD = "ic_thumb_down_outline_grey600_18dp.png";
                 TimeSpan timeSpan;
                 cont +=1;
                 double worked = HoursPerDay(i.DayOfYear.ToString() , i.Year.ToString());
                 timeSpan = TimeSpan.FromHours(worked);
                 int p = (int)i.DayOfWeek;
+
+                TimeSpan ReqTimeSpan = new TimeSpan(8,0,0);
+
+                if (timeSpan > ReqTimeSpan) {
+                    upDownD = "ic_thumb_up_outline_grey600_18dp.png";
+                }
 
                 Worked.Add(new DaysWorked
                 {
@@ -190,7 +224,8 @@ namespace Tess.ViewModel
                     DayName = DaysName[(cont - 1)],
                     WorkedHours = timeSpan.ToString(),
                     Year = i.Year.ToString(),
-                    YearDay = i.DayOfYear.ToString()
+                    YearDay = i.DayOfYear.ToString(),
+                    WorkedUpDown = upDownD
                 });
 
             }
@@ -405,6 +440,58 @@ namespace Tess.ViewModel
 
         }
 
+        public double HoursAvg()
+        {
+            int weekStart = DayOfYear - (DayOfWeek - 1);
+            int weekEnd = DayOfYear + (7 - DayOfWeek);
+
+            double WeekTot = 0;
+            int Days = 0;
+
+            for (int i = weekStart; i <= weekEnd; i++)
+            {
+                int wstart = i;
+                string ws = wstart.ToString();
+                string y = Year.ToString();
+                var d = ManageData.getDay(ws, y);
+                if (d != null)
+                {
+
+                    string idDay = d.IdDaysWorked.ToString();
+                    var f = ManageData.getClosedDayHours(idDay);
+                    if (f != null)
+                    {
+                        Days++;
+                        //fetch della lista
+                        foreach (var interval in f)
+                        {
+                            var start = interval.CheckIn;
+                            var end = interval.CheckOut;
+
+                            DateTime startDT = Convert.ToDateTime(start);
+                            DateTime endDT = Convert.ToDateTime(end);
+
+
+                            var hours = (endDT - startDT).TotalHours;
+                            WeekTot = WeekTot + hours;
+
+                        }
+
+                        //per ogni riga calcolare la differenza tra check in e out
+
+                    }
+
+
+
+                }
+
+            }
+
+            return WeekTot/Days;
+
+
+        }
+
         public double HoursPerDay(string DayYear, string Year)
         {
 
@@ -452,11 +539,11 @@ namespace Tess.ViewModel
             Percentage = perc.ToString();
         }
 
-        public async void EditRow(DaysWorked p1) {
-
+        public void EditRow(DaysWorked p1) {
             DaysWorked day = ManageData.getDay(p1.YearDay, p1.Year);
-            await App.Current.MainPage.Navigation.PushAsync(new EntryPage());
-
+            MasterDetailPage newPage = App.Current.MainPage as MasterDetailPage;
+            Page gotoEntry = new View.EntryPage(day);
+            newPage.Detail = new NavigationPage(gotoEntry);
         }
 
         public async void DelRow(DaysWorked p1)

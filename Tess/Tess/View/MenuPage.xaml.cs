@@ -10,7 +10,6 @@ namespace Tess.View
             InitializeComponent();
             this.BindingContext = new ViewModel.vmMenuPage();
             Detail = new NavigationPage(new MainPage());
-
         }
 
     }

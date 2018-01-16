@@ -12,11 +12,11 @@
     <StackLayout>
       <StackLayout Style="{StaticResource MasterDetailSLMain}">
         <StackLayout>
-          <StackLayout >
+          <StackLayout>
             <Image.GestureRecognizers>
               <TapGestureRecognizer Command="{Binding gotoSettings}" NumberOfTapsRequired="1"/>
             </Image.GestureRecognizers>
-            <Image Source="ic_trophy_outline_grey600_36dp.png"/>
+            <Image Source="{Binding upDown}"/>           
           </StackLayout>
           <ProgressBar x:Name="progress" Progress="{Binding Percentage}" Scale="1"  />
           <StackLayout Orientation="Horizontal" HorizontalOptions="End">
@@ -33,7 +33,7 @@
             <DataTemplate>
               <ViewCell>
                 <ViewCell.ContextActions>
-                  <!-- bindando . passo tutto l'oggetto previsto dal bonding context della lista-->
+                  <!-- bindando . passo tutto l'oggetto previsto dal binding context della lista-->
                   <MenuItem Icon="ic_delete_white_18dp.png" Command="{Binding Path=BindingContext.CommandDelRow, Source={x:Reference Name=MainPage}}" 
                             CommandParameter="{Binding .}" />
                   <!--cambio bindContext.BindingContext.miocommand è il command che ho dichiarato nel VM . Perchè funzioni Name=MainPage deve essere lo stesso dell x:name della view -->
@@ -49,7 +49,7 @@
                   <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" >
                     <Image Source="ic_clock_grey600_18dp.png" />
                     <Label Text="{Binding WorkedHours}" VerticalTextAlignment="Center"/>
-                    <Image Source="ic_check_grey600_18dp.png" />
+                    <Image Source="{Binding WorkedUpDown}" />
                   </StackLayout>
                 </StackLayout>
               </ViewCell>

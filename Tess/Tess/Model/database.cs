@@ -65,6 +65,8 @@ namespace Tess.Model
 
         public string WorkedHours { get; set; } = "-";
 
+        public string WorkedUpDown { get; set; } = "";
+
         public override string ToString()
         {
             return string.Format("[Language: IdDaysWorked={0}, Datetime={1}, WeekDay{2} ,YearDay{3}, Year{4}", IdDaysWorked, Datetime, WeekDay, YearDay, Year);
@@ -166,6 +168,13 @@ namespace Tess.Model
         public static DaysWorked getDay(string YearDay, string Year)
         {
             string query = $"SELECT * FROM [{TabellaDays}] WHERE [Year] = \"{Year}\" AND [YearDay] = \"{YearDay}\"";
+            var lista = database.Query<DaysWorked>(query);
+            return lista.FirstOrDefault();
+        }
+
+        public static DaysWorked getDayFromId(string IdDaysWorked)
+        {
+            string query = $"SELECT * FROM [{TabellaDays}] WHERE [IdDaysWorked] = \"{IdDaysWorked}\"";
             var lista = database.Query<DaysWorked>(query);
             return lista.FirstOrDefault();
         }

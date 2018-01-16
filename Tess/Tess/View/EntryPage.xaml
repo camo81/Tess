@@ -1,7 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Tess.View.EntryPage">
+             x:Class="Tess.View.EntryPage"
+             Title="Edit Entry"
+             xmlns:customs="clr-namespace:Tess.Model;assembly=Tess">
+    <ContentPage.ToolbarItems>
+    <ToolbarItem Icon="ic_check_white_36dp.png" Command="{Binding SaveSettings}"></ToolbarItem>
+  </ContentPage.ToolbarItems>
   
-  <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
+  <ScrollView Style="{StaticResource MasterDetailSVMain}">
+    <StackLayout>
+      <StackLayout Style="{StaticResource MasterDetailSLMain}">
+        <StackLayout Orientation="Horizontal">
+          <Image Source="ic_clock_grey600_18dp.png" />         
+          <TimePicker Time="{Binding In1, Mode=TwoWay}" Format="HH:mm" />                     
+          <TimePicker Time="{Binding Out1, Mode=TwoWay}" Format="HH:mm"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal">
+          <Image Source="ic_clock_grey600_18dp.png" />
+          <TimePicker Time="{Binding In2, Mode=TwoWay}" Format="HH:mm" />
+          <TimePicker Time="{Binding Out2, Mode=TwoWay}" Format="HH:mm"/>
+        </StackLayout>
+      </StackLayout>
+          <customs:ButtonWithoutShadow x:Name = "buttonDel" Image="ic_delete_white_24dp.png" Command="{Binding DelSettings}" Style="{StaticResource buttonOnlyIcon}" />
+    </StackLayout>
+  </ScrollView>
 </ContentPage>
+

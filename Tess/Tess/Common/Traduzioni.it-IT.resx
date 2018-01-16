@@ -207,4 +207,7 @@
   <data name="Wednesday" xml:space="preserve">
     <value>Mercoledì</value>
   </data>
+  <data name="Entry_gandalf" xml:space="preserve">
+    <value>You shall not pass</value>
+  </data>
 </root>

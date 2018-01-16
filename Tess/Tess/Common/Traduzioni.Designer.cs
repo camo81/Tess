@@ -62,6 +62,15 @@ namespace Tess.Common {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a You shall not pass.
+        /// </summary>
+        internal static string Entry_gandalf {
+            get {
+                return ResourceManager.GetString("Entry_gandalf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a Friday.
         /// </summary>
         internal static string Friday {
