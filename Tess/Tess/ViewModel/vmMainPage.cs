@@ -62,11 +62,11 @@ namespace Tess.ViewModel
 
         }
 
-        public ICommand gotoSettings
+        public ICommand gotoDetail
         {
             get
             {
-                return new RelayCommand(() => { vmMenuPage.changePage("SettingsPage"); });
+                return new RelayCommand(() => { vmMenuPage.changePage("DetailPage"); });
 
             }
 
@@ -412,10 +412,7 @@ namespace Tess.ViewModel
             DateTime weekStartDT = DateTime.Now.AddDays(-(DayOfWeek - 1));
             DateTime weekEndDT = DateTime.Now.AddDays((7 - DayOfWeek));
 
-            //int weekStart = DayOfYear - (DayOfWeek - 1);
-            //int weekEnd = DayOfYear + (7 - DayOfWeek);
-
-            double WeekTot = 0;
+            TimeSpan WeekTot = new TimeSpan();
 
             for (DateTime i = weekStartDT; i <= weekEndDT; i = i.AddDays(1))
                 {
@@ -430,7 +427,7 @@ namespace Tess.ViewModel
                     var f = ManageData.getClosedDayHours(idDay);
                     if (f != null)
                     {
-                        //fetch della lista
+
                         foreach (var interval in f)
                         {
                             var start = interval.CheckIn;
@@ -439,25 +436,66 @@ namespace Tess.ViewModel
                             DateTime startDT = Convert.ToDateTime(start);
                             DateTime endDT = Convert.ToDateTime(end);
 
-
-                            var hours = (endDT - startDT).TotalHours;
+                            TimeSpan hours = endDT - startDT;
                             WeekTot = WeekTot + hours;
 
                         }
 
-                            //per ogni riga calcolare la differenza tra check in e out
+                        // se c'è una pausa, verifico la durata minima
+                        if (f.Count == 2)
+                        {
+                            //Timespan della pausa
+                            DateTime CO1 = DateTime.Parse(f[0].CheckOut);
+                            DateTime CI2 = DateTime.Parse(f[1].CheckIn);
+                            TimeSpan BR = CI2 - CO1;
+
+                            //Timespan minimo richiesto dai settings
+                            TimeSpan MinReq = getMinBreak();
+
+                            if (BR < MinReq)
+                            {
+                                WeekTot = WeekTot - (MinReq - BR);
+                            }
 
                         }
 
+                    }
 
 
                 }
 
             }
 
-            return WeekTot;
+            return WeekTot.TotalHours;
 
 
+        }
+
+        public TimeSpan getMinBreak() {
+            // get ore min break
+            int MBH = 0;
+            var Hr = ManageData.getValue("BHSelected");
+            if (Hr != null)
+            {
+                bool isConvertible = false;
+                isConvertible = int.TryParse(Hr.SettingValue, out MBH);
+
+            }
+
+
+            // get minutes min break
+            int MBM = 0;
+            var Mn = ManageData.getValue("BMSelected");
+            if (Mn != null)
+            {
+                bool isConvertible = false;
+                isConvertible = int.TryParse(Mn.SettingValue, out MBM);
+
+            }
+
+            TimeSpan MinBreak = new TimeSpan(MBH, MBM, 0);
+
+            return MinBreak;
         }
 
         public double HoursAvg()
@@ -468,7 +506,7 @@ namespace Tess.ViewModel
             int weekStart = DayOfYear - (DayOfWeek - 1);
             int weekEnd = DayOfYear -1;
 
-            double WeekTot = 0;
+            TimeSpan WeekTot = new TimeSpan();
             int Days = 0;
 
 
@@ -486,7 +524,6 @@ namespace Tess.ViewModel
                     if (f != null)
                     {
                         Days++;
-                        //fetch della lista
                         foreach (var interval in f)
                         {
                             var start = interval.CheckIn;
@@ -496,12 +533,28 @@ namespace Tess.ViewModel
                             DateTime endDT = Convert.ToDateTime(end);
 
 
-                            var hours = (endDT - startDT).TotalHours;
+                            TimeSpan hours = endDT - startDT;
                             WeekTot = WeekTot + hours;
 
                         }
 
-                        //per ogni riga calcolare la differenza tra check in e out
+                        // se c'è una pausa, verifico la durata minima
+                        if (f.Count == 2)
+                        {
+                            //Timespan della pausa
+                            DateTime CO1 = DateTime.Parse(f[0].CheckOut);
+                            DateTime CI2 = DateTime.Parse(f[1].CheckIn);
+                            TimeSpan BR = CI2 - CO1;
+
+                            //Timespan minimo richiesto dai settings
+                            TimeSpan MinReq = getMinBreak();
+
+                            if (BR < MinReq)
+                            {
+                                WeekTot = WeekTot - (MinReq - BR);
+                            }
+
+                        }
 
                     }
 
@@ -511,7 +564,7 @@ namespace Tess.ViewModel
 
             }
 
-            return WeekTot/Days;
+            return WeekTot.TotalHours / Days;
 
 
         }
@@ -519,7 +572,7 @@ namespace Tess.ViewModel
         public double HoursPerDay(string DayYear, string Year)
         {
 
-            double DayTot = 0;
+            TimeSpan DayTot = new TimeSpan();
 
             DaysWorked day = ManageData.getDay(DayYear, Year);
 
@@ -539,14 +592,32 @@ namespace Tess.ViewModel
                         DateTime endDT = Convert.ToDateTime(end);
 
 
-                        var hours = (endDT - startDT).TotalHours;
+                        TimeSpan hours = endDT - startDT;
                         DayTot = DayTot + hours;
+                    }
+
+                    // se c'è una pausa, verifico la durata minima
+                    if (f.Count == 2)
+                    {
+                        //Timespan della pausa
+                        DateTime CO1 = DateTime.Parse(f[0].CheckOut);
+                        DateTime CI2 = DateTime.Parse(f[1].CheckIn);
+                        TimeSpan BR = CI2 - CO1;
+
+                        //Timespan minimo richiesto dai settings
+                        TimeSpan MinReq = getMinBreak();
+
+                        if (BR < MinReq)
+                        {
+                            DayTot = DayTot - (MinReq - BR);
+                        }
+
                     }
 
                 }
             }
 
-            return DayTot;
+            return DayTot.TotalHours;
 
 
         }

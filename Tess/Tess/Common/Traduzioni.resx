@@ -226,13 +226,31 @@ And to my daughter Teresa, this app is for you &lt;3.</value>
   <data name="Settings_sound" xml:space="preserve">
     <value>Play sounds</value>
   </data>
+  <data name="Detail_l1" xml:space="preserve">
+    <value>Worked hours in week</value>
+  </data>
+  <data name="Detail_l2" xml:space="preserve">
+    <value>Day/hours in week</value>
+  </data>
+  <data name="Detail_l3" xml:space="preserve">
+    <value>Reqested week hours</value>
+  </data>
+  <data name="Detail_l4" xml:space="preserve">
+    <value>Working days in week</value>
+  </data>
+  <data name="Detail_l5" xml:space="preserve">
+    <value>Remaining hours</value>
+  </data>
   <data name="Main_confirmMessage" xml:space="preserve">
     <value>To proced you must set the required values</value>
   </data>
   <data name="Main_confirm_no" xml:space="preserve">
-    <value>Buahahah, i'm a pirate!</value>
+    <value>Ahr ahr ahr, I'm Pirate Roberts!</value>
   </data>
   <data name="Main_confirm_yes" xml:space="preserve">
     <value>Go to settings page</value>
+  </data>
+  <data name="Settings_LavoriTroppo" xml:space="preserve">
+    <value>You can't work more than 15 hours per day</value>
   </data>
 </root>

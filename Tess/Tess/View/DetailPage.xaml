@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Tess.View.DetailPage"
+             Title="Detail"
+             xmlns:customs="clr-namespace:Tess.Model;assembly=Tess">
+
+
+  <ScrollView Style="{StaticResource MasterDetailSVMain}">
+    <StackLayout>
+      <StackLayout WidthRequest ="250" HorizontalOptions="Center">
+        <Image Source="ic_information_grey600_48dp.png"></Image>
+      </StackLayout>
+      <StackLayout Style="{StaticResource MasterDetailSLMain}">
+        <Label Text="{Binding DetailHeading}" VerticalOptions="Center" HorizontalOptions="Center" Font="Bold,20"  />
+        <ProgressBar x:Name="progress" Progress="{Binding Percentage}" Scale="1"  />
+        
+        <StackLayout Orientation="Horizontal">
+          <Image Source="ic_arrow_right_grey600_18dp.png"/>
+          <Label Text="{Binding Label1}"                
+                 HorizontalOptions="StartAndExpand"
+                 HorizontalTextAlignment="Start" 
+                 Style="{StaticResource DefLabelRoboto}"/>
+          <Label Text="{Binding WeekTotString}"
+                 HorizontalOptions="EndAndExpand"
+                 HorizontalTextAlignment="End"
+                 Style="{StaticResource DefLabelRoboto}"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal">
+          <Image Source="ic_arrow_right_grey600_18dp.png"/>
+          <Label Text="{Binding Label2}"
+                 HorizontalOptions="StartAndExpand"
+                 HorizontalTextAlignment="Start"
+                 Style="{StaticResource DefLabelRoboto}"/>
+          <Label Text="{Binding DayAvgString}"
+                 HorizontalOptions="EndAndExpand"
+                 HorizontalTextAlignment="End"
+                 Style="{StaticResource DefLabelRoboto}"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal">
+          <Image Source="ic_arrow_right_grey600_18dp.png"/>
+          <Label Text="{Binding Label3}"
+                 HorizontalOptions="StartAndExpand"
+                 HorizontalTextAlignment="Start"
+                 Style="{StaticResource DefLabelRoboto}"/>
+          <Label Text="{Binding HoursNumString}"
+                 HorizontalOptions="EndAndExpand"
+                 HorizontalTextAlignment="End"
+                 Style="{StaticResource DefLabelRoboto}"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal">
+          <Image Source="ic_arrow_right_grey600_18dp.png"/>
+          <Label Text="{Binding Label4}"
+                 HorizontalOptions="StartAndExpand"
+                 HorizontalTextAlignment="Start"
+                 Style="{StaticResource DefLabelRoboto}"/>
+          <Label Text="{Binding DaysNumString}"
+                 HorizontalOptions="EndAndExpand"
+                 HorizontalTextAlignment="End"
+                 Style="{StaticResource DefLabelRoboto}"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal">
+          <Image Source="ic_arrow_right_grey600_18dp.png"/>
+          <Label Text="{Binding Label5}"
+                 HorizontalOptions="StartAndExpand"
+                 HorizontalTextAlignment="Start"
+                 Style="{StaticResource DefLabelRoboto}"/>
+          <Label Text="{Binding RemainHours}"
+                 HorizontalOptions="EndAndExpand"
+                 HorizontalTextAlignment="End"
+                 Style="{StaticResource DefLabelRoboto}"/>
+        </StackLayout>
+        
+      </StackLayout>
+    </StackLayout>
+  </ScrollView>
+</ContentPage>

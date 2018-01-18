@@ -56,6 +56,7 @@
     <Compile Include="Model\database.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\vmAboutPage.cs" />
+    <Compile Include="ViewModel\vmDetailPage.cs" />
     <Compile Include="ViewModel\vmEntryPage.cs" />
     <Compile Include="ViewModel\vmLanguagePage.cs" />
     <Compile Include="ViewModel\vmMainPage.cs" />
@@ -63,6 +64,9 @@
     <Compile Include="ViewModel\vmSettingsPage.cs" />
     <Compile Include="View\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DetailPage.xaml.cs">
+      <DependentUpon>DetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EntryPage.xaml.cs">
       <DependentUpon>EntryPage.xaml</DependentUpon>
@@ -183,6 +187,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="View\AboutPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\DetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

@@ -14,7 +14,7 @@
         <StackLayout>
           <StackLayout>
             <Image.GestureRecognizers>
-              <TapGestureRecognizer Command="{Binding gotoSettings}" NumberOfTapsRequired="1"/>
+              <TapGestureRecognizer Command="{Binding gotoDetail}" NumberOfTapsRequired="1"/>
             </Image.GestureRecognizers>
             <Image Source="{Binding upDown}"/>           
           </StackLayout>

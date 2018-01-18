@@ -551,7 +551,22 @@ namespace Tess.ViewModel
 
             if ((Wd != 0) && (Os != 0))
             {
-                UserDialogs.Instance.ShowSuccess(Traduzioni.Settings_SaveSetOk);
+                bool isConvertible1 = false;
+                bool isConvertible2 = false;
+                int OsInt = 0;
+                int WdInt = 0;
+
+                isConvertible1 = int.TryParse(OsSelected.number, out OsInt);
+                isConvertible2 = int.TryParse(WdSelected.number, out WdInt);
+
+                if ( (isConvertible1) && (isConvertible2) && ( (OsInt / WdInt) > 15) )
+                {
+                    UserDialogs.Instance.ShowError(Traduzioni.Settings_LavoriTroppo, 4000);
+                }
+                else {
+                    UserDialogs.Instance.ShowSuccess(Traduzioni.Settings_SaveSetOk);
+                }
+                
             }
             else
             {

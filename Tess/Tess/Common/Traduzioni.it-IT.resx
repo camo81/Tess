@@ -217,6 +217,21 @@ Siete liberi di scaricarla, modificarla, romperla, abbellirla e imbruttirla.
 Grazie a Material Design Icons (https://materialdesignicons.com/) per le icone, Pixabay (https://pixabay.com/it/) per lo sfondo del menù, Smashicons di Flaticon (https://www.flaticon.com/authors/smashicons) per l'app icon.
 E a mia figlia Teresa, questo lavoro è dedicato a te. &lt;3</value>
   </data>
+  <data name="Detail_l1" xml:space="preserve">
+    <value>Ore lavorate in settimana</value>
+  </data>
+  <data name="Detail_l2" xml:space="preserve">
+    <value>Media oraria al giorno</value>
+  </data>
+  <data name="Detail_l3" xml:space="preserve">
+    <value>Ore settimanali richieste</value>
+  </data>
+  <data name="Detail_l4" xml:space="preserve">
+    <value>Giorni lavorativi in settimana</value>
+  </data>
+  <data name="Detail_l5" xml:space="preserve">
+    <value>Ore da lavorare</value>
+  </data>
   <data name="Entry_gandalf" xml:space="preserve">
     <value>You shall not pass</value>
   </data>
@@ -227,12 +242,15 @@ E a mia figlia Teresa, questo lavoro è dedicato a te. &lt;3</value>
     <value>Per procedere imposta i valori richiesti</value>
   </data>
   <data name="Main_confirm_no" xml:space="preserve">
-    <value>A me non servono</value>
+    <value>Ahr ahr ahr, io sono il Pirata Roberts!</value>
   </data>
   <data name="Main_confirm_yes" xml:space="preserve">
     <value>Vai alla pagina impostazioni</value>
   </data>
   <data name="Settings_sound" xml:space="preserve">
     <value>Riproduci suoni</value>
+  </data>
+  <data name="Settings_LavoriTroppo" xml:space="preserve">
+    <value>Non puoi lavorare più di 15 ore al giorno, schiavo!</value>
   </data>
 </root>

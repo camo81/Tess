@@ -57,6 +57,11 @@ namespace Tess.ViewModel
                     newPage.Detail = new NavigationPage(gotoAbout);
                     break;
 
+                case "DetailPage":
+                    Page gotoDetail = new View.DetailPage();
+                    newPage.Detail = new NavigationPage(gotoDetail);
+                    break;
+
                 default:
                     Page gotoPage = new View.MainPage();
                     newPage.Detail = new NavigationPage(gotoPage);

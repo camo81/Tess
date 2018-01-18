@@ -84,6 +84,51 @@ namespace Tess.Common {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a Worked hours in week.
+        /// </summary>
+        internal static string Detail_l1 {
+            get {
+                return ResourceManager.GetString("Detail_l1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Day/hours in week.
+        /// </summary>
+        internal static string Detail_l2 {
+            get {
+                return ResourceManager.GetString("Detail_l2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Reqested week hours.
+        /// </summary>
+        internal static string Detail_l3 {
+            get {
+                return ResourceManager.GetString("Detail_l3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Working days in week.
+        /// </summary>
+        internal static string Detail_l4 {
+            get {
+                return ResourceManager.GetString("Detail_l4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Remaining hours.
+        /// </summary>
+        internal static string Detail_l5 {
+            get {
+                return ResourceManager.GetString("Detail_l5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a You shall not pass.
         /// </summary>
         internal static string Entry_gandalf {
@@ -156,7 +201,7 @@ namespace Tess.Common {
         }
         
         /// <summary>
-        ///   Cerca una stringa localizzata simile a Buahahah, i&apos;m a pirate!.
+        ///   Cerca una stringa localizzata simile a Ahr ahr ahr, I&apos;m Pirate Roberts!.
         /// </summary>
         internal static string Main_confirm_no {
             get {
@@ -287,6 +332,15 @@ namespace Tess.Common {
         internal static string Setting_confirmMessage {
             get {
                 return ResourceManager.GetString("Setting_confirmMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a You can&apos;t work more than 15 hours per day.
+        /// </summary>
+        internal static string Settings_LavoriTroppo {
+            get {
+                return ResourceManager.GetString("Settings_LavoriTroppo", resourceCulture);
             }
         }
         
