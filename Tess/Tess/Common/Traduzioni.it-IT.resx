@@ -157,7 +157,7 @@
     <value>Venerdì</value>
   </data>
   <data name="Loading_message" xml:space="preserve">
-    <value>blablabla | opopopop</value>
+    <value>Faccio cose, vedo gente. | Lanciando coriandoli ... | Sto clonando la tua carta di credito | Sto formattando c:\ | Grazie Mario ma la principessa è in un altro castello | Round one, fight! | Chiedendomi cosa farebbe Piero Angela al posto mio ... | Scusa ma ieri mi sono sbronzato | Arance, bottiglie, maniglie... | Quale cancello ? | Questi non sono i droidi che state cercando | Arduo da vedere il Lato Oscuro è|Molto da apprendere ancora tu hai.|No! Provare no! Fare, o non fare! Non c'è provare!|</value>
   </data>
   <data name="Main_1opened" xml:space="preserve">
     <value>Prima chiudi il Check-in aperto</value>
@@ -207,7 +207,32 @@
   <data name="Wednesday" xml:space="preserve">
     <value>Mercoledì</value>
   </data>
+  <data name="About_heading" xml:space="preserve">
+    <value>Tess v1.0</value>
+  </data>
+  <data name="About_text" xml:space="preserve">
+    <value>Tess è fatta da Carlo Camagni.
+L'applicazione è sviluppata in C# tramite Xamarin ed il codice sorgente è liberamente scaricabile da https://github.com/camo81/Tess. 
+Siete liberi di scaricarla, modificarla, romperla, abbellirla e imbruttirla.
+Grazie a Material Design Icons (https://materialdesignicons.com/) per le icone, Pixabay (https://pixabay.com/it/) per lo sfondo del menù, Smashicons di Flaticon (https://www.flaticon.com/authors/smashicons) per l'app icon.
+E a mia figlia Teresa, questo lavoro è dedicato a te. &lt;3</value>
+  </data>
   <data name="Entry_gandalf" xml:space="preserve">
     <value>You shall not pass</value>
+  </data>
+  <data name="General_GitUri" xml:space="preserve">
+    <value>https://github.com/camo81/Tess</value>
+  </data>
+  <data name="Main_confirmMessage" xml:space="preserve">
+    <value>Per procedere imposta i valori richiesti</value>
+  </data>
+  <data name="Main_confirm_no" xml:space="preserve">
+    <value>A me non servono</value>
+  </data>
+  <data name="Main_confirm_yes" xml:space="preserve">
+    <value>Vai alla pagina impostazioni</value>
+  </data>
+  <data name="Settings_sound" xml:space="preserve">
+    <value>Riproduci suoni</value>
   </data>
 </root>

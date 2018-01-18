@@ -28,18 +28,21 @@ namespace Tess.Droid.DS
 
         public void PlayAudioFile(string fileName)
         {
-
-            //inserisci qui il check per l'impostazione di abilitare i suoni
-            var player = new MediaPlayer();
-            var fd = global::Android.App.Application.Context.Assets.OpenFd(fileName);
-            
-            player.Prepared += (s, e) =>
+            var fx = ManageData.getValue("PlaySound");
+            if (fx.SettingValue != "False")
             {
-                player.Start();
-            };
+                var player = new MediaPlayer();
+                var fd = global::Android.App.Application.Context.Assets.OpenFd(fileName);
 
-            player.SetDataSource(fd.FileDescriptor, fd.StartOffset, fd.Length);
-            player.Prepare();
+                player.Prepared += (s, e) =>
+                {
+                    player.Start();
+                };
+
+                player.SetDataSource(fd.FileDescriptor, fd.StartOffset, fd.Length);
+                player.Prepare();
+            }
+
         }
     }
 

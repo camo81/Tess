@@ -62,6 +62,28 @@ namespace Tess.Common {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a Tess v1.0.
+        /// </summary>
+        internal static string About_heading {
+            get {
+                return ResourceManager.GetString("About_heading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Tess, made by Carlo Camagni. 
+        ///Tess is developed in C# and Xamarin, for source code visit https://github.com/camo81/Tess.
+        ///You are free to download, modify, destroy or improve it.
+        ///Thanks to Material Design Icons (https://materialdesignicons.com/) for in app icons, Pixabay (https://pixabay.com/it/) for menu background, Smashicons on Flaticon (https://www.flaticon.com/authors/smashicons) for the app icon.
+        ///And to my daughter Teresa, this app is for you &lt;3..
+        /// </summary>
+        internal static string About_text {
+            get {
+                return ResourceManager.GetString("About_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a You shall not pass.
         /// </summary>
         internal static string Entry_gandalf {
@@ -80,6 +102,15 @@ namespace Tess.Common {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a https://github.com/camo81/Tess.
+        /// </summary>
+        internal static string General_GitUri {
+            get {
+                return ResourceManager.GetString("General_GitUri", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a Choose language.
         /// </summary>
         internal static string Language_pickerTitle {
@@ -89,7 +120,7 @@ namespace Tess.Common {
         }
         
         /// <summary>
-        ///   Cerca una stringa localizzata simile a blablabla | opopopop.
+        ///   Cerca una stringa localizzata simile a Making some stuff... | Round one, fight! |Tthese aren&apos;t the droids you&apos;re looking for | That is why you fail.|Adventure. Excitement. A Jedi craves not these things|Wars not make one great. | Do. Or do not. There is no try.| Always two there are, no more, no less. A master and an apprentice.|You fail because you don’t believe..
         /// </summary>
         internal static string Loading_message {
             get {
@@ -121,6 +152,33 @@ namespace Tess.Common {
         internal static string Main_Closed {
             get {
                 return ResourceManager.GetString("Main_Closed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Buahahah, i&apos;m a pirate!.
+        /// </summary>
+        internal static string Main_confirm_no {
+            get {
+                return ResourceManager.GetString("Main_confirm_no", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Go to settings page.
+        /// </summary>
+        internal static string Main_confirm_yes {
+            get {
+                return ResourceManager.GetString("Main_confirm_yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a To proced you must set the required values.
+        /// </summary>
+        internal static string Main_confirmMessage {
+            get {
+                return ResourceManager.GetString("Main_confirmMessage", resourceCulture);
             }
         }
         
@@ -301,6 +359,15 @@ namespace Tess.Common {
         internal static string Settings_SaveSetOk {
             get {
                 return ResourceManager.GetString("Settings_SaveSetOk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Play sounds.
+        /// </summary>
+        internal static string Settings_sound {
+            get {
+                return ResourceManager.GetString("Settings_sound", resourceCulture);
             }
         }
         

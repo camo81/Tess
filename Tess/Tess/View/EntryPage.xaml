@@ -10,17 +10,25 @@
   
   <ScrollView Style="{StaticResource MasterDetailSVMain}">
     <StackLayout>
+      <RelativeLayout>
+        <Image Source="background.png" Aspect="Fill" />
+        <Label Text="Tess" Style ="{StaticResource MasterDetailLb1}"/>
+      </RelativeLayout>
+    </StackLayout>
+    <StackLayout>
       <StackLayout Style="{StaticResource MasterDetailSLMain}">
         <StackLayout Orientation="Horizontal">
           <Image Source="ic_clock_grey600_18dp.png" />         
-          <TimePicker Time="{Binding In1, Mode=TwoWay}" Format="HH:mm" />                     
-          <TimePicker Time="{Binding Out1, Mode=TwoWay}" Format="HH:mm"/>
+          <TimePicker Time="{Binding In1, Mode=TwoWay}" Format="HH:mm" HorizontalOptions="StartAndExpand" />
+          <Image Source="ic_arrow_right_grey600_18dp.png" />
+          <TimePicker Time="{Binding Out1, Mode=TwoWay}" Format="HH:mm" HorizontalOptions="EndAndExpand"/>
         </StackLayout>
 
         <StackLayout Orientation="Horizontal">
           <Image Source="ic_clock_grey600_18dp.png" />
-          <TimePicker Time="{Binding In2, Mode=TwoWay}" Format="HH:mm" />
-          <TimePicker Time="{Binding Out2, Mode=TwoWay}" Format="HH:mm"/>
+          <TimePicker Time="{Binding In2, Mode=TwoWay}" Format="HH:mm" HorizontalOptions="StartAndExpand"/>
+          <Image Source="ic_arrow_right_grey600_18dp.png" />
+          <TimePicker Time="{Binding Out2, Mode=TwoWay}" Format="HH:mm" HorizontalOptions="EndAndExpand"/>
         </StackLayout>
       </StackLayout>
           <customs:ButtonWithoutShadow x:Name = "buttonDel" Image="ic_delete_white_24dp.png" Command="{Binding DelSettings}" Style="{StaticResource buttonOnlyIcon}" />

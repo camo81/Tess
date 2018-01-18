@@ -53,7 +53,7 @@ namespace Tess.ViewModel
                     break;
 
                 case "AboutPage":
-                    Page gotoAbout = new View.MainPage();
+                    Page gotoAbout = new View.AboutPage();
                     newPage.Detail = new NavigationPage(gotoAbout);
                     break;
 

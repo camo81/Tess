@@ -55,7 +55,7 @@ namespace Tess.ViewModel
         {
             get
             {
-                return new RelayCommand(() => { vmMenuPage.changePage("About"); });
+                return new RelayCommand(() => { vmMenuPage.changePage("AboutPage"); });
 
             }
 
@@ -120,7 +120,7 @@ namespace Tess.ViewModel
         public string Date;
         public double HoursNum = 0;
         public int DaysNum = 0;
-        bool leap;
+        bool check;
 
         #endregion
 
@@ -130,10 +130,31 @@ namespace Tess.ViewModel
             DayOfYear = now.DayOfYear;
             DayOfWeek = (int)now.DayOfWeek;
             Year = now.Year;
-            leap = DateTime.IsLeapYear(Year);
             Date = now.ToString();
 
+            //get impostazioni richieste
+            check = getReqSettings();
+            //Set di updown
+            setUpDown();
+            // Creazione della listview
+            createListView();
+            //inserisco i workedDays se non esistono ancora
+            insertWorkedDay();
+            //Calcolo la somma settimanale di ore e inizializzo la progress bar
+            double WeekTot = HoursSum();
+            setProgressBar(HoursNum, WeekTot);
 
+            if (!check) {
+                SetReq();
+            }
+
+        }
+
+
+
+        #region functions
+
+        public bool getReqSettings() {
             // get impostazioni
             var DaysNumber = ManageData.getValue("WdSelected");
             if (DaysNumber != null)
@@ -143,7 +164,10 @@ namespace Tess.ViewModel
                 {
                     DaysNum = Int32.Parse(DaysNumber.SettingValue);
                 }
-            } 
+            }
+            else {
+                return false;
+            }
 
 
             var HoursNumber = ManageData.getValue("OsSelected");
@@ -155,26 +179,13 @@ namespace Tess.ViewModel
                     HoursNum = Double.Parse(HoursNumber.SettingValue);
                 }
             }
+            else
+            {
+                return false;
+            }
 
-
-            //Set di updown
-            setUpDown();
-
-            // Creazione della listview
-            createListView();
-
-            //inserisco i workedDays se non esistono ancora
-            insertWorkedDay();
-
-            //Calcolo la somma settimanale di ore e inizializzo la progress bar
-            double WeekTot = HoursSum();
-            setProgressBar(HoursNum, WeekTot);
-
+            return true;
         }
-
-
-
-        #region functions
 
         public void setUpDown() {
             //ore/giorno attuali 
@@ -183,9 +194,9 @@ namespace Tess.ViewModel
             // ore/giorno richieste
             double HperDayReq = HoursNum / DaysNum;
 
-            if (HAvg > HperDayReq)
+            if (HAvg >= HperDayReq)
             {
-                upDown = "ic_thumb_up_outline_grey600_18dp.png";
+                upDown = "ic_thumb_up_outline_grey600_48dp.png";
             }
 
 
@@ -212,10 +223,15 @@ namespace Tess.ViewModel
                 timeSpan = TimeSpan.FromHours(worked);
                 int p = (int)i.DayOfWeek;
 
-                TimeSpan ReqTimeSpan = new TimeSpan(8,0,0);
+                if ((DaysNum > 0) && (HoursNum > 0))
+                {
+                    TimeSpan ReqTimeSpan = TimeSpan.FromHours(HoursNum / DaysNum);
 
-                if (timeSpan > ReqTimeSpan) {
-                    upDownD = "ic_thumb_up_outline_grey600_18dp.png";
+                    if (timeSpan >= ReqTimeSpan)
+                    {
+                        upDownD = "ic_thumb_up_outline_grey600_18dp.png";
+                    }
+
                 }
 
                 Worked.Add(new DaysWorked
@@ -392,14 +408,18 @@ namespace Tess.ViewModel
         }
 
         public double HoursSum() {
-            int weekStart = DayOfYear - (DayOfWeek - 1);
-            int weekEnd = DayOfYear + (7 - DayOfWeek);
+
+            DateTime weekStartDT = DateTime.Now.AddDays(-(DayOfWeek - 1));
+            DateTime weekEndDT = DateTime.Now.AddDays((7 - DayOfWeek));
+
+            //int weekStart = DayOfYear - (DayOfWeek - 1);
+            //int weekEnd = DayOfYear + (7 - DayOfWeek);
 
             double WeekTot = 0;
 
-            for (int i = weekStart; i <= weekEnd; i++)
-            {
-                int wstart = i;
+            for (DateTime i = weekStartDT; i <= weekEndDT; i = i.AddDays(1))
+                {
+                int wstart = i.DayOfYear;
                 string ws = wstart.ToString();
                 string y = Year.ToString();
                 var d = ManageData.getDay(ws, y);
@@ -442,15 +462,19 @@ namespace Tess.ViewModel
 
         public double HoursAvg()
         {
+            DateTime weekStartDT = DateTime.Now.AddDays(-(DayOfWeek - 1));
+            DateTime weekEndDT = DateTime.Now.AddDays((-1));
+
             int weekStart = DayOfYear - (DayOfWeek - 1);
-            int weekEnd = DayOfYear + (7 - DayOfWeek);
+            int weekEnd = DayOfYear -1;
 
             double WeekTot = 0;
             int Days = 0;
 
-            for (int i = weekStart; i <= weekEnd; i++)
-            {
-                int wstart = i;
+
+            for (DateTime i = weekStartDT; i <= weekEndDT; i = i.AddDays(1))
+                {
+                int wstart = i.DayOfYear;
                 string ws = wstart.ToString();
                 string y = Year.ToString();
                 var d = ManageData.getDay(ws, y);
@@ -565,7 +589,24 @@ namespace Tess.ViewModel
             
         }
 
+        public async void SetReq()
+        {
 
+            var result = await UserDialogs.Instance.ConfirmAsync(new ConfirmConfig
+            {
+                Message = Traduzioni.Main_confirmMessage,
+                OkText = Traduzioni.Main_confirm_yes,
+                CancelText = Traduzioni.Main_confirm_no,
+            });
+            if (result)
+            {
+                vmMenuPage.changePage("SettingsPage");
+            }
+            else {
+                vmMenuPage.changePage("MainPage");
+            }
+            
+        }
 
 
         #endregion

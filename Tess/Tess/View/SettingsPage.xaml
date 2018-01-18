@@ -13,6 +13,18 @@
   <ScrollView Style="{StaticResource MasterDetailSVMain}">
     <StackLayout>
       <StackLayout Style="{StaticResource MasterDetailSLMain}">
+        <StackLayout Orientation="Horizontal">
+          <Label Text="{Binding switchText}"
+                HorizontalOptions="StartAndExpand"
+                HorizontalTextAlignment="Start"
+                VerticalOptions="Center"
+                Style="{StaticResource DefLabelRoboto}"/>
+
+          <Switch VerticalOptions="Center"
+                HorizontalOptions="EndAndExpand"
+                IsToggled="{Binding isSelected}"/>
+        </StackLayout>
+        
         <Picker x:Name="Dayselection" HorizontalOptions="FillAndExpand" Title="{Binding pickerWdTitle}" ItemsSource="{Binding Giorni}"
                 ItemDisplayBinding="{Binding number}" SelectedIndex="{Binding WdIndex}" SelectedItem="{Binding WdSelected}" Style="{StaticResource LanguagePicker}">
                 
@@ -35,11 +47,11 @@
           <Picker x:Name="Breakselection2" HorizontalOptions="FillAndExpand" Title="{Binding breakMinute}" ItemsSource="{Binding minMBreak}"
                   ItemDisplayBinding="{Binding number}" SelectedIndex="{Binding BMIndex}" SelectedItem="{Binding BMSelected}" Style="{StaticResource LanguagePicker}">
           </Picker>
-                    
-        </StackLayout>        
+                   
+        </StackLayout>
+
       </StackLayout>
       <customs:ButtonWithoutShadow x:Name = "buttonDel" Image="ic_delete_white_24dp.png" Command="{Binding DelSettings}" Style="{StaticResource buttonOnlyIcon}" />
-      <Label Text="{Binding opStatus}" Style="{StaticResource DefLabelRoboto}"/>
     </StackLayout>
   </ScrollView>
 </ContentPage>

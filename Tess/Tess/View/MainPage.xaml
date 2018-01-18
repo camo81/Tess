@@ -5,7 +5,7 @@
              xmlns:customs="clr-namespace:Tess.Model;assembly=Tess"
              x:Name="MainPage">
   <ContentPage.ToolbarItems>
-    <ToolbarItem Name="About" Order="Secondary" Priority="0" Command="{Binding gotoPage}" />
+    <ToolbarItem Name="About" Order="Secondary" Priority="0" Command="{Binding gotoPage}"/>
   </ContentPage.ToolbarItems>
 
   <ScrollView Style="{StaticResource MasterDetailSVMain}">

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Tess.View.AboutPage"             
+             Title="About"
+             xmlns:customs="clr-namespace:Tess.Model;assembly=Tess">
+
+
+  <ScrollView Style="{StaticResource MasterDetailSVMain}">
+    <StackLayout>
+      <StackLayout WidthRequest ="250" HorizontalOptions="Center">
+        <Image Source="icon.png"></Image>
+      </StackLayout>
+      <StackLayout Style="{StaticResource MasterDetailSLMain}">
+        <Label Text="{Binding AboutHeading}" VerticalOptions="Center" HorizontalOptions="Center" Font="Bold,20"  />
+        <Label Text="{Binding AboutText}" VerticalOptions="Center" HorizontalOptions="Center" />
+        <customs:ButtonWithoutShadow x:homeButton = "button2" Image="ic_web_white_36dp.png" Command="{Binding CommandOpenUrl}" Style="{StaticResource buttonOnlyIcon}" />
+      </StackLayout>
+    </StackLayout>
+  </ScrollView>
+</ContentPage>

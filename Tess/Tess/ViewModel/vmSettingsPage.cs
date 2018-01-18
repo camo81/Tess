@@ -27,6 +27,18 @@ namespace Tess.ViewModel
             }
         }
 
+        private bool isselected = true;
+        public bool isSelected
+        {
+            get { return isselected; }
+            set
+            {
+                isselected = value;
+                Set(nameof(isSelected), ref value);
+
+            }
+        }
+
         private String pickerdescription = Traduzioni.Settings_pickerDesc;
         public String pickerDescription
         {
@@ -83,6 +95,18 @@ namespace Tess.ViewModel
             {
                 breakminute = value;
                 Set(nameof(breakMinute), ref value);
+
+            }
+        }
+
+        private String switchtext = Traduzioni.Settings_sound;
+        public String switchText
+        {
+            get { return switchtext; }
+            set
+            {
+                switchtext = value;
+                Set(nameof(switchText), ref value);
 
             }
         }
@@ -262,13 +286,107 @@ namespace Tess.ViewModel
         {
             get
             {
-                return new RelayCommand(() => { vmMenuPage.changePage("About"); });
-
+                return new RelayCommand(() => { vmMenuPage.changePage("AboutPage"); });
             }
 
 
         }
         #endregion
+
+        public vmSettingsPage()
+        {
+            this.Giorni = new List<WorkingDays>();
+            Giorni.Add(new WorkingDays { number = "1" });
+            Giorni.Add(new WorkingDays { number = "2" });
+            Giorni.Add(new WorkingDays { number = "3" });
+            Giorni.Add(new WorkingDays { number = "4" });
+            Giorni.Add(new WorkingDays { number = "5" });
+            Giorni.Add(new WorkingDays { number = "6" });
+            Giorni.Add(new WorkingDays { number = "7" });
+
+            this.oreSettimana = new List<HoursWeek>();
+            for (int i = 1; i < 101; i++)
+            {
+                oreSettimana.Add(new HoursWeek { number = ""+i });
+            }
+
+            this.minHBreak = new List<MinBreakHour>();
+            for (int i = 0; i < 5; i++)
+            {
+                minHBreak.Add(new MinBreakHour { number = "" + i });
+            }
+
+            this.minMBreak = new List<MinBreakMinute>();
+            for (int i = 0; i <61 ; i++)
+            {
+                minMBreak.Add(new MinBreakMinute { number = "" + i });
+            }
+
+
+            #region GetValue
+            try
+            {
+                /*Breve spiegazione triste: i raccatta la mia impostazione corrente. con linq faccio una query sulla lista giorni dicendogli che 
+                 l'attributo number dell'oggetto deve essere uguale al valore raccattato con getvalue*/
+
+                var i = ManageData.getValue("WdSelected");
+                WdSelected = Giorni.Where(x => x.number == i.SettingValue).FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                //opStatus = "Not set" + e;
+
+            }
+
+            try
+            {
+                var i = ManageData.getValue("OsSelected");
+                OsSelected = oreSettimana.Where(x => x.number == i.SettingValue).FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                //opStatus = "Not set" + e;
+
+            }
+
+            try
+            {
+                var i = ManageData.getValue("BHSelected");
+                BHSelected = minHBreak.Where(x => x.number == i.SettingValue).FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                //opStatus = "Not set" + e;
+
+            }
+
+            try
+            {
+                var i = ManageData.getValue("BMSelected");
+                BMSelected = minMBreak.Where(x => x.number == i.SettingValue).FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                //opStatus = "Not set" + e;
+
+            }
+            try
+            {
+                var i = ManageData.getValue("PlaySound");
+                if (i.SettingValue == "False")
+                {
+                    isSelected = false;
+                }
+                
+            }
+            catch (Exception e)
+            {
+                //opStatus = "Not set" + e;
+
+            }
+            #endregion
+
+        }
 
         #region functions
         public void SaveSet()
@@ -281,7 +399,7 @@ namespace Tess.ViewModel
             if (WdSelected != null)
             {
                 dati.SettingValue = WdSelected.number;
-                
+
                 //verifico se esiste già un setting per WdSelected
                 var tmp = ManageData.getValue("WdSelected");
 
@@ -303,7 +421,7 @@ namespace Tess.ViewModel
                     dati.IdSetting = tmp.IdSetting;
                     Wd = ManageData.UpdateSettings(dati);
                 }
-                  
+
             }
 
             //set della variabile OsSelected
@@ -405,7 +523,32 @@ namespace Tess.ViewModel
 
             }
 
+            //set della variabile isSelected
+            dati.SettingName = "PlaySound";
+
+
+            dati.SettingValue = isSelected.ToString(); 
+            var tmp2 = ManageData.getValue("PlaySound");
+            if ((tmp2 == null))
+            {
+                // se non esiste faccio l'insert
+                try
+                {
+                    Wd = ManageData.InsertSettings(dati);
+                }
+                catch (Exception e)
+                {
+                    opStatus = "" + e;
+                }
+            }
+            else
+            {
+                dati.IdSetting = tmp2.IdSetting;
+                Wd = ManageData.UpdateSettings(dati);
+            }
             
+
+
             if ((Wd != 0) && (Os != 0))
             {
                 UserDialogs.Instance.ShowSuccess(Traduzioni.Settings_SaveSetOk);
@@ -433,94 +576,12 @@ namespace Tess.ViewModel
                 BHIndex = -1;
                 WdIndex = -1;
                 OsIndex = -1;
-                BMIndex = -1; 
+                BMIndex = -1;
+                isSelected = true;
             }
 
         }
         #endregion
-
-        public vmSettingsPage()
-        {
-            this.Giorni = new List<WorkingDays>();
-            Giorni.Add(new WorkingDays { number = "1" });
-            Giorni.Add(new WorkingDays { number = "2" });
-            Giorni.Add(new WorkingDays { number = "3" });
-            Giorni.Add(new WorkingDays { number = "4" });
-            Giorni.Add(new WorkingDays { number = "5" });
-            Giorni.Add(new WorkingDays { number = "6" });
-            Giorni.Add(new WorkingDays { number = "7" });
-
-            this.oreSettimana = new List<HoursWeek>();
-            for (int i = 1; i < 101; i++)
-            {
-                oreSettimana.Add(new HoursWeek { number = ""+i });
-            }
-
-            this.minHBreak = new List<MinBreakHour>();
-            for (int i = 0; i < 5; i++)
-            {
-                minHBreak.Add(new MinBreakHour { number = "" + i });
-            }
-
-            this.minMBreak = new List<MinBreakMinute>();
-            for (int i = 0; i <61 ; i++)
-            {
-                minMBreak.Add(new MinBreakMinute { number = "" + i });
-            }
-
-
-            #region GetValue
-            try
-            {
-                /*Breve spiegazione triste: i raccatta la mia impostazione corrente. con linq faccio una query sulla lista giorni dicendogli che 
-                 l'attributo number dell'oggetto deve essere uguale al valore raccattato con getvalue*/
-
-                var i = ManageData.getValue("WdSelected");
-                WdSelected = Giorni.Where(x => x.number == i.SettingValue).FirstOrDefault();
-            }
-            catch (Exception e)
-            {
-                opStatus = "Not set" + e;
-
-            }
-
-            try
-            {
-                var i = ManageData.getValue("OsSelected");
-                OsSelected = oreSettimana.Where(x => x.number == i.SettingValue).FirstOrDefault();
-            }
-            catch (Exception e)
-            {
-                opStatus = "Not set" + e;
-
-            }
-
-            try
-            {
-                var i = ManageData.getValue("BHSelected");
-                BHSelected = minHBreak.Where(x => x.number == i.SettingValue).FirstOrDefault();
-            }
-            catch (Exception e)
-            {
-                opStatus = "Not set" + e;
-
-            }
-
-            try
-            {
-
-                var i = ManageData.getValue("BMSelected");
-                BMSelected = minMBreak.Where(x => x.number == i.SettingValue).FirstOrDefault();
-            }
-            catch (Exception e)
-            {
-                opStatus = "Not set" + e;
-
-            }
-
-            #endregion
-
-        }
 
 
 

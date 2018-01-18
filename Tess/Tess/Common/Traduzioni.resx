@@ -157,7 +157,7 @@
     <value>Friday</value>
   </data>
   <data name="Loading_message" xml:space="preserve">
-    <value>blablabla | opopopop</value>
+    <value>Making some stuff... | Round one, fight! |Tthese aren't the droids you're looking for | That is why you fail.|Adventure. Excitement. A Jedi craves not these things|Wars not make one great. | Do. Or do not. There is no try.| Always two there are, no more, no less. A master and an apprentice.|You fail because you don’t believe.</value>
   </data>
   <data name="Main_1opened" xml:space="preserve">
     <value>First close the opened Check-in</value>
@@ -207,7 +207,32 @@
   <data name="Wednesday" xml:space="preserve">
     <value>Wednesday</value>
   </data>
+  <data name="About_heading" xml:space="preserve">
+    <value>Tess v1.0</value>
+  </data>
+  <data name="About_text" xml:space="preserve">
+    <value>Tess, made by Carlo Camagni. 
+Tess is developed in C# and Xamarin, for source code visit https://github.com/camo81/Tess.
+You are free to download, modify, destroy or improve it.
+Thanks to Material Design Icons (https://materialdesignicons.com/) for in app icons, Pixabay (https://pixabay.com/it/) for menu background, Smashicons on Flaticon (https://www.flaticon.com/authors/smashicons) for the app icon.
+And to my daughter Teresa, this app is for you &lt;3.</value>
+  </data>
   <data name="Entry_gandalf" xml:space="preserve">
     <value>You shall not pass</value>
+  </data>
+  <data name="General_GitUri" xml:space="preserve">
+    <value>https://github.com/camo81/Tess</value>
+  </data>
+  <data name="Settings_sound" xml:space="preserve">
+    <value>Play sounds</value>
+  </data>
+  <data name="Main_confirmMessage" xml:space="preserve">
+    <value>To proced you must set the required values</value>
+  </data>
+  <data name="Main_confirm_no" xml:space="preserve">
+    <value>Buahahah, i'm a pirate!</value>
+  </data>
+  <data name="Main_confirm_yes" xml:space="preserve">
+    <value>Go to settings page</value>
   </data>
 </root>

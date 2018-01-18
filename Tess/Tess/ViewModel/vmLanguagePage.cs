@@ -64,13 +64,8 @@ namespace Tess.ViewModel
         {
             get
             {
-                return new RelayCommand(() => {
+                return new RelayCommand(() => { vmMenuPage.changePage("AboutPage"); });
 
-                    SaveLang();
-
-                    //funzioniComuni.changePage(new View.About());
-
-                });
             }
 
 
@@ -124,7 +119,7 @@ namespace Tess.ViewModel
             }
             catch (Exception e)
             {
-                OpStatus = "Not set" + e;
+                //OpStatus = "Not set" + e;
 
             }
         }

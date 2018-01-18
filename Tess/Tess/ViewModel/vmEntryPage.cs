@@ -103,9 +103,13 @@ namespace Tess.ViewModel
                         DateTime out1D;
                         if (!DateTime.TryParse(p[0].CheckOut, out out1D))
                         {
-                            out1D = DateTime.Now;
+                            Out1 = TimeSpan.Zero;
                         }
-                        Out1 = out1D.TimeOfDay;
+                        else
+                        {
+                            Out1 = out1D.TimeOfDay;
+                        }
+
                         break;
 
                     case 2:
@@ -115,10 +119,13 @@ namespace Tess.ViewModel
 
                         if (!DateTime.TryParse(p[0].CheckOut, out out1D))
                         {
-                            out1D = DateTime.Now;
+                            Out1 = TimeSpan.Zero;
+                        }
+                        else
+                        {
+                            Out1 = out1D.TimeOfDay;
                         }
 
-                        Out1 = out1D.TimeOfDay;
 
                         DateTime in2D = DateTime.Parse(p[1].CheckIn);
                         In2 = in2D.TimeOfDay;
@@ -127,8 +134,12 @@ namespace Tess.ViewModel
                         if (!DateTime.TryParse(p[1].CheckOut, out out2D))
                         {
                             out2D = DateTime.Now;
+                            
                         }
-                        Out2 = out2D.TimeOfDay;
+                        else {
+                            Out2 = out2D.TimeOfDay;
+                        }
+                        
 
                         break;
 
@@ -234,7 +245,8 @@ namespace Tess.ViewModel
             if (result)
             {
                 ManageData.delDayHours(SelectedDay.IdDaysWorked);
-
+                In1 = In2 = Out1 = Out2 = TimeSpan.FromSeconds(0.1);
+          
             }
 
         }
