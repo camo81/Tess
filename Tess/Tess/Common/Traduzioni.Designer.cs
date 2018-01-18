@@ -291,6 +291,33 @@ namespace Tess.Common {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a Language.
+        /// </summary>
+        internal static string Menu_language {
+            get {
+                return ResourceManager.GetString("Menu_language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Main.
+        /// </summary>
+        internal static string Menu_main {
+            get {
+                return ResourceManager.GetString("Menu_main", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Settings.
+        /// </summary>
+        internal static string Menu_settings {
+            get {
+                return ResourceManager.GetString("Menu_settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a Monday.
         /// </summary>
         internal static string Monday {

@@ -253,4 +253,13 @@ And to my daughter Teresa, this app is for you &lt;3.</value>
   <data name="Settings_LavoriTroppo" xml:space="preserve">
     <value>You can't work more than 15 hours per day</value>
   </data>
+  <data name="Menu_language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Menu_main" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="Menu_settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
 </root>

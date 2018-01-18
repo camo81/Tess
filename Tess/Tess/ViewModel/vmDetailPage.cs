@@ -204,7 +204,7 @@ namespace Tess.ViewModel
             //get impostazioni richieste
             check = getReqSettings();
 
-            WeekTot = HoursSum();
+            WeekTot = Math.Round( HoursSum(),2);
             WeekTotString = WeekTot.ToString();
 
             DayAvg = Math.Round(HoursAvg(), 2);

@@ -9,5 +9,10 @@
     <item name="android:windowBackground">@color/window_background</item>
     <item name="windowActionModeOverlay">true</item>
     <item name="android:actionModeBackground">@color/primaryDark</item>
+    <item name="android:colorPressedHighlight">@color/white</item>
+    <item name="android:colorLongPressedHighlight">@color/white</item>
+    <item name="android:colorFocusedHighlight">@color/white</item>
+    <item name="android:colorActivatedHighlight">@color/white</item>
+    <item name="android:activatedBackgroundIndicator">@color/white</item>    
   </style>
 </resources>

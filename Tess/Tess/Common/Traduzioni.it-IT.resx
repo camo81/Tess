@@ -253,4 +253,13 @@ E a mia figlia Teresa, questo lavoro è dedicato a te. &lt;3</value>
   <data name="Settings_LavoriTroppo" xml:space="preserve">
     <value>Non puoi lavorare più di 15 ore al giorno, schiavo!</value>
   </data>
+  <data name="Menu_language" xml:space="preserve">
+    <value>Lingua</value>
+  </data>
+  <data name="Menu_main" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="Menu_settings" xml:space="preserve">
+    <value>Impostazioni</value>
+  </data>
 </root>

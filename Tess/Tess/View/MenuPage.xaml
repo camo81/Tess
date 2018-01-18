@@ -18,12 +18,11 @@
             </RelativeLayout>
           </StackLayout>
 
-                    
-          <StackLayout HorizontalOptions="FillAndExpand" Style ="{StaticResource MasterDetailSL1}">
-            
+          <ScrollView>        
+            <StackLayout HorizontalOptions="FillAndExpand" Style ="{StaticResource MasterDetailSL1}">            
             <StackLayout Orientation="Horizontal">
               <Image Source="ic_home_grey600_24dp.png"></Image>
-              <Label Text="Main" Style ="{StaticResource MasterDetailLb2}">
+              <Label Text="{Binding Main}" Style ="{StaticResource MasterDetailLb2}">
               <Label.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding gotoPage}" NumberOfTapsRequired="1" CommandParameter="MainPage" />
               </Label.GestureRecognizers>
@@ -32,7 +31,7 @@
 
             <StackLayout Orientation="Horizontal">
               <Image Source="ic_settings_grey600_24dp.png"></Image>
-              <Label Text="Settings" Style ="{StaticResource MasterDetailLb2}">
+              <Label Text="{Binding Settings}" Style ="{StaticResource MasterDetailLb2}">
                 <Label.GestureRecognizers>
                   <TapGestureRecognizer Command="{Binding gotoPage}" NumberOfTapsRequired="1" CommandParameter="SettingsPage" />
                 </Label.GestureRecognizers>
@@ -41,7 +40,7 @@
             
             <StackLayout Orientation="Horizontal">
               <Image Source="ic_web_grey600_24dp.png"></Image>
-              <Label Text="Language" Style ="{StaticResource MasterDetailLb2}">
+              <Label Text="{Binding Language}" Style ="{StaticResource MasterDetailLb2}">
                 <Label.GestureRecognizers>
                   <TapGestureRecognizer Command="{Binding gotoPage}" NumberOfTapsRequired="1" CommandParameter="LanguagePage" />
                 </Label.GestureRecognizers>
@@ -49,8 +48,9 @@
             </StackLayout>
                         
           </StackLayout>
-        
+          </ScrollView>
         </StackLayout>
+        
         
       </ContentPage.Content>
     </ContentPage>
