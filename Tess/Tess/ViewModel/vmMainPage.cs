@@ -17,6 +17,17 @@ namespace Tess.ViewModel
     public class vmMainPage : ViewModelBase
     {
         #region binding
+
+        private Timer timer;
+
+        private TimeSpan totalSeconds = new TimeSpan(0, 0, 0, 0);
+        public TimeSpan TotalSeconds
+        {
+            get { return totalSeconds; }
+            set { Set(ref totalSeconds, value); }
+        }
+
+
         private String updown = "ic_thumb_down_outline_grey600_48dp.png";
 
         public String upDown
@@ -55,7 +66,7 @@ namespace Tess.ViewModel
         {
             get
             {
-                return new RelayCommand(() => { vmMenuPage.changePage("AboutPage"); });
+                return new RelayCommand(() => { functions.pageAsync(new AboutPage()); });
 
             }
 
@@ -66,7 +77,7 @@ namespace Tess.ViewModel
         {
             get
             {
-                return new RelayCommand(() => { vmMenuPage.changePage("DetailPage"); });
+                return new RelayCommand(() => { functions.pageAsync(new DetailPage()); });
 
             }
 
@@ -126,6 +137,7 @@ namespace Tess.ViewModel
 
         public vmMainPage()
         {
+
             var now = DateTime.Now;
             DayOfYear = now.DayOfYear;
             DayOfWeek = (int)now.DayOfWeek;
@@ -144,6 +156,10 @@ namespace Tess.ViewModel
             double WeekTot = HoursSum();
             setProgressBar(HoursNum, WeekTot);
 
+            //set del timer
+            setTimer();
+
+
             if (!check) {
                 SetReq();
             }
@@ -153,6 +169,49 @@ namespace Tess.ViewModel
 
 
         #region functions
+
+        public void setTimer() {
+            //get delle ore giornaliere
+            double hours = HoursPerDay(DayOfYear.ToString(), Year.ToString());
+            double lastCheckIn = functions.hoursFromLastCheckIn(DayOfYear.ToString(), Year.ToString());
+
+            TimeSpan hoursTS = new TimeSpan();
+            hoursTS = TimeSpan.FromHours(hours);
+
+            TimeSpan lastCheckInTS = new TimeSpan();
+            lastCheckInTS = TimeSpan.FromHours(lastCheckIn);
+
+            //sommo le ore a totaleseconds
+            totalSeconds = totalSeconds + hoursTS + lastCheckInTS;
+            timer = new Timer(TimeSpan.FromSeconds(1), Count);
+            TotalSeconds = totalSeconds;
+
+            if (lastCheckIn > 0)
+            {
+                timer.Start();
+            }
+        }
+
+        private void Count()
+        {
+            
+            if (totalSeconds.TotalSeconds == 0)
+            {
+                //do something after hitting 0, in this example it just stops/resets the timer
+                //StopTimerCommand();
+                TotalSeconds = totalSeconds.Add(new TimeSpan(0, 0, 0, 1));
+            }
+            else
+            {
+                TotalSeconds = totalSeconds.Add(new TimeSpan(0, 0, 0, 1));
+            }
+        }
+
+        private void StopTimerCommand()
+        {
+            TotalSeconds = new TimeSpan(0, 0, 0, 10);
+            timer.Stop();
+        }
 
         public bool getReqSettings() {
             // get impostazioni
@@ -204,9 +263,6 @@ namespace Tess.ViewModel
 
         public void createListView()
         {
-            //int weekStart = DayOfYear - (DayOfWeek - 1);
-            //int weekEnd = DayOfYear + (7 - DayOfWeek);
-            
 
             DateTime weekStartDT = DateTime.Now.AddDays(-(DayOfWeek - 1));
             DateTime weekEndDT = DateTime.Now.AddDays((7 - DayOfWeek));
@@ -320,6 +376,8 @@ namespace Tess.ViewModel
                     UserDialogs.Instance.ShowError(Traduzioni.Main_castError);
                 }
 
+                timer.Start();
+
             }
            
         }
@@ -329,7 +387,8 @@ namespace Tess.ViewModel
             bool i = setCheckout();
             double WeekTot = HoursSum();
             setProgressBar(HoursNum,WeekTot);
-            vmMenuPage.changePage("MainPage");     
+            vmMenuPage.changePage(new View.MainPage());
+            timer.Stop();
         }
 
         public bool checkDayEntry(string IdDayWorked)
@@ -456,6 +515,13 @@ namespace Tess.ViewModel
                             {
                                 WeekTot = WeekTot - (MinReq - BR);
                             }
+                            double Tot = WeekTot.TotalHours;
+
+                            if (Tot < 0)
+                            {
+                                WeekTot = new TimeSpan(0,0,0);
+                            }
+
 
                         }
 
@@ -609,7 +675,7 @@ namespace Tess.ViewModel
 
                         if (BR < MinReq)
                         {
-                            DayTot = DayTot - (MinReq - BR);
+                            DayTot = DayTot - (MinReq - BR);                           
                         }
 
                     }
@@ -617,7 +683,15 @@ namespace Tess.ViewModel
                 }
             }
 
-            return DayTot.TotalHours;
+            double Tot = DayTot.TotalHours;
+            if (Tot < 0)
+            {
+                return 0;
+            }
+            else {
+                return DayTot.TotalHours;
+            }
+            
 
 
         }
@@ -636,9 +710,7 @@ namespace Tess.ViewModel
 
         public void EditRow(DaysWorked p1) {
             DaysWorked day = ManageData.getDay(p1.YearDay, p1.Year);
-            MasterDetailPage newPage = App.Current.MainPage as MasterDetailPage;
-            Page gotoEntry = new View.EntryPage(day);
-            newPage.Detail = new NavigationPage(gotoEntry);
+            functions.pageAsync(new EntryPage(day));     
         }
 
         public async void DelRow(DaysWorked p1)
@@ -654,7 +726,7 @@ namespace Tess.ViewModel
                 DaysWorked day = ManageData.getDay(p1.YearDay, p1.Year);
                 ManageData.delDayHours(day.IdDaysWorked);
                 UserDialogs.Instance.ShowSuccess(Traduzioni.Settings_SaveSetOk);
-                vmMenuPage.changePage("MainPage");
+                vmMenuPage.changePage(new MainPage());
             }
 
             
@@ -671,14 +743,13 @@ namespace Tess.ViewModel
             });
             if (result)
             {
-                vmMenuPage.changePage("SettingsPage");
+                vmMenuPage.changePage(new SettingsPage());
             }
             else {
-                vmMenuPage.changePage("MainPage");
+                vmMenuPage.changePage(new MainPage());
             }
             
         }
-
 
         #endregion
     }

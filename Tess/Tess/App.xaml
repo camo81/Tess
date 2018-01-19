@@ -28,6 +28,14 @@
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
       </Style>
 
+      <Style x:Key="BuranLabel" TargetType="Label">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontFamily" Value="Buran.ttf#Buran" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+      </Style>
+      
+
       <Style x:Key="DefLabelRoboto" TargetType="Label">
         <Setter Property="FontFamily" Value="Roboto-Regular.ttf#Roboto-Regular" />
       </Style>
@@ -37,7 +45,7 @@
         <Setter Property="VerticalOptions" Value="CenterAndExpand" />
         <Setter Property="TextColor" Value="White" />
         <Setter Property="HorizontalOptions" Value="Center" />
-        <Setter Property="FontFamily" Value="IMissYourKiss.ttf#IMissYourKiss" />
+        <Setter Property="FontFamily" Value="Buran.ttf#Buran" />
         <Setter Property="Margin" Value="40,10,40,40" />
       </Style>      
       

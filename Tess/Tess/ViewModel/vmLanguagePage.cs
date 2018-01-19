@@ -10,6 +10,7 @@ using Tess.Model;
 using Xamarin.Forms;
 using Acr;
 using Tess.Common;
+using Tess.View;
 
 namespace Tess.ViewModel
 {
@@ -64,7 +65,7 @@ namespace Tess.ViewModel
         {
             get
             {
-                return new RelayCommand(() => { vmMenuPage.changePage("AboutPage"); });
+                return new RelayCommand(() => { functions.pageAsync(new AboutPage()); });
 
             }
 

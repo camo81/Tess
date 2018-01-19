@@ -19,9 +19,15 @@
             <Image Source="{Binding upDown}"/>           
           </StackLayout>
           <ProgressBar x:Name="progress" Progress="{Binding Percentage}" Scale="1"  />
-          <StackLayout Orientation="Horizontal" HorizontalOptions="End">
-            <customs:ButtonWithoutShadow x:Name = "buttonStopIn" Image="ic_login_variant_white_24dp.png" Command="{Binding CommandStopWatchIn}" Style="{StaticResource buttonOnlyIcon}" />
-            <customs:ButtonWithoutShadow x:Name = "buttonStopOut" Image="ic_logout_variant_white_24dp.png" Command="{Binding CommandStopWatchOut}" Style="{StaticResource buttonOnlyIcon}" />
+          <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+            <Image Source="ic_clock_grey600_24dp.png" HorizontalOptions="Start" />
+            <Label Text="{Binding TotalSeconds, StringFormat='{0:h\\:mm\\:ss}'}" HorizontalOptions="Start" VerticalOptions="Center"></Label>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                <customs:ButtonWithoutShadow x:Name = "buttonStopIn" Image="ic_login_variant_white_24dp.png" 
+                                             Command="{Binding CommandStopWatchIn}" Style="{StaticResource buttonOnlyIcon}" />
+                <customs:ButtonWithoutShadow x:Name = "buttonStopOut" Image="ic_logout_variant_white_24dp.png" 
+                                             Command="{Binding CommandStopWatchOut}" Style="{StaticResource buttonOnlyIcon}" />
+            </StackLayout>
           </StackLayout>
         </StackLayout>
 
@@ -41,10 +47,9 @@
                             CommandParameter="{Binding .}" />
                 </ViewCell.ContextActions>
                 
-                <StackLayout Orientation="Horizontal" >                
-                  <Label Text="{Binding WeekDay}" VerticalTextAlignment="Center"/>
-                  <Label Text="{Binding DayName}" VerticalTextAlignment="Center"/>
+                <StackLayout Orientation="Horizontal" >                                  
                   <Label Text=" {Binding YearDay}" VerticalTextAlignment="Center"/>
+                  <Label Text="{Binding DayName}" VerticalTextAlignment="Center"/>
                  
                   <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" >
                     <Image Source="ic_clock_grey600_18dp.png" />

@@ -234,7 +234,7 @@ namespace Tess.Model
 
         public static List<DaysWorkedHours> getOpenedDayHours(string IdDaysWorked)
         {
-            string query = $"SELECT * FROM [{TabellaDaysHours}] WHERE [IdDaysWorked] = \"{IdDaysWorked}\" AND [CheckOut] = \"\" ";
+            string query = $"SELECT * FROM [{TabellaDaysHours}] WHERE [IdDaysWorked] = \"{IdDaysWorked}\"  AND [CheckIn] <> \"\" AND [CheckOut] = \"\" ";
             var lista = database.Query<DaysWorkedHours>(query);
             return lista;
         }

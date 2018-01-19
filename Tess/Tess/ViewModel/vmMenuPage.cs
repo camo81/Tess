@@ -48,11 +48,44 @@ namespace Tess.ViewModel
         }
 
 
+        private Page mainpage = new View.MainPage();
+        public Page mainPage
+        {
+            get { return mainpage; }
+            set
+            {
+                mainpage = value;
+                Set(nameof(mainPage), ref value);
+            }
+        }
+
+        private Page settingspage = new View.SettingsPage();
+        public Page settingsPage
+        {
+            get { return settingspage; }
+            set
+            {
+                settingspage = value;
+                Set(nameof(settingsPage), ref value);
+            }
+        }
+
+        private Page languagepage = new View.LanguagePage();
+        public Page languagePage
+        {
+            get { return languagepage; }
+            set
+            {
+                languagepage = value;
+                Set(nameof(languagePage), ref value);
+            }
+        }
+
         public ICommand gotoPage
         {
             get
             {
-                return new RelayCommand<string>((page) => { changePage(page); });
+                return new RelayCommand<Page>((page) => { changePage(page); });
             }
 
 
@@ -66,43 +99,10 @@ namespace Tess.ViewModel
         }
 
 
-        public static void changePage(string page)
+        public static void changePage(Page page)
         {
             MasterDetailPage newPage = App.Current.MainPage as MasterDetailPage;
-
-            switch (page)
-            {
-                case "MainPage":
-                    Page gotoHome = new View.MainPage();
-                    newPage.Detail = new NavigationPage(gotoHome);
-                    break;
-
-                case "SettingsPage":
-                    Page gotoSettings = new View.SettingsPage();
-                    newPage.Detail = new NavigationPage(gotoSettings);
-                    break;
-
-                case "LanguagePage":
-                    Page gotoLang = new View.LanguagePage();
-                    newPage.Detail = new NavigationPage(gotoLang);
-                    break;
-
-                case "AboutPage":
-                    Page gotoAbout = new View.AboutPage();
-                    newPage.Detail = new NavigationPage(gotoAbout);
-                    break;
-
-                case "DetailPage":
-                    Page gotoDetail = new View.DetailPage();
-                    newPage.Detail = new NavigationPage(gotoDetail);
-                    break;
-
-                default:
-                    Page gotoPage = new View.MainPage();
-                    newPage.Detail = new NavigationPage(gotoPage);
-                    break;
-            }
-     
+            newPage.Detail = new NavigationPage(page);
             newPage.IsPresented = false;
 
         }

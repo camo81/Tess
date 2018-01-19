@@ -9,6 +9,7 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using Tess.Common;
 using Acr.UserDialogs;
+using Tess.View;
 
 namespace Tess.ViewModel
 {
@@ -286,7 +287,7 @@ namespace Tess.ViewModel
         {
             get
             {
-                return new RelayCommand(() => { vmMenuPage.changePage("AboutPage"); });
+                return new RelayCommand(() => { functions.pageAsync(new AboutPage(),false); });
             }
 
 

@@ -187,12 +187,6 @@ namespace Tess.ViewModel
                 DateTime In2ToSave = theDate + In2;
                 DateTime Out2ToSave = theDate + Out2;
 
-                /*
-                var a = In1ToSave.ToString();
-                var b = Out1ToSave.ToString();
-                var c = In2ToSave.ToString();
-                var d = Out2ToSave.ToString();
-                */
 
 
                 if ((Out1ToSave < In1ToSave) || (Out2ToSave < In2ToSave))
@@ -203,22 +197,32 @@ namespace Tess.ViewModel
 
                     ManageData.delDayHours(SelectedDay.IdDaysWorked);
 
-                    DaysWorkedHours dati = new DaysWorkedHours();
 
-                    dati.IdDaysWorked = SelectedDay.IdDaysWorked;
-                    dati.CheckIn = In1ToSave.ToString();
-                    dati.CheckOut = Out1ToSave.ToString();
+                    if ((In1ToSave.TimeOfDay.Ticks != 0) && (Out1ToSave.TimeOfDay.Ticks != 0))
+                    {
+                        DaysWorkedHours dati = new DaysWorkedHours();
 
-                    ManageData.InsertDayHours(dati);
+                        dati.IdDaysWorked = SelectedDay.IdDaysWorked;
+                        dati.CheckIn = In1ToSave.ToString();
+                        dati.CheckOut = Out1ToSave.ToString();
 
-                    dati.CheckIn = In2ToSave.ToString();
-                    dati.CheckOut = Out2ToSave.ToString();
+                        ManageData.InsertDayHours(dati);
+                    }
 
-                    ManageData.InsertDayHours(dati);
+                    if ((In2ToSave.TimeOfDay.Ticks != 0) && (Out2ToSave.TimeOfDay.Ticks != 0))
+                    {
+                        DaysWorkedHours dati = new DaysWorkedHours();
+
+                        dati.CheckIn = In2ToSave.ToString();
+                        dati.CheckOut = Out2ToSave.ToString();
+
+                        ManageData.InsertDayHours(dati);
+                    }
+
 
                     UserDialogs.Instance.ShowSuccess(Traduzioni.Settings_SaveSetOk);
 
-                    vmMenuPage.changePage("MainPage");
+                    vmMenuPage.changePage(new View.MainPage());
 
                 }
                 
@@ -246,7 +250,8 @@ namespace Tess.ViewModel
             {
                 ManageData.delDayHours(SelectedDay.IdDaysWorked);
                 In1 = In2 = Out1 = Out2 = TimeSpan.FromSeconds(0.1);
-          
+                vmMenuPage.changePage(new View.MainPage());
+
             }
 
         }

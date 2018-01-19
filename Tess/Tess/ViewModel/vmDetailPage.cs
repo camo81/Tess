@@ -205,14 +205,18 @@ namespace Tess.ViewModel
             check = getReqSettings();
 
             WeekTot = Math.Round( HoursSum(),2);
-            WeekTotString = WeekTot.ToString();
+            TimeSpan WeekTs = TimeSpan.FromHours(WeekTot);
+            WeekTotString = string.Format("{0:00}:{1:00}", (int)WeekTs.TotalHours, WeekTs.Minutes);
 
             DayAvg = Math.Round(HoursAvg(), 2);
-            DayAvgString = DayAvg.ToString();
+            TimeSpan DayAvgTs = TimeSpan.FromHours(DayAvg);
+            DayAvgString = string.Format("{0:00}:{1:00}", DayAvgTs.Hours, DayAvgTs.Minutes);
 
-            RemainHours = (HoursNum - WeekTot).ToString();
 
-            DetailHeading = "" + WeekTot + " / " + HoursNum + "H";
+            TimeSpan RemH = TimeSpan.FromHours(HoursNum) - TimeSpan.FromHours(WeekTot);
+            RemainHours = string.Format("{0:00}:{1:00}", (int)RemH.TotalHours, RemH.Minutes);
+
+            DetailHeading = "" + string.Format("{0:00}:{1:00}", (int)WeekTs.TotalHours, WeekTs.Minutes) + " / " + HoursNum + "H";
 
             setProgressBar(HoursNum,WeekTot);
 
@@ -281,7 +285,12 @@ namespace Tess.ViewModel
                             {
                                 WeekTot = WeekTot - (MinReq - BR);
                             }
+                            double Tot = WeekTot.TotalHours;
 
+                            if (Tot < 0)
+                            {
+                                WeekTot = new TimeSpan(0, 0, 0);
+                            }
                         }
 
                     }
@@ -370,7 +379,7 @@ namespace Tess.ViewModel
         public double HoursPerDay(string DayYear, string Year)
         {
 
-            double DayTot = 0;
+            TimeSpan DayTot = new TimeSpan();
 
             DaysWorked day = ManageData.getDay(DayYear, Year);
 
@@ -391,15 +400,40 @@ namespace Tess.ViewModel
                         DateTime endDT = Convert.ToDateTime(end);
 
 
-                        var hours = (endDT - startDT).TotalHours;
+                        TimeSpan hours = endDT - startDT;
                         DayTot = DayTot + hours;
+                    }
+
+                    // se c'è una pausa, verifico la durata minima
+                    if (f.Count == 2)
+                    {
+                        //Timespan della pausa
+                        DateTime CO1 = DateTime.Parse(f[0].CheckOut);
+                        DateTime CI2 = DateTime.Parse(f[1].CheckIn);
+                        TimeSpan BR = CI2 - CO1;
+
+                        //Timespan minimo richiesto dai settings
+                        TimeSpan MinReq = getMinBreak();
+
+                        if (BR < MinReq)
+                        {
+                            DayTot = DayTot - (MinReq - BR);
+                        }
+
                     }
 
                 }
             }
 
-            return DayTot;
-
+            double Tot = DayTot.TotalHours;
+            if (Tot < 0)
+            {
+                return 0;
+            }
+            else
+            {
+                return DayTot.TotalHours;
+            }
 
         }
 
@@ -426,11 +460,12 @@ namespace Tess.ViewModel
             });
             if (result)
             {
-                vmMenuPage.changePage("SettingsPage");
+
+                vmMenuPage.changePage(new View.SettingsPage());
             }
             else
             {
-                vmMenuPage.changePage("MainPage");
+                vmMenuPage.changePage(new View.MainPage());
             }
 
         }
