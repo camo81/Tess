@@ -137,7 +137,6 @@ namespace Tess.ViewModel
 
         public vmMainPage()
         {
-
             var now = DateTime.Now;
             DayOfYear = now.DayOfYear;
             DayOfWeek = (int)now.DayOfWeek;
@@ -159,8 +158,8 @@ namespace Tess.ViewModel
             //set del timer
             setTimer();
 
-
-            if (!check) {
+            if (!check)
+            {
                 SetReq();
             }
 
@@ -387,7 +386,7 @@ namespace Tess.ViewModel
             bool i = setCheckout();
             double WeekTot = HoursSum();
             setProgressBar(HoursNum,WeekTot);
-            vmMenuPage.changePage(new View.MainPage());
+            functions.changePage(new View.MainPage());
             timer.Stop();
         }
 
@@ -726,7 +725,7 @@ namespace Tess.ViewModel
                 DaysWorked day = ManageData.getDay(p1.YearDay, p1.Year);
                 ManageData.delDayHours(day.IdDaysWorked);
                 UserDialogs.Instance.ShowSuccess(Traduzioni.Settings_SaveSetOk);
-                vmMenuPage.changePage(new MainPage());
+                functions.changePage(new MainPage());
             }
 
             
@@ -735,20 +734,24 @@ namespace Tess.ViewModel
         public async void SetReq()
         {
 
-            var result = await UserDialogs.Instance.ConfirmAsync(new ConfirmConfig
             {
-                Message = Traduzioni.Main_confirmMessage,
-                OkText = Traduzioni.Main_confirm_yes,
-                CancelText = Traduzioni.Main_confirm_no,
-            });
-            if (result)
-            {
-                vmMenuPage.changePage(new SettingsPage());
+
+                var result = await UserDialogs.Instance.ConfirmAsync(new ConfirmConfig
+                {
+                    Message = Traduzioni.Main_confirmMessage,
+                    OkText = Traduzioni.Main_confirm_yes,
+                    CancelText = Traduzioni.Main_confirm_no,
+                });
+                if (result)
+                {
+                    functions.changePage(new View.SettingsPage());
+                }
+                else
+                {
+                    functions.changePage(new View.MainPage());
+                }
+
             }
-            else {
-                vmMenuPage.changePage(new MainPage());
-            }
-            
         }
 
         #endregion

@@ -154,6 +154,7 @@ namespace Tess.ViewModel
         }
 
         #region functions
+
         public void SaveSet()
         {
             int SelectedYear;
@@ -222,7 +223,7 @@ namespace Tess.ViewModel
 
                     UserDialogs.Instance.ShowSuccess(Traduzioni.Settings_SaveSetOk);
 
-                    vmMenuPage.changePage(new View.MainPage());
+                    functions.changePage(new View.MainPage());
 
                 }
                 
@@ -250,7 +251,7 @@ namespace Tess.ViewModel
             {
                 ManageData.delDayHours(SelectedDay.IdDaysWorked);
                 In1 = In2 = Out1 = Out2 = TimeSpan.FromSeconds(0.1);
-                vmMenuPage.changePage(new View.MainPage());
+                functions.changePage(new View.MainPage());
 
             }
 

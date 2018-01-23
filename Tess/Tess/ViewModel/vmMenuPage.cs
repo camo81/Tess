@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Tess.Common;
+using Tess.View;
 using Xamarin.Forms;
 
 namespace Tess.ViewModel
@@ -48,8 +49,8 @@ namespace Tess.ViewModel
         }
 
 
-        private Page mainpage = new View.MainPage();
-        public Page mainPage
+        private MainPage mainpage = new MainPage();
+        public MainPage mainPage
         {
             get { return mainpage; }
             set
@@ -59,8 +60,8 @@ namespace Tess.ViewModel
             }
         }
 
-        private Page settingspage = new View.SettingsPage();
-        public Page settingsPage
+        private SettingsPage settingspage = new SettingsPage();
+        public SettingsPage settingsPage
         {
             get { return settingspage; }
             set
@@ -70,8 +71,8 @@ namespace Tess.ViewModel
             }
         }
 
-        private Page languagepage = new View.LanguagePage();
-        public Page languagePage
+        private LanguagePage languagepage = new LanguagePage();
+        public LanguagePage languagePage
         {
             get { return languagepage; }
             set
@@ -85,7 +86,15 @@ namespace Tess.ViewModel
         {
             get
             {
-                return new RelayCommand<Page>((page) => { changePage(page); });
+                
+                return new RelayCommand<Page>((page) => {
+
+                    //get type of object passed
+                    Type t = page.GetType();
+                    //create a new instance of obj                    
+                    page=Activator.CreateInstance(t) as Page;
+
+                    functions.changePage(page); });
             }
 
 
@@ -93,20 +102,26 @@ namespace Tess.ViewModel
 
         #endregion
 
-        public vmMenuPage()
+        public vmMenuPage(MasterDetailPage current)
         {
+
+            bool check = functions.checkReqSet();
+            Page page = new Page();
+            
+            if (check)
+            {
+                page = new MainPage();
+            }
+            else {
+                page = new SettingsPage();
+            }
+            
+            current.Detail = new NavigationPage(page);
 
         }
 
-
-        public static void changePage(Page page)
-        {
-            MasterDetailPage newPage = App.Current.MainPage as MasterDetailPage;
-            newPage.Detail = new NavigationPage(page);
-            newPage.IsPresented = false;
-
-        }
     }
-
-
 }
+
+
+

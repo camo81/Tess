@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Tess.Common;
 using Tess.Model;
+using Tess.ViewModel;
 using Xamarin.Forms;
 
 namespace Tess

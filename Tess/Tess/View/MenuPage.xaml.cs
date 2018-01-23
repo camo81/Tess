@@ -8,8 +8,7 @@ namespace Tess.View
         public MenuPage()
         {
             InitializeComponent();
-            this.BindingContext = new ViewModel.vmMenuPage();
-            Detail = new NavigationPage(new MainPage());
+            this.BindingContext = new ViewModel.vmMenuPage(this);          
         }
 
     }

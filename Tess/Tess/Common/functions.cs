@@ -25,24 +25,98 @@ namespace Tess.Common
 
         }
 
+        public static void changePage(Page page)
+        {
+            MasterDetailPage newPage = App.Current.MainPage as MasterDetailPage;
+            newPage.Detail = new NavigationPage(page);
+            newPage.IsPresented = false;
+
+        }
+
+        public static void changePage(string page)
+        {
+            MasterDetailPage newPage = App.Current.MainPage as MasterDetailPage;
+
+            switch (page)
+            {
+                case "MainPage":
+                    Page gotoHome = new View.MainPage();
+                    newPage.Detail = new NavigationPage(gotoHome);
+                    break;
+
+                case "SettingsPage":
+                    Page gotoSettings = new View.SettingsPage();
+                    Page pippo = newPage.Detail.Navigation.NavigationStack[0];
+                    pippo = gotoSettings;
+                    break;
+
+                case "LanguagePage":
+                    Page gotoLang = new View.LanguagePage();
+                    newPage.Detail = new NavigationPage(gotoLang);
+                    break;
+
+                case "AboutPage":
+                    Page gotoAbout = new View.AboutPage();
+                    newPage.Detail = new NavigationPage(gotoAbout);
+                    break;
+
+                case "DetailPage":
+                    Page gotoDetail = new View.DetailPage();
+                    newPage.Detail = new NavigationPage(gotoDetail);
+                    break;
+
+                default:
+                    Page gotoPage = new View.MainPage();
+                    newPage.Detail = new NavigationPage(gotoPage);
+                    break;
+            }
+
+            newPage.IsPresented = false;
+
+        }
+
         public static double hoursFromLastCheckIn(string YearDay, string Year) {
 
             double tot = 0;
             TimeSpan interval = new TimeSpan();
             var i = ManageData.getDay(YearDay,Year);
-            var p = ManageData.getOpenedDayHours(i.IdDaysWorked.ToString());
-            foreach (var item in p)
+            if (i != null)
+
             {
-                string c = item.CheckIn;
-                DateTime cdt = DateTime.Parse(c);
-                DateTime now = DateTime.Now;
+                var p = ManageData.getOpenedDayHours(i.IdDaysWorked.ToString());
+                foreach (var item in p)
+                {
+                    string c = item.CheckIn;
+                    DateTime cdt = DateTime.Parse(c);
+                    DateTime now = DateTime.Now;
 
-                interval = now - cdt;
+                    interval = now - cdt;
 
-                tot = tot + interval.TotalHours;
-            }         
+                    tot = tot + interval.TotalHours;
+                }
+            }
+
 
             return tot;
+        }
+
+        public static bool checkReqSet() {
+
+            var DaysNumber = ManageData.getValue("WdSelected");
+            if (DaysNumber == null)
+            {
+                return false;
+            }
+
+            var HoursNumber = ManageData.getValue("OsSelected");
+            if (HoursNumber == null)
+            {
+                return false;
+            }
+
+
+            return true;
+
         }
     }
 

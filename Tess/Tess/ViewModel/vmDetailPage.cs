@@ -220,11 +220,6 @@ namespace Tess.ViewModel
 
             setProgressBar(HoursNum,WeekTot);
 
-            if (!check)
-            {
-                SetReq();
-            }
-
         }
 
         public void OpenUrl()
@@ -447,27 +442,6 @@ namespace Tess.ViewModel
 
             var perc = Math.Round(WeekTot / HoursNum, 2);
             Percentage = perc.ToString();
-        }
-
-        public async void SetReq()
-        {
-
-            var result = await UserDialogs.Instance.ConfirmAsync(new ConfirmConfig
-            {
-                Message = Traduzioni.Main_confirmMessage,
-                OkText = Traduzioni.Main_confirm_yes,
-                CancelText = Traduzioni.Main_confirm_no,
-            });
-            if (result)
-            {
-
-                vmMenuPage.changePage(new View.SettingsPage());
-            }
-            else
-            {
-                vmMenuPage.changePage(new View.MainPage());
-            }
-
         }
 
         public bool getReqSettings()
