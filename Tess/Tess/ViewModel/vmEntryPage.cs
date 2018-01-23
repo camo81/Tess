@@ -87,7 +87,10 @@ namespace Tess.ViewModel
 
         public vmEntryPage(DaysWorked day)
         {
-            
+
+            var iu = ManageData.getAllHours();
+
+
             var i = ManageData.getDay(day.YearDay, day.Year);
             var p = ManageData.getDayHours(i.IdDaysWorked.ToString());
             SelectedDay = day;
@@ -202,22 +205,21 @@ namespace Tess.ViewModel
                     if ((In1ToSave.TimeOfDay.Ticks != 0) && (Out1ToSave.TimeOfDay.Ticks != 0))
                     {
                         DaysWorkedHours dati = new DaysWorkedHours();
-
                         dati.IdDaysWorked = SelectedDay.IdDaysWorked;
                         dati.CheckIn = In1ToSave.ToString();
                         dati.CheckOut = Out1ToSave.ToString();
 
-                        ManageData.InsertDayHours(dati);
+                        var op = ManageData.InsertDayHours(dati);
                     }
 
                     if ((In2ToSave.TimeOfDay.Ticks != 0) && (Out2ToSave.TimeOfDay.Ticks != 0))
                     {
                         DaysWorkedHours dati = new DaysWorkedHours();
-
+                        dati.IdDaysWorked = SelectedDay.IdDaysWorked;
                         dati.CheckIn = In2ToSave.ToString();
                         dati.CheckOut = Out2ToSave.ToString();
 
-                        ManageData.InsertDayHours(dati);
+                        var op = ManageData.InsertDayHours(dati);
                     }
 
 
