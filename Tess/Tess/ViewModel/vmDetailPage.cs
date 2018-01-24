@@ -218,7 +218,7 @@ namespace Tess.ViewModel
 
             DetailHeading = "" + string.Format("{0:00}:{1:00}", (int)WeekTs.TotalHours, WeekTs.Minutes) + " / " + HoursNum + "H";
 
-            setProgressBar(HoursNum,WeekTot);
+            Percentage = functions.setProgressBar(HoursNum,WeekTot);
 
         }
 
@@ -430,18 +430,6 @@ namespace Tess.ViewModel
                 return DayTot.TotalHours;
             }
 
-        }
-
-        public void setProgressBar(double HoursNum, double WeekTot)
-        {
-
-            if (HoursNum < WeekTot)
-            {
-                WeekTot = HoursNum;
-            }
-
-            var perc = Math.Round(WeekTot / HoursNum, 2);
-            Percentage = perc.ToString();
         }
 
         public bool getReqSettings()

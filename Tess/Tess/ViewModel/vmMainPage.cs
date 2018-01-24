@@ -153,7 +153,7 @@ namespace Tess.ViewModel
             insertWorkedDay();
             //Calcolo la somma settimanale di ore e inizializzo la progress bar
             double WeekTot = HoursSum();
-            setProgressBar(HoursNum, WeekTot);
+            Percentage = functions.setProgressBar(HoursNum, WeekTot);
 
             //set del timer
             setTimer();
@@ -385,7 +385,7 @@ namespace Tess.ViewModel
         {
             bool i = setCheckout();
             double WeekTot = HoursSum();
-            setProgressBar(HoursNum,WeekTot);
+            Percentage = functions.setProgressBar(HoursNum,WeekTot);
             functions.changePage(new View.MainPage());
             timer.Stop();
         }
@@ -693,18 +693,6 @@ namespace Tess.ViewModel
             
 
 
-        }
-
-        public void setProgressBar(double HoursNum, double WeekTot)
-        {
-
-            if (HoursNum < WeekTot)
-            {
-                WeekTot = HoursNum;
-            }
-
-            var perc = Math.Round(WeekTot / HoursNum, 2);
-            Percentage = perc.ToString();
         }
 
         public void EditRow(DaysWorked p1) {

@@ -118,6 +118,19 @@ namespace Tess.Common
             return true;
 
         }
+
+        public static string setProgressBar(double HoursNum, double WeekTot)
+        {
+
+            if (HoursNum < WeekTot)
+            {
+                WeekTot = HoursNum;
+            }
+
+            var perc = Math.Round(WeekTot / HoursNum, 2);
+            IFormatProvider cultureUS = new System.Globalization.CultureInfo("en-US");
+            return perc.ToString(cultureUS);
+        }
     }
 
     public class Timer
