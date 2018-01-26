@@ -82,7 +82,17 @@ namespace Tess.ViewModel
 
         }
         #endregion
+        private String pagetitle = Traduzioni.Entry_pageTitle;
+        public String pageTitle
+        {
+            get { return pagetitle; }
+            set
+            {
+                pagetitle = value;
+                Set(nameof(pageTitle), ref value);
 
+            }
+        }
         public DaysWorked SelectedDay;
 
         public vmEntryPage(DaysWorked day)

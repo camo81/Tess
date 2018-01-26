@@ -71,6 +71,15 @@ namespace Tess.Common {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a About Tess.
+        /// </summary>
+        internal static string About_pageTitle {
+            get {
+                return ResourceManager.GetString("About_pageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a Tess, made by Carlo Camagni. 
         ///Tess is developed in C# and Xamarin, for source code visit https://github.com/camo81/Tess.
         ///You are free to download, modify, destroy or improve it.
@@ -102,7 +111,7 @@ namespace Tess.Common {
         }
         
         /// <summary>
-        ///   Cerca una stringa localizzata simile a Reqested week hours.
+        ///   Cerca una stringa localizzata simile a Requested week hours.
         /// </summary>
         internal static string Detail_l3 {
             get {
@@ -129,11 +138,29 @@ namespace Tess.Common {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a Details.
+        /// </summary>
+        internal static string Detail_pageTitle {
+            get {
+                return ResourceManager.GetString("Detail_pageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a You shall not pass.
         /// </summary>
         internal static string Entry_gandalf {
             get {
                 return ResourceManager.GetString("Entry_gandalf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Modify day .
+        /// </summary>
+        internal static string Entry_pageTitle {
+            get {
+                return ResourceManager.GetString("Entry_pageTitle", resourceCulture);
             }
         }
         
@@ -152,6 +179,15 @@ namespace Tess.Common {
         internal static string General_GitUri {
             get {
                 return ResourceManager.GetString("General_GitUri", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Language.
+        /// </summary>
+        internal static string Language_pageTitle {
+            get {
+                return ResourceManager.GetString("Language_pageTitle", resourceCulture);
             }
         }
         
@@ -291,6 +327,15 @@ namespace Tess.Common {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a My Week.
+        /// </summary>
+        internal static string Main_pageTitle {
+            get {
+                return ResourceManager.GetString("Main_pageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a Language.
         /// </summary>
         internal static string Menu_language {
@@ -323,6 +368,24 @@ namespace Tess.Common {
         internal static string Monday {
             get {
                 return ResourceManager.GetString("Monday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a You have a check-in opened from {0} hours.
+        /// </summary>
+        internal static string Notification_desc {
+            get {
+                return ResourceManager.GetString("Notification_desc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Remember remember the fifth of november.
+        /// </summary>
+        internal static string Notification_title {
+            get {
+                return ResourceManager.GetString("Notification_title", resourceCulture);
             }
         }
         
@@ -381,6 +444,15 @@ namespace Tess.Common {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a Settings.
+        /// </summary>
+        internal static string Settings_pageTitle {
+            get {
+                return ResourceManager.GetString("Settings_pageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a Working days in week *.
         /// </summary>
         internal static string Settings_picker1 {
@@ -413,6 +485,24 @@ namespace Tess.Common {
         internal static string Settings_picker4 {
             get {
                 return ResourceManager.GetString("Settings_picker4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Notify me for opened check-in.
+        /// </summary>
+        internal static string Settings_picker5 {
+            get {
+                return ResourceManager.GetString("Settings_picker5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a In hours. If a number is selected you receive a notification after check-in is opened to remember to close it..
+        /// </summary>
+        internal static string Settings_picker5_desc {
+            get {
+                return ResourceManager.GetString("Settings_picker5_desc", resourceCulture);
             }
         }
         

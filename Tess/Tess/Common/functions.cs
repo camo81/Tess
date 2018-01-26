@@ -131,6 +131,33 @@ namespace Tess.Common
             IFormatProvider cultureUS = new System.Globalization.CultureInfo("en-US");
             return perc.ToString(cultureUS);
         }
+
+        public static int enableNotification() {
+            try
+            {
+                var i = ManageData.getValue("NotifyMe");
+                bool isConvertible = false;
+                int myIndex = 0;
+
+                isConvertible = int.TryParse(i.SettingValue, out myIndex);
+                if (isConvertible)
+                {
+                    return myIndex;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch (Exception e)
+            {
+
+                return 0;
+            
+            }
+
+
+        }
     }
 
     public class Timer

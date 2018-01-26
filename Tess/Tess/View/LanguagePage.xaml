@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Tess.View.LanguagePage">
+             x:Class="Tess.View.LanguagePage"
+             Title="{Binding pageTitle}">
     <ContentPage.ToolbarItems>
       <ToolbarItem Icon="ic_check_white_36dp.png" Command="{Binding SaveLanguage}"></ToolbarItem>
       <ToolbarItem Name="About" Order="Secondary" Priority="0" Command="{Binding gotoPage}" />

@@ -63,6 +63,7 @@ namespace Tess.Droid
 			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahText = global::Tess.Droid.Resource.Styleable.ProgressWheel_ahText;
 			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahTextColor = global::Tess.Droid.Resource.Styleable.ProgressWheel_ahTextColor;
 			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahTextSize = global::Tess.Droid.Resource.Styleable.ProgressWheel_ahTextSize;
+			global::Plugin.LocalNotifications.Resource.Drawable.plugin_lc_smallicon = global::Tess.Droid.Resource.Drawable.plugin_lc_smallicon;
 			global::Splat.Resource.String.library_name = global::Tess.Droid.Resource.String.library_name;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::Tess.Droid.Resource.Attribute.actionBarSize;
 		}
@@ -2290,26 +2291,26 @@ namespace Tess.Droid
 			// aapt resource value: 0x7f020056
 			public const int avd_hide_password = 2130837590;
 			
-			// aapt resource value: 0x7f020217
-			public const int avd_hide_password_1 = 2130838039;
-			
 			// aapt resource value: 0x7f020218
-			public const int avd_hide_password_2 = 2130838040;
+			public const int avd_hide_password_1 = 2130838040;
 			
 			// aapt resource value: 0x7f020219
-			public const int avd_hide_password_3 = 2130838041;
+			public const int avd_hide_password_2 = 2130838041;
+			
+			// aapt resource value: 0x7f02021a
+			public const int avd_hide_password_3 = 2130838042;
 			
 			// aapt resource value: 0x7f020057
 			public const int avd_show_password = 2130837591;
 			
-			// aapt resource value: 0x7f02021a
-			public const int avd_show_password_1 = 2130838042;
-			
 			// aapt resource value: 0x7f02021b
-			public const int avd_show_password_2 = 2130838043;
+			public const int avd_show_password_1 = 2130838043;
 			
 			// aapt resource value: 0x7f02021c
-			public const int avd_show_password_3 = 2130838044;
+			public const int avd_show_password_2 = 2130838044;
+			
+			// aapt resource value: 0x7f02021d
+			public const int avd_show_password_3 = 2130838045;
 			
 			// aapt resource value: 0x7f020058
 			public const int background = 2130837592;
@@ -3616,11 +3617,11 @@ namespace Tess.Droid
 			// aapt resource value: 0x7f02020a
 			public const int notification_icon_background = 2130838026;
 			
-			// aapt resource value: 0x7f020215
-			public const int notification_template_icon_bg = 2130838037;
-			
 			// aapt resource value: 0x7f020216
-			public const int notification_template_icon_low_bg = 2130838038;
+			public const int notification_template_icon_bg = 2130838038;
+			
+			// aapt resource value: 0x7f020217
+			public const int notification_template_icon_low_bg = 2130838039;
 			
 			// aapt resource value: 0x7f02020b
 			public const int notification_tile_bg = 2130838027;
@@ -3632,25 +3633,28 @@ namespace Tess.Droid
 			public const int pencil = 2130838029;
 			
 			// aapt resource value: 0x7f02020e
-			public const int roundedbg = 2130838030;
+			public const int plugin_lc_smallicon = 2130838030;
 			
 			// aapt resource value: 0x7f02020f
-			public const int roundedbgdark = 2130838031;
+			public const int roundedbg = 2130838031;
 			
 			// aapt resource value: 0x7f020210
-			public const int settings = 2130838032;
+			public const int roundedbgdark = 2130838032;
 			
 			// aapt resource value: 0x7f020211
-			public const int thumb_down_outline = 2130838033;
+			public const int settings = 2130838033;
 			
 			// aapt resource value: 0x7f020212
-			public const int thumb_up_outline = 2130838034;
+			public const int thumb_down_outline = 2130838034;
 			
 			// aapt resource value: 0x7f020213
-			public const int trophy_outline = 2130838035;
+			public const int thumb_up_outline = 2130838035;
 			
 			// aapt resource value: 0x7f020214
-			public const int web = 2130838036;
+			public const int trophy_outline = 2130838036;
+			
+			// aapt resource value: 0x7f020215
+			public const int web = 2130838037;
 			
 			static Drawable()
 			{

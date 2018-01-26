@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Tess.View.EntryPage"
-             Title="Edit Entry"
+             Title="{Binding pageTitle}"
              xmlns:customs="clr-namespace:Tess.Model;assembly=Tess">
     <ContentPage.ToolbarItems>
     <ToolbarItem Icon="ic_check_white_36dp.png" Command="{Binding SaveSettings}"></ToolbarItem>

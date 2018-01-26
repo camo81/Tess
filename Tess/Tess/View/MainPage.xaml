@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Tess.View.MainPage"
              xmlns:customs="clr-namespace:Tess.Model;assembly=Tess"
-             x:Name="MainPage">
+             x:Name="MainPage"
+             Title="{Binding pageTitle}">
   <ContentPage.ToolbarItems>
     <ToolbarItem Name="About" Order="Secondary" Priority="0" Command="{Binding gotoPage}"/>
   </ContentPage.ToolbarItems>

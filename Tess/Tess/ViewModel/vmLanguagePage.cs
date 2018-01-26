@@ -17,6 +17,17 @@ namespace Tess.ViewModel
     public class vmLanguagePage : ViewModelBase
     {
         #region binding
+        private String pagetitle = Traduzioni.Language_pageTitle;
+        public String pageTitle
+        {
+            get { return pagetitle; }
+            set
+            {
+                pagetitle = value;
+                Set(nameof(pageTitle), ref value);
+
+            }
+        }
         private String langset = "";
         public String LangSet
         {

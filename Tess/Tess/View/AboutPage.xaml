@@ -1,20 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Tess.View.AboutPage"             
-             Title="About"
+             x:Class="Tess.View.AboutPage"
+             Title="{Binding pageTitle}"
              xmlns:customs="clr-namespace:Tess.Model;assembly=Tess">
 
 
   <ScrollView Style="{StaticResource MasterDetailSVMain}">
     <StackLayout>
-      <StackLayout WidthRequest ="250" HorizontalOptions="Center">
+      <StackLayout WidthRequest ="200" HorizontalOptions="Center">
         <Image Source="icon.png"></Image>
       </StackLayout>
       <StackLayout Style="{StaticResource MasterDetailSLMain}">
         <Label Text="{Binding AboutHeading}" Style="{StaticResource BuranLabel}" />
         <Label Text="{Binding AboutText}" VerticalOptions="Center" HorizontalOptions="Center" />
-        <customs:ButtonWithoutShadow x:homeButton = "button2" Image="ic_github_circle_white_36dp.png" Command="{Binding CommandOpenUrl}" Style="{StaticResource buttonOnlyIcon}" />
+        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" >
+          <Label Text="Fork me on" VerticalOptions="Center" HorizontalOptions="Center" Style="{StaticResource BuranLabel}"/>
+          <customs:ButtonWithoutShadow x:homeButton = "button2" Image="ic_github_circle_white_36dp.png" Command="{Binding CommandOpenUrl}" Style="{StaticResource buttonOnlyIcon}" />
+        </StackLayout>
       </StackLayout>
     </StackLayout>
   </ScrollView>

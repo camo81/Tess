@@ -14,7 +14,17 @@ namespace Tess.ViewModel
     public class vmAboutPage : ViewModelBase
     {
 
+        private String pagetitle = Traduzioni.About_pageTitle;
+        public String pageTitle
+        {
+            get { return pagetitle; }
+            set
+            {
+                pagetitle = value;
+                Set(nameof(pageTitle), ref value);
 
+            }
+        }
         public String aboutheading = Traduzioni.About_heading;
         public String AboutHeading
         {

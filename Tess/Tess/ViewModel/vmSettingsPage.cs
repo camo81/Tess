@@ -16,6 +16,18 @@ namespace Tess.ViewModel
     public class vmSettingsPage : ViewModelBase
     {
         #region binding
+        private String pagetitle = Traduzioni.Settings_pageTitle;
+        public String pageTitle
+        {
+            get { return pagetitle; }
+            set
+            {
+                pagetitle = value;
+                Set(nameof(pageTitle), ref value);
+
+            }
+        }
+
         private String opstatus;
         public String opStatus
         {
@@ -100,6 +112,30 @@ namespace Tess.ViewModel
             }
         }
 
+        private String notifypicker = Traduzioni.Settings_picker5;
+        public String notifyPicker
+        {
+            get { return notifypicker; }
+            set
+            {
+                notifypicker = value;
+                Set(nameof(notifyPicker), ref value);
+
+            }
+        }
+
+        private String notifypickerdesc = Traduzioni.Settings_picker5_desc;
+        public String notifyPickerDesc
+        {
+            get { return notifypickerdesc; }
+            set
+            {
+                notifypickerdesc = value;
+                Set(nameof(notifyPickerDesc), ref value);
+
+            }
+        }
+
         private String switchtext = Traduzioni.Settings_sound;
         public String switchText
         {
@@ -132,6 +168,17 @@ namespace Tess.ViewModel
             {
                 giorni = value;
                 Set(nameof(Giorni), ref value);
+            }
+        }
+
+        private List<string> notify;
+        public List<string> Notify
+        {
+            get { return notify; }
+            set
+            {
+                notify = value;
+                Set(nameof(Notify), ref value);
             }
         }
 
@@ -204,6 +251,18 @@ namespace Tess.ViewModel
             {
                 bmindex = value;
                 Set(nameof(BMIndex), ref value);
+            }
+
+        }
+
+        private int notifyindex = 0;
+        public int notifyIndex
+        {
+            get { return notifyindex; }
+            set
+            {
+                notifyindex = value;
+                Set(nameof(notifyIndex), ref value);
             }
 
         }
@@ -323,6 +382,13 @@ namespace Tess.ViewModel
                 minMBreak.Add(new MinBreakMinute { number = "" + i });
             }
 
+            this.Notify = new List<string>();
+            Notify.Add("-");
+            Notify.Add("1");
+            Notify.Add("2");
+            Notify.Add("3");
+            Notify.Add("4");
+
 
             #region GetValue
             try
@@ -379,6 +445,28 @@ namespace Tess.ViewModel
                     isSelected = false;
                 }
                 
+            }
+            catch (Exception e)
+            {
+                //opStatus = "Not set" + e;
+
+            }
+            try
+            {
+                var i = ManageData.getValue("NotifyMe");
+                bool isConvertible = false;
+                int myIndex = 0;
+
+                isConvertible = int.TryParse(i.SettingValue, out myIndex);
+                if (isConvertible)
+                {
+                    notifyIndex = myIndex;
+                }
+                else {
+                    notifyIndex = 0;
+                }
+
+
             }
             catch (Exception e)
             {
@@ -535,7 +623,7 @@ namespace Tess.ViewModel
                 // se non esiste faccio l'insert
                 try
                 {
-                    Wd = ManageData.InsertSettings(dati);
+                    ManageData.InsertSettings(dati);
                 }
                 catch (Exception e)
                 {
@@ -545,10 +633,30 @@ namespace Tess.ViewModel
             else
             {
                 dati.IdSetting = tmp2.IdSetting;
-                Wd = ManageData.UpdateSettings(dati);
+                ManageData.UpdateSettings(dati);
             }
-            
 
+            //set della variabile notifyme
+            dati.SettingName = "NotifyMe";
+            dati.SettingValue = notifyIndex.ToString();
+            var tmp3 = ManageData.getValue("NotifyMe");
+            if ((tmp3 == null))
+            {
+                // se non esiste faccio l'insert
+                try
+                {
+                    ManageData.InsertSettings(dati);
+                }
+                catch (Exception e)
+                {
+                    opStatus = "" + e;
+                }
+            }
+            else
+            {
+                dati.IdSetting = tmp3.IdSetting;
+                ManageData.UpdateSettings(dati);
+            }
 
             if ((Wd != 0) && (Os != 0))
             {

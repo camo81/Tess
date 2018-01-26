@@ -8,6 +8,7 @@ using Android.Widget;
 using Android.OS;
 using Acr;
 using Acr.UserDialogs;
+using Plugin.LocalNotifications;
 
 namespace Tess.Droid
 {
@@ -24,7 +25,10 @@ namespace Tess.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
-            
+
+            LocalNotificationsImplementation.NotificationIconId = Resource.Drawable.icon;
+
+
         }
     }
 }

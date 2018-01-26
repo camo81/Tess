@@ -262,4 +262,34 @@ E a mia figlia Teresa, questo lavoro è dedicato a te. &lt;3</value>
   <data name="Menu_settings" xml:space="preserve">
     <value>Impostazioni</value>
   </data>
+  <data name="Notification_desc" xml:space="preserve">
+    <value>Hai un check-in aperto da {0} ore</value>
+  </data>
+  <data name="Notification_title" xml:space="preserve">
+    <value>Hey, ti ricordi di me?</value>
+  </data>
+  <data name="Settings_picker5" xml:space="preserve">
+    <value>Notificami i check-in aperti</value>
+  </data>
+  <data name="Settings_picker5_desc" xml:space="preserve">
+    <value>In ore. Se selezioni un numero riceverai una notifica dopo che hai aperto un check-in per ricordarti di chiuderlo.</value>
+  </data>
+  <data name="About_pageTitle" xml:space="preserve">
+    <value>About Tess</value>
+  </data>
+  <data name="Detail_pageTitle" xml:space="preserve">
+    <value>Dettagli</value>
+  </data>
+  <data name="Entry_pageTitle" xml:space="preserve">
+    <value>Modifica le entrate</value>
+  </data>
+  <data name="Language_pageTitle" xml:space="preserve">
+    <value>Lingua</value>
+  </data>
+  <data name="Main_pageTitle" xml:space="preserve">
+    <value>La mia settimana</value>
+  </data>
+  <data name="Settings_pageTitle" xml:space="preserve">
+    <value>Impostazioni</value>
+  </data>
 </root>

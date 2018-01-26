@@ -250,6 +250,12 @@ namespace Tess.Model
             return i;
         }
 
+        public static DaysWorkedHours lastDaysWorkedHours()
+        {
+            string query = $"SELECT * FROM [{TabellaDaysHours}] ORDER BY IdDaysWorkedHours DESC";
+            var lista = database.Query<DaysWorkedHours>(query);
+            return lista.FirstOrDefault();
+        }
         #endregion
     }
 

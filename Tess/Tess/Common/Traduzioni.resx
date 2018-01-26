@@ -233,7 +233,7 @@ And to my daughter Teresa, this app is for you &lt;3.</value>
     <value>Day/hours in week</value>
   </data>
   <data name="Detail_l3" xml:space="preserve">
-    <value>Reqested week hours</value>
+    <value>Requested week hours</value>
   </data>
   <data name="Detail_l4" xml:space="preserve">
     <value>Working days in week</value>
@@ -260,6 +260,36 @@ And to my daughter Teresa, this app is for you &lt;3.</value>
     <value>Main</value>
   </data>
   <data name="Menu_settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Notification_desc" xml:space="preserve">
+    <value>You have a check-in opened from {0} hours</value>
+  </data>
+  <data name="Notification_title" xml:space="preserve">
+    <value>Remember remember the fifth of november</value>
+  </data>
+  <data name="Settings_picker5" xml:space="preserve">
+    <value>Notify me for opened check-in</value>
+  </data>
+  <data name="Settings_picker5_desc" xml:space="preserve">
+    <value>In hours. If a number is selected you receive a notification after check-in is opened to remember to close it.</value>
+  </data>
+  <data name="About_pageTitle" xml:space="preserve">
+    <value>About Tess</value>
+  </data>
+  <data name="Detail_pageTitle" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Entry_pageTitle" xml:space="preserve">
+    <value>Modify day </value>
+  </data>
+  <data name="Language_pageTitle" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Main_pageTitle" xml:space="preserve">
+    <value>My Week</value>
+  </data>
+  <data name="Settings_pageTitle" xml:space="preserve">
     <value>Settings</value>
   </data>
 </root>

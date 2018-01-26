@@ -16,7 +16,17 @@ namespace Tess.ViewModel
     {
 
         #region Binding
+        private String pagetitle = Traduzioni.Detail_pageTitle;
+        public String pageTitle
+        {
+            get { return pagetitle; }
+            set
+            {
+                pagetitle = value;
+                Set(nameof(pageTitle), ref value);
 
+            }
+        }
         private String label1 = Traduzioni.Detail_l1;
         public String Label1
         {

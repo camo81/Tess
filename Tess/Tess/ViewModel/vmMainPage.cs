@@ -1,6 +1,7 @@
 ﻿using Acr.UserDialogs;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Plugin.LocalNotifications;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,17 @@ namespace Tess.ViewModel
     public class vmMainPage : ViewModelBase
     {
         #region binding
+        private String pagetitle = Traduzioni.Main_pageTitle;
+        public String pageTitle
+        {
+            get { return pagetitle; }
+            set
+            {
+                pagetitle = value;
+                Set(nameof(pageTitle), ref value);
 
+            }
+        }
         private Timer timer;
 
         private TimeSpan totalSeconds = new TimeSpan(0, 0, 0, 0);
@@ -162,6 +173,8 @@ namespace Tess.ViewModel
             {
                 SetReq();
             }
+
+           
 
         }
 
@@ -376,9 +389,20 @@ namespace Tess.ViewModel
                 }
 
                 timer.Start();
-
+                
+                //send notification if enabled
+                if (functions.enableNotification() > 0)
+                {
+                    var last = ManageData.lastDaysWorkedHours();
+                    var sbuild = new StringBuilder();
+                    var text = sbuild.AppendFormat(Traduzioni.Notification_desc, functions.enableNotification().ToString());
+                    var id = last.IdDaysWorkedHours;
+                    // DateTime.Now.AddMinutes(functions.enableNotification())
+                    CrossLocalNotifications.Current.Show(Traduzioni.Notification_title, text.ToString(),id, DateTime.Now.AddHours(functions.enableNotification()));
+                }
+               
             }
-           
+            
         }
 
         public void StopWatchOut()
@@ -388,6 +412,12 @@ namespace Tess.ViewModel
             Percentage = functions.setProgressBar(HoursNum,WeekTot);
             functions.changePage(new View.MainPage());
             timer.Stop();
+            //send notification if enabled
+            if (functions.enableNotification() > 0)
+            {
+                var last = ManageData.lastDaysWorkedHours();
+                CrossLocalNotifications.Current.Cancel(last.IdDaysWorkedHours);
+            }
         }
 
         public bool checkDayEntry(string IdDayWorked)

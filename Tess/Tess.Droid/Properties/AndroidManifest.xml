@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.Camo.Tess" android:installLocation="auto" android:versionName="0.6 alpha" android:versionCode="6">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.Camo.Tess" android:installLocation="auto" android:versionName="0.7 alpha" android:versionCode="7">
 	<uses-sdk android:minSdkVersion="15" />
 	<application android:label="Tess.Droid"></application>
 </manifest>

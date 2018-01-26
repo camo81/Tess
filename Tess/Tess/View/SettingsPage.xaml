@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Tess.View.SettingsPage"
-             Title="Settings"
+             Title="{Binding pageTitle}"
              xmlns:customs="clr-namespace:Tess.Model;assembly=Tess">
 
   <ContentPage.ToolbarItems>
@@ -13,18 +13,7 @@
   <ScrollView Style="{StaticResource MasterDetailSVMain}">
     <StackLayout>
       <StackLayout Style="{StaticResource MasterDetailSLMain}">
-        <StackLayout Orientation="Horizontal">
-          <Label Text="{Binding switchText}"
-                HorizontalOptions="StartAndExpand"
-                HorizontalTextAlignment="Start"
-                VerticalOptions="Center"
-                Style="{StaticResource DefLabelRoboto}"/>
-
-          <Switch VerticalOptions="Center"
-                HorizontalOptions="EndAndExpand"
-                IsToggled="{Binding isSelected}"/>
-        </StackLayout>
-        
+                
         <Picker x:Name="Dayselection" HorizontalOptions="FillAndExpand" Title="{Binding pickerWdTitle}" ItemsSource="{Binding Giorni}"
                 ItemDisplayBinding="{Binding number}" SelectedIndex="{Binding WdIndex}" SelectedItem="{Binding WdSelected}" Style="{StaticResource LanguagePicker}">
                 
@@ -34,7 +23,6 @@
 
         </Picker>             
       </StackLayout>
-
       
       <StackLayout Style="{StaticResource MasterDetailSLMain}">
         <Label Text="{Binding pickerDescription}" Style="{StaticResource DefLabelRoboto}"/>
@@ -49,8 +37,40 @@
           </Picker>
                    
         </StackLayout>
-
       </StackLayout>
+
+
+      <StackLayout Style="{StaticResource MasterDetailSLMain}">
+        <StackLayout Orientation="Horizontal">
+          <Label Text="{Binding switchText}"
+                HorizontalOptions="StartAndExpand"
+                HorizontalTextAlignment="Start"
+                VerticalOptions="Center"
+                Style="{StaticResource DefLabelRoboto}"/>
+
+          <Switch VerticalOptions="Center"
+                HorizontalOptions="EndAndExpand"
+                IsToggled="{Binding isSelected}"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal">
+          <Label Text="{Binding notifyPicker}"
+                  HorizontalOptions="StartAndExpand"
+                  HorizontalTextAlignment="Start"
+                  VerticalOptions="Center"
+                  Style="{StaticResource DefLabelRoboto}"/>
+          <Picker x:Name="Notify"  Title="" ItemsSource="{Binding Notify}"
+                  SelectedIndex="{Binding notifyIndex}" Style="{StaticResource LanguagePicker}"
+                  HorizontalOptions="CenterAndExpand" >
+          </Picker>
+        </StackLayout>
+        <Label Text="{Binding notifyPickerDesc}"
+                HorizontalOptions="StartAndExpand"
+                HorizontalTextAlignment="Start"
+                VerticalOptions="Center"/>
+      </StackLayout>
+
+
       <customs:ButtonWithoutShadow x:Name = "buttonDel" Image="ic_delete_white_24dp.png" Command="{Binding DelSettings}" Style="{StaticResource buttonOnlyIcon}" />
     </StackLayout>
   </ScrollView>
