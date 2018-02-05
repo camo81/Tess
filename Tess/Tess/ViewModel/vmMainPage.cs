@@ -309,6 +309,7 @@ namespace Tess.ViewModel
                     WorkedHours = timeSpan.ToString(),
                     Year = i.Year.ToString(),
                     YearDay = i.DayOfYear.ToString(),
+                    MonthDay = i.Day.ToString(),
                     WorkedUpDown = upDownD
                 });
 

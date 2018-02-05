@@ -219,12 +219,36 @@ namespace Tess.ViewModel
             WeekTotString = string.Format("{0:00}:{1:00}", (int)WeekTs.TotalHours, WeekTs.Minutes);
 
             DayAvg = Math.Round(HoursAvg(), 2);
-            TimeSpan DayAvgTs = TimeSpan.FromHours(DayAvg);
-            DayAvgString = string.Format("{0:00}:{1:00}", DayAvgTs.Hours, DayAvgTs.Minutes);
+            
+
+            try
+            {
+                TimeSpan DayAvgTs = TimeSpan.FromHours(DayAvg);
+                DayAvgString = string.Format("{0:00}:{1:00}", DayAvgTs.Hours, DayAvgTs.Minutes);
+            }
+            catch (Exception e)
+            {
+
+                DayAvgString = "-";
+            }
+            
 
 
             TimeSpan RemH = TimeSpan.FromHours(HoursNum) - TimeSpan.FromHours(WeekTot);
-            RemainHours = string.Format("{0:00}:{1:00}", (int)RemH.TotalHours, RemH.Minutes);
+
+            //sistemo la visualizzazone in caso di saldo negativo
+            if (RemH.Ticks < 0)
+            {
+                double th = Math.Abs(RemH.TotalHours);
+                double tm = Math.Abs(RemH.Minutes);
+
+                RemainHours = string.Format("0:00 (+{0:00}:{1:00})", th, tm);
+            }
+            else {
+                RemainHours = string.Format("{0:00}:{1:00}", (int)RemH.TotalHours, RemH.Minutes);
+            }
+
+            
 
             DetailHeading = "" + string.Format("{0:00}:{1:00}", (int)WeekTs.TotalHours, WeekTs.Minutes) + " / " + HoursNum + "H";
 

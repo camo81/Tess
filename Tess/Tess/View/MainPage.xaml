@@ -49,7 +49,7 @@
                 </ViewCell.ContextActions>
                 
                 <StackLayout Orientation="Horizontal" >                                  
-                  <Label Text=" {Binding YearDay}" VerticalTextAlignment="Center"/>
+                  <Label Text=" {Binding MonthDay}" VerticalTextAlignment="Center"/>
                   <Label Text="{Binding DayName}" VerticalTextAlignment="Center"/>
                  
                   <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" >
