@@ -147,7 +147,7 @@ namespace Tess.Common {
         }
         
         /// <summary>
-        ///   Cerca una stringa localizzata simile a You shall not pass.
+        ///   Cerca una stringa localizzata simile a There is something wrong!.
         /// </summary>
         internal static string Entry_gandalf {
             get {
@@ -237,7 +237,7 @@ namespace Tess.Common {
         }
         
         /// <summary>
-        ///   Cerca una stringa localizzata simile a Ahr ahr ahr, I&apos;m Pirate Roberts!.
+        ///   Cerca una stringa localizzata simile a No.
         /// </summary>
         internal static string Main_confirm_no {
             get {
@@ -381,7 +381,7 @@ namespace Tess.Common {
         }
         
         /// <summary>
-        ///   Cerca una stringa localizzata simile a Remember remember the fifth of november.
+        ///   Cerca una stringa localizzata simile a Hey, do you remember me?.
         /// </summary>
         internal static string Notification_title {
             get {

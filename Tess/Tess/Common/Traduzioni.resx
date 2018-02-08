@@ -218,7 +218,7 @@ Thanks to Material Design Icons (https://materialdesignicons.com/) for in app ic
 And to my daughter Teresa, this app is for you &lt;3.</value>
   </data>
   <data name="Entry_gandalf" xml:space="preserve">
-    <value>You shall not pass</value>
+    <value>There is something wrong!</value>
   </data>
   <data name="General_GitUri" xml:space="preserve">
     <value>https://github.com/camo81/Tess</value>
@@ -245,7 +245,7 @@ And to my daughter Teresa, this app is for you &lt;3.</value>
     <value>To proced you must set the required values</value>
   </data>
   <data name="Main_confirm_no" xml:space="preserve">
-    <value>Ahr ahr ahr, I'm Pirate Roberts!</value>
+    <value>No</value>
   </data>
   <data name="Main_confirm_yes" xml:space="preserve">
     <value>Go to settings page</value>
@@ -266,7 +266,7 @@ And to my daughter Teresa, this app is for you &lt;3.</value>
     <value>You have a check-in opened from {0} hours</value>
   </data>
   <data name="Notification_title" xml:space="preserve">
-    <value>Remember remember the fifth of november</value>
+    <value>Hey, do you remember me?</value>
   </data>
   <data name="Settings_picker5" xml:space="preserve">
     <value>Notify me for opened check-in</value>

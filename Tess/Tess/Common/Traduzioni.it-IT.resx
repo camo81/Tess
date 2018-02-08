@@ -148,10 +148,10 @@
     <value>Sicuro di procedere?</value>
   </data>
   <data name="Setting_confirm_no" xml:space="preserve">
-    <value>Prima chiedo alla mamma</value>
+    <value>Procediamo</value>
   </data>
   <data name="Setting_confirm_yes" xml:space="preserve">
-    <value>Ho le spalle larghe</value>
+    <value>Ci penso un attimo</value>
   </data>
   <data name="Friday" xml:space="preserve">
     <value>Venerdì</value>
@@ -233,7 +233,7 @@ E a mia figlia Teresa, questo lavoro è dedicato a te. &lt;3</value>
     <value>Ore da lavorare</value>
   </data>
   <data name="Entry_gandalf" xml:space="preserve">
-    <value>You shall not pass</value>
+    <value>Gli orari inseriti non sono corretti</value>
   </data>
   <data name="General_GitUri" xml:space="preserve">
     <value>https://github.com/camo81/Tess</value>
@@ -242,7 +242,7 @@ E a mia figlia Teresa, questo lavoro è dedicato a te. &lt;3</value>
     <value>Per procedere imposta i valori richiesti</value>
   </data>
   <data name="Main_confirm_no" xml:space="preserve">
-    <value>Ahr ahr ahr, io sono il Pirata Roberts!</value>
+    <value>Più tardi</value>
   </data>
   <data name="Main_confirm_yes" xml:space="preserve">
     <value>Vai alla pagina impostazioni</value>
@@ -251,7 +251,7 @@ E a mia figlia Teresa, questo lavoro è dedicato a te. &lt;3</value>
     <value>Riproduci suoni</value>
   </data>
   <data name="Settings_LavoriTroppo" xml:space="preserve">
-    <value>Non puoi lavorare più di 15 ore al giorno, schiavo!</value>
+    <value>Non puoi lavorare più di 15 ore al giorno.</value>
   </data>
   <data name="Menu_language" xml:space="preserve">
     <value>Lingua</value>
